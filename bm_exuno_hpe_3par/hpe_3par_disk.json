@@ -1,0 +1,365 @@
+
+
+{
+	"dashboard": {
+		"title": "HPE 3PAR Disk",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (chunklets_available_failed IS NULL OR chunklets_available_failed < 1) AND (chunklets_used_failed IS NULL OR chunklets_used_failed < 1) AND (spare_chunklets_available_failed IS NULL OR spare_chunklets_available_failed < 1) AND (spare_chunklets_used_failed IS NULL OR spare_chunklets_used_failed < 1) AND (temperature IS NULL OR temperature < 50)) AS 'Health Score' FROM hpe_3par_disk FACET hpe_3par_disk_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Disk Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hpe_3par_disk_name) AS 'Disks' FROM hpe_3par_disk FACET hpe_3par_port_name"
+					}
+				],
+				"presentation": {
+					"title": "Port Distribution",
+          "notes": "The parent Port of this Disk",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hpe_3par_disk_name) AS 'Disks' FROM hpe_3par_disk FACET type"
+					}
+				],
+				"presentation": {
+					"title": "Type Distribution",
+          "notes": "The storage type of the disk drive.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_io) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read I/O (Reads per Second)",
+					"notes": "The frequency of read I/O operations performed by the disk."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_io) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write I/O (Writes per Second)",
+					"notes": "The frequency of write I/O operations performed by the disk."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_latency) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Latency (Milliseconds)",
+					"notes": "The average time to service a read requested from the disk."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_latency) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Latency (Milliseconds)",
+					"notes": "The average time to service a write requested from the disk."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(read_throughput) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Throughput (Kilobytes per Second)",
+					"notes": "The average throughput of read I/O operations processed by the disk."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(write_throughput) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Throughput (Kilobytes per Second)",
+					"notes": "The average throughput of write I/O operations processed by the disk."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_latency) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Latency (Milliseconds)",
+					"notes": "The average time to service I/O requested from the disk."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(busy_time) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Busy Time (Percent)",
+					"notes": "The average percent of time the disk is performing operations."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(chunklets_available_failed) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Chunklets Available Failed",
+					"notes": "Number of available chunklets on this disk that have failed."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(chunklets_used_failed) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Chunklets Used Failed",
+					"notes": "Number of used chunklets on this disk that have failed."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(spare_chunklets_available_failed) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Spare Chunklets Available Failed",
+					"notes": "Number of available spare chunklets on this disk that have failed."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(spare_chunklets_used_failed) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Spare Chunklets Used Failed",
+					"notes": "Number of used spare chunklets on this disk that have failed."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(total_io) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total I/O (Operations per Second)",
+					"notes": "The frequency of I/O operations performed by the disk."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_throughput) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Throughput (Kilobytes per Second)",
+					"notes": "The average throughput of I/O operations processed by the disk."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 7,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(life_left) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Life Left (Percent)",
+					"notes": "Estimated percent of lifetime usage remaining."
+				}
+			}
+		]
+	}
+}
