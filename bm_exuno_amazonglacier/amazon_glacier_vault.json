@@ -1,0 +1,97 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon Glacier Vault",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT latest(timestamp) AS 'Last Updated' FROM amazon_glacier_vault FACET amazon_glacier_vault_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Vault Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_glacier_vault_name) AS 'Vaults' FROM amazon_glacier_vault FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(number_of_archives) FROM amazon_glacier_vault COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Number of Archives",
+					"notes": "The number of archives in the vault as of the last inventory date."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(size) FROM amazon_glacier_vault COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Size (Bytes)",
+					"notes": "Total size of the archives in the vault as of the last inventory date."
+				}
+			}
+		]
+	}
+}

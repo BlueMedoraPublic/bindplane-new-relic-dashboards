@@ -1,0 +1,177 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon WorkSpaces Workspace",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (connection_failures IS NULL OR connection_failures < 1.0) AND (unhealthy IS NULL OR unhealthy < 1.0)) AS 'Health Score' FROM amazon_workspaces_workspace FACET amazon_workspaces_workspace_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Workspace Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_workspaces_workspace_name) AS 'Workspaces' FROM amazon_workspaces_workspace FACET compute_type"
+					}
+				],
+				"presentation": {
+					"title": "Compute Type Distribution",
+          "notes": "The bundle compute type of the Workspace.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_workspaces_workspace_name) AS 'Workspaces' FROM amazon_workspaces_workspace FACET id"
+					}
+				],
+				"presentation": {
+					"title": "ID Distribution",
+          "notes": "ID of the Amazon WorkSpaces WorkSpace.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_workspaces_workspace_name) AS 'Workspaces' FROM amazon_workspaces_workspace FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(in_session_latency) FROM amazon_workspaces_workspace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "In Session Latency (Milliseconds)",
+					"notes": "The round trip time between the WorkSpaces client and the WorkSpace."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(connection_failures) FROM amazon_workspaces_workspace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Connection Failures (Connections)",
+					"notes": "The number of failed connections."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(connection_successes) FROM amazon_workspaces_workspace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Connection Successes (Connections)",
+					"notes": "The number of successful connections."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(connection_attempts) FROM amazon_workspaces_workspace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Connection Attempts (Connections)",
+					"notes": "The number of connection attempts."
+				}
+			}
+		]
+	}
+}

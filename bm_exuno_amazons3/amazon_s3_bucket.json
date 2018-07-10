@@ -1,0 +1,232 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon S3 Bucket",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (`4xx_errors` IS NULL OR `4xx_errors` < 1) AND (`5xx_errors` IS NULL OR `5xx_errors` < 1)) AS 'Health Score' FROM amazon_s3_bucket FACET amazon_s3_bucket_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Bucket Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_s3_bucket_name) AS 'Buckets' FROM amazon_s3_bucket FACET owner_name"
+					}
+				],
+				"presentation": {
+					"title": "Owner Name Distribution",
+          "notes": "The owner name of this bucket.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_s3_bucket_name) AS 'Buckets' FROM amazon_s3_bucket FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(`4xx_errors`) FROM amazon_s3_bucket COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "4xx Errors",
+					"notes": "The number of HTTP 4xx client error status code requests made to a bucket with a value of 0 or 1. The average statistic shows the error rate, and the sum statistic shows the count of that type of error, during each period."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(`5xx_errors`) FROM amazon_s3_bucket COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "5xx Errors",
+					"notes": "The number of HTTP 5xx server error status code requests made to a bucket with a value of either 0 or 1. The average statistic shows the error rate, and the sum statistic shows the count of that type of error, during each period."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_all_requests) FROM amazon_s3_bucket COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average All Requests (Bytes)",
+					"notes": "The number bytes uploaded to a bucket that contain a request body."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(uploaded_throughput) FROM amazon_s3_bucket COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Uploaded Throughput (Bytes per Second)",
+					"notes": "The total number bytes uploaded for requests made to a bucket, where the response includes a body."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_first_byte_latency) FROM amazon_s3_bucket COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average First Byte Latency (Milliseconds)",
+					"notes": "The per-request time from the complete request being received by a bucket to when the response starts to be returned."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_total_request_latency) FROM amazon_s3_bucket COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Total Request Latency (Milliseconds)",
+					"notes": "The elapsed per-request time from the first byte received to the last byte sent to a bucket. This includes the time taken to receive the request body and send the response body, which is not included in FirstByteLatency."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(standard_storage_bucket_size) FROM amazon_s3_bucket COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Standard Storage Bucket Size (Bytes)",
+					"notes": "The amount of data in bytes stored in a bucket in the Standard storage class."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_data_downloaded) FROM amazon_s3_bucket COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Data Downloaded (Bytes)",
+					"notes": "The number bytes downloaded for requests made to a bucket, where the response includes a body."
+				}
+			}
+		]
+	}
+}

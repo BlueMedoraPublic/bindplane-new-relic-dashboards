@@ -1,0 +1,192 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon Kinesis Video Stream",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (put_media_connection_errors IS NULL OR put_media_connection_errors <= 0) AND (put_media_error_ack_count IS NULL OR put_media_error_ack_count <= 0) AND (put_media_buffering_ack_latency IS NULL OR put_media_buffering_ack_latency < 0.1) AND (put_media_persisted_ack_latency IS NULL OR put_media_persisted_ack_latency < 0.1) AND (put_media_received_ack_latency IS NULL OR put_media_received_ack_latency < 0.1) AND (put_media_fragment_persist_latency IS NULL OR put_media_fragment_persist_latency < 0.1) AND (put_media_fragment_ingestion_latency IS NULL OR put_media_fragment_ingestion_latency < 0.1) AND (list_fragments_latency IS NULL OR list_fragments_latency < 0.1)) AS 'Health Score' FROM amazon_kinesis_video_stream FACET amazon_kinesis_video_stream_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Video Stream Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_kinesis_video_stream_name) AS 'Video Streams' FROM amazon_kinesis_video_stream FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(get_media_successes) FROM amazon_kinesis_video_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "GetMedia Successes (Percent)",
+					"notes": "Indicates the rate of success."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(put_media_connection_errors) FROM amazon_kinesis_video_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "PutMedia Connection Errors (Errors)",
+					"notes": "Total number of errors while establishing PutMedia connection for the stream."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(put_media_error_ack_count) FROM amazon_kinesis_video_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "PutMedia Error ACK Count",
+					"notes": "Total number of Error ACKs sent while doing PutMedia for the stream."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(put_media_buffering_ack_latency) FROM amazon_kinesis_video_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "PutMedia Buffering ACK Latency (Milliseconds)",
+					"notes": "Time difference between when the first byte of a new fragment is received by Kinesis Video Streams and when the Buffering Ack is sent for the fragment."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(put_media_persisted_ack_latency) FROM amazon_kinesis_video_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "PutMedia Persisted ACK Latency (Milliseconds)",
+					"notes": "Time difference between when the last byte of a new fragment is received by and when the Persisted ACK is sent for the fragment."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(put_media_received_ack_latency) FROM amazon_kinesis_video_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "PutMedia Received ACK Latency (Milliseconds)",
+					"notes": "Time difference between when the last byte of a new fragment is received by and when the Buffering ACK is sent for the fragment."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(list_fragments_latency) FROM amazon_kinesis_video_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "ListFragments Latency (Milliseconds)",
+					"notes": "Latency of the ListFragments API calls for the given stream name."
+				}
+			}
+		]
+	}
+}

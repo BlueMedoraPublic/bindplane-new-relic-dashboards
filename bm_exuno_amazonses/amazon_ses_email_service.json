@@ -1,0 +1,192 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon SES Email Service",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (email_reputation_bounce_rate IS NULL OR email_reputation_bounce_rate < 0.1) AND (email_reputation_complaint_rate IS NULL OR email_reputation_complaint_rate < 0.1)) AS 'Health Score' FROM amazon_ses_email_service FACET amazon_ses_email_service_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Email Service Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_ses_email_service_name) AS 'Email Services' FROM amazon_ses_email_service FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(bounced_emails) FROM amazon_ses_email_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Bounced Emails",
+					"notes": "The recipient's mail server permanently rejected the email. This event corresponds to hard bounces; soft bounces are included only when Amazon SES fails to deliver the email after retrying for a period of time."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(email_reputation_bounce_rate) FROM amazon_ses_email_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Email Reputation Bounce Rate (Percent)",
+					"notes": "The percentage of messages sent from your account that bounced. Only hard bounces are considered in this calculation."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(complaint_emails) FROM amazon_ses_email_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Complaint Emails",
+					"notes": "The recipient marked the email as spam."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(email_reputation_complaint_rate) FROM amazon_ses_email_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Email Reputation Complaint Rate (Percent)",
+					"notes": "The percentage of messages sent from your account that were reported by their recipients as spam."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(delivered_emails) FROM amazon_ses_email_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Delivered Emails",
+					"notes": "Amazon SES successfully delivered the email to the recipient's mail server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(opened_emails) FROM amazon_ses_email_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Opened Emails",
+					"notes": "The recipient opened an email. Only open events from HTML emails are tracked."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(clicked_emails) FROM amazon_ses_email_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Clicked Emails",
+					"notes": "The recipient clicked a link in the email. Only click events from HTML emails are tracked."
+				}
+			}
+		]
+	}
+}

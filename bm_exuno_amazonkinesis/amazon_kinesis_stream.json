@@ -1,0 +1,211 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon Kinesis Stream",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (get_records_latency IS NULL OR get_records_latency < 0.1) AND (put_record_latency IS NULL OR put_record_latency < 0.1) AND (put_records_latency IS NULL OR put_records_latency < 0.1) AND (read_provisioned_throughput_exceeded IS NULL OR read_provisioned_throughput_exceeded <= 0) AND (write_provisioned_throughput_exceeded IS NULL OR write_provisioned_throughput_exceeded <= 0)) AS 'Health Score' FROM amazon_kinesis_stream FACET amazon_kinesis_stream_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Stream Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_kinesis_stream_name) AS 'Streams' FROM amazon_kinesis_stream FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(get_records_latency) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "GetRecords Latency (Milliseconds)",
+					"notes": "The time taken per GetRecords operation, measured over the specified time period."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(get_records_successes) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "GetRecords Successes (Percent)",
+					"notes": "The number of successful GetRecords operations per stream, measured over the specified time period."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(put_record_latency) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "PutRecord Latency (Milliseconds)",
+					"notes": "The time taken per PutRecord operation, measured over the specified time period."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(put_record_successes) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "PutRecord Successes (Percent)",
+					"notes": "Reflects the percentage of successful writes to a stream."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(put_records_latency) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "PutRecords Latency (Milliseconds)",
+					"notes": "The time taken per PutRecords operation, measured over the specified time period."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(put_records_successes) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "PutRecords Successes (Requests)",
+					"notes": "The number of PutRecords operations where at least one record succeeded, per Kinesis stream, measured over the specified time period."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(read_provisioned_throughput_exceeded) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Provisioned Throughput Exceeded (Requests)",
+					"notes": "The number of GetRecords calls throttled for the stream over the specified time period."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(write_provisioned_throughput_exceeded) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Provisioned Throughput Exceeded (Records)",
+					"notes": "The number of records rejected due to throttling for the stream over the specified time period. This metric includes throttling from PutRecord and PutRecords operations."
+				}
+			}
+		]
+	}
+}

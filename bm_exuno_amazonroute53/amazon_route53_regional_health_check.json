@@ -1,0 +1,154 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon Route 53 Regional Health Check",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (status IS NULL OR status = 100.0)) AS 'Health Score' FROM amazon_route53_regional_health_check FACET amazon_route53_regional_health_check_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Regional Health Check Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_route53_regional_health_check_name) AS 'Regional Health Checks' FROM amazon_route53_regional_health_check FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(child_healthy_health_checks) FROM amazon_route53_regional_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Child Healthy Health Checks",
+					"notes": "The number of health checks that are healthy among the health checks that Amazon Route 53 is monitoring."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(status) FROM amazon_route53_regional_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Status",
+					"notes": "The status of the health check endpoint that CloudWatch is checking. 1 indicates healthy, and 0 indicates unhealthy."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(connection_time) FROM amazon_route53_regional_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Connection Time (Milliseconds)",
+					"notes": "The average time that it took Amazon Route 53 health checkers to establish a TCP connection with the endpoint."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(ssl_handshake_time) FROM amazon_route53_regional_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "SSL Handshake Time (Milliseconds)",
+					"notes": "The average time, that it took Amazon Route 53 health checkers to complete the SSL handshake."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(time_to_first_byte) FROM amazon_route53_regional_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Time To First Byte (Milliseconds)",
+					"notes": "The average time, that it took Amazon Route 53 health checkers to receive the first byte of the response to an HTTP or HTTPS request."
+				}
+			}
+		]
+	}
+}

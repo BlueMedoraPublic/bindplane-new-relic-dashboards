@@ -1,0 +1,234 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon VPC NAT Gateway",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (error_port_allocation IS NULL OR error_port_allocation < 1.0) AND (state IS NULL OR state = 'available')) AS 'Health Score' FROM amazon_vpc_nat_gateway FACET amazon_vpc_nat_gateway_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "NAT Gateway Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_vpc_nat_gateway_name) AS 'NAT Gateways' FROM amazon_vpc_nat_gateway FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_vpc_nat_gateway_name) AS 'NAT Gateways' FROM amazon_vpc_nat_gateway FACET subnet_id"
+					}
+				],
+				"presentation": {
+					"title": "Subnet ID Distribution",
+          "notes": "The ID of the subnet in which the NAT gateway is located",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_vpc_nat_gateway_name) AS 'NAT Gateways' FROM amazon_vpc_nat_gateway FACET vpc_id"
+					}
+				],
+				"presentation": {
+					"title": "VPC ID Distribution",
+          "notes": "The ID of the VPC in which the NAT gateway is located",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(active_connection_count) FROM amazon_vpc_nat_gateway COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Active Connection Count (Connections)",
+					"notes": "The total number of concurrent active TCP connections through the NAT gateway."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(connection_established_count) FROM amazon_vpc_nat_gateway COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Connection Established Count (Connections)",
+					"notes": "The number of connections established through the NAT gateway."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(data_in_from_source) FROM amazon_vpc_nat_gateway COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data In From Source (Bytes)",
+					"notes": "The number of bytes received by the NAT gateway from clients in your VPC."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(data_out_to_source) FROM amazon_vpc_nat_gateway COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data Out To Source (Bytes)",
+					"notes": "The number of bytes sent through the NAT gateway to the clients in your VPC."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(data_in_from_destination) FROM amazon_vpc_nat_gateway COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data In From Destination (Bytes)",
+					"notes": "The number of bytes received by the NAT gateway from the destination."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(data_out_to_destination) FROM amazon_vpc_nat_gateway COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data Out To Destination (Bytes)",
+					"notes": "The number of bytes sent out through the NAT gateway to the destination."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(error_port_allocation) FROM amazon_vpc_nat_gateway COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Error Port Allocation (Errors)",
+					"notes": "The number of times the NAT gateway could not allocate a source port."
+				}
+			}
+		]
+	}
+}

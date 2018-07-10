@@ -1,0 +1,196 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon Auto Scaling Group",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (total_instances IS NULL OR total_instances < desired_capacity)) AS 'Health Score' FROM amazon_autoscaling_auto_scaling_group FACET amazon_autoscaling_auto_scaling_group_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Group Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_autoscaling_auto_scaling_group_name) AS 'Groups' FROM amazon_autoscaling_auto_scaling_group FACET availability_zone"
+					}
+				],
+				"presentation": {
+					"title": "Availability Zone Distribution",
+          "notes": "One or more Availability Zones for the group.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_autoscaling_auto_scaling_group_name) AS 'Groups' FROM amazon_autoscaling_auto_scaling_group FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_autoscaling_auto_scaling_group_name) AS 'Groups' FROM amazon_autoscaling_auto_scaling_group FACET vpc_zone"
+					}
+				],
+				"presentation": {
+					"title": "VPC Zone Distribution",
+          "notes": "One or more subnet IDs, if applicable, sparated by commas.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_instances) FROM amazon_autoscaling_auto_scaling_group COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Instances",
+					"notes": "The total number of instances in the Auto Scaling group. This metric identifies the number of instances that are in service, pending, and terminating."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(in_service_instances) FROM amazon_autoscaling_auto_scaling_group COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "In-Service Instances",
+					"notes": "The number of instances that are running as part of the Auto Scaling group. This metric does not include instances that are pending or terminating."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(pending_instances) FROM amazon_autoscaling_auto_scaling_group COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Pending Instances",
+					"notes": "The number of instances that are pending. A pending instance is not yet in service. This metric does not include instances that are in service or terminating."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(standby_instances) FROM amazon_autoscaling_auto_scaling_group COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Standby Instances",
+					"notes": "The number of instances that are in a Standby state. Instances in this state are still running but are not actively in service."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(terminating_instances) FROM amazon_autoscaling_auto_scaling_group COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Terminating Instances",
+					"notes": "The number of instances that are in the process of terminating. This metric does not include instances that are in service or pending."
+				}
+			}
+		]
+	}
+}

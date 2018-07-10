@@ -1,0 +1,291 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon Elasticsearch Domain",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cluster_index_writes_blocked IS NULL OR cluster_index_writes_blocked = 0) AND (master_reachable_from_node IS NULL OR master_reachable_from_node = 1) AND (read_latency IS NULL OR read_latency < 0.1) AND (write_latency IS NULL OR write_latency < 0.1) AND (automated_snapshot_failure IS NULL OR automated_snapshot_failure <= 0)) AS 'Health Score' FROM amazon_elasticsearch_domain FACET amazon_elasticsearch_domain_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Domain Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_elasticsearch_domain_name) AS 'Domains' FROM amazon_elasticsearch_domain FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_elasticsearch_domain_name) AS 'Domains' FROM amazon_elasticsearch_domain FACET version"
+					}
+				],
+				"presentation": {
+					"title": "Version Distribution",
+          "notes": "The Elasticsearch version.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_elasticsearch_domain_name) AS 'Domains' FROM amazon_elasticsearch_domain FACET instance_type"
+					}
+				],
+				"presentation": {
+					"title": "Instance Type Distribution",
+          "notes": "The instance type for the Elasticsearch cluster.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_utilization) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Utilization (Percent)",
+					"notes": "The maximum percentage of CPU resources used for data nodes in the cluster."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(master_cpu_utilization) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Master CPU Utilization (Percent)",
+					"notes": "The maximum percentage of CPU resources used by the dedicated master nodes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(jvm_memory_pressure) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "JVM Memory Pressure (Percent)",
+					"notes": "The maximum percentage of the Java heap used for all data nodes in the cluster."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(master_jvm_memory_pressure) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Master JVM Memory Pressure (Percent)",
+					"notes": "The maximum percentage of the Java heap used for all dedicated master nodes in the cluster."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_iops) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read IOPS (Operations per Second)",
+					"notes": "The input and output (I/O) operations rate for read operations on EBS volumes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_latency) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Latency (Seconds)",
+					"notes": "The latency for read operations on EBS volumes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(read_throughput) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Throughput (Bytes per Second)",
+					"notes": "The data throughput rate for read operations on EBS volumes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_iops) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write IOPS (Operations per Second)",
+					"notes": "The input and output (I/O) operations rate for write operations on EBS volumes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_latency) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Latency (Seconds)",
+					"notes": "The latency for write operations on EBS volumes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(write_throughput) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Throughput (Bytes per Second)",
+					"notes": "The data throughput rate for write operations on EBS volumes."
+				}
+			}
+		]
+	}
+}

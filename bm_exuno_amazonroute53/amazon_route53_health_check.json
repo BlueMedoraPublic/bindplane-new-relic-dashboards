@@ -1,0 +1,116 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon Route 53 Health Check",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (healthy_percentage IS NULL OR healthy_percentage = 100.0) AND (status IS NULL OR status = 1)) AS 'Health Score' FROM amazon_route53_health_check FACET amazon_route53_health_check_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Health Check Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_route53_health_check_name) AS 'Health Checks' FROM amazon_route53_health_check FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(child_healthy_health_checks) FROM amazon_route53_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Child Healthy Health Checks",
+					"notes": "The number of health checks that are healthy among the health checks that Amazon Route 53 is monitoring."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(healthy_percentage) FROM amazon_route53_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Healthy Percentage (Percent)",
+					"notes": "The percentage of Amazon Route 53 health checkers that consider the selected endpoint to be healthy."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(status) FROM amazon_route53_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Status",
+					"notes": "The status of the health check endpoint that CloudWatch is checking. 1 indicates healthy, and 0 indicates unhealthy."
+				}
+			}
+		]
+	}
+}

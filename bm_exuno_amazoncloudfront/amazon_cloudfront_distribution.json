@@ -1,0 +1,156 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon CloudFront Distribution",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (`4xx_error_rate` IS NULL OR `4xx_error_rate` < 1.0) AND (`5xx_error_rate` IS NULL OR `5xx_error_rate` < 1.0)) AS 'Health Score' FROM amazon_cloudfront_distribution FACET amazon_cloudfront_distribution_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Distribution Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_cloudfront_distribution_name) AS 'Distributions' FROM amazon_cloudfront_distribution FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_cloudfront_distribution_name) AS 'Distributions' FROM amazon_cloudfront_distribution FACET status"
+					}
+				],
+				"presentation": {
+					"title": "Status Distribution",
+          "notes": "The current status of the distribution.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(`4xx_error_rate`) FROM amazon_cloudfront_distribution COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "4xx Error Rate (Percent)",
+					"notes": "The percentage of all requests for which the HTTP status code is 4xx"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(`5xx_error_rate`) FROM amazon_cloudfront_distribution COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "5xx Error Rate (Percent)",
+					"notes": "The percentage of all requests for which the HTTP status code is 5xx"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(bytes_downloaded) FROM amazon_cloudfront_distribution COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Bytes Downloaded (Bytes)",
+					"notes": "The number of bytes downloaded by viewers for GET, HEAD, and OPTIONS requests."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(bytes_uploaded) FROM amazon_cloudfront_distribution COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Bytes Uploaded (Bytes)",
+					"notes": "The number of bytes uploaded to your origin with CloudFront using POST and PUT requests."
+				}
+			}
+		]
+	}
+}
