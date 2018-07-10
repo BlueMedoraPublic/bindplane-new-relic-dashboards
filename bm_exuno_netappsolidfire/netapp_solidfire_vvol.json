@@ -1,0 +1,272 @@
+
+
+{
+	"dashboard": {
+		"title": "NetApp SolidFire VVol",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (volume_utilization IS NULL OR volume_utilization < 1)) AS 'Health Score' FROM netapp_solidfire_vvol FACET netapp_solidfire_vvol_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "VVol Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(netapp_solidfire_vvol_name) AS 'VVols' FROM netapp_solidfire_vvol FACET netapp_solidfire_storage_container_name"
+					}
+				],
+				"presentation": {
+					"title": "Storage Container Distribution",
+          "notes": "The parent Storage Container of this VVol",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(netapp_solidfire_vvol_name) AS 'VVols' FROM netapp_solidfire_vvol FACET status"
+					}
+				],
+				"presentation": {
+					"title": "Status Distribution",
+          "notes": "The current status of the volume.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(netapp_solidfire_vvol_name) AS 'VVols' FROM netapp_solidfire_vvol FACET vvol_type"
+					}
+				],
+				"presentation": {
+					"title": "VVol Type Distribution",
+          "notes": "The type of the virtual volume.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(volume_utilization) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Volume Utilization",
+					"notes": "A floating value that describes how much the client is using the volume. Possible values: 0: The client is not using the volume 1: The client is using their maximum. >1: The client is using their burst"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(size) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Size (Bytes)",
+					"notes": "Total provisioned capacity in bytes"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_latency) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Latency (Microseconds)",
+					"notes": "The average time, in microseconds, to complete read operations to the volume in the last 500 milliseconds."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_latency) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Latency (Microseconds)",
+					"notes": "The average time, in microseconds, to complete write operations to a volume in the last 500 milliseconds."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_operations_rate) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Operations (Operations per Second)",
+					"notes": "The total read operations to the volume since the creation of the volume."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_operations_rate) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Operations (Operations per Second)",
+					"notes": "The total cumulative write operations to the volume since the creation of the volume."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(reads_rate) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Reads (Bytes per Second)",
+					"notes": "The total cumulative bytes read from the volume since the creation of the volume."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(writes_rate) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Writes (Bytes per Second)",
+					"notes": "The total cumulative bytes written to the volume since the creation of the volume"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(actual_iops) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Actual IOPS (Operations per Second)",
+					"notes": "The current actual IOPS to the volume in the last 500 milliseconds."
+				}
+			}
+		]
+	}
+}

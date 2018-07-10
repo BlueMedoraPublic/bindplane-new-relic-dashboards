@@ -1,0 +1,217 @@
+
+
+{
+	"dashboard": {
+		"title": "Citrix NetScaler Load Balancing Service",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT latest(timestamp) AS 'Last Updated' FROM citrix_netscaler_load_balancing_service FACET citrix_netscaler_load_balancing_service_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Load Balancing Service Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(citrix_netscaler_load_balancing_service_name) AS 'Load Balancing Services' FROM citrix_netscaler_load_balancing_service FACET citrix_netscaler_load_balancing_virtual_server_name"
+					}
+				],
+				"presentation": {
+					"title": "Load Balancing Virtual Server Distribution",
+          "notes": "The parent Load Balancing Virtual Server of this Load Balancing Service",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(citrix_netscaler_load_balancing_service_name) AS 'Load Balancing Services' FROM citrix_netscaler_load_balancing_service FACET citrix_netscaler_appliance_name"
+					}
+				],
+				"presentation": {
+					"title": "Appliance Distribution",
+          "notes": "The parent Appliance of this Load Balancing Service",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(citrix_netscaler_load_balancing_service_name) AS 'Load Balancing Services' FROM citrix_netscaler_load_balancing_service FACET service_state"
+					}
+				],
+				"presentation": {
+					"title": "Service State Distribution",
+          "notes": "The state of the Citrix NetScaler Load Balancing Service.  Possibilities are: UP, DOWN, UNKNOWN, BUSY, OUT OF SERVICE, GOING OUT OF SERVICE, DOWN WHEN GOING OUT OF SERVICE, NS_EMPTY_STR, Unknown, or DISABLED.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(citrix_netscaler_load_balancing_service_name) AS 'Load Balancing Services' FROM citrix_netscaler_load_balancing_service FACET service_type"
+					}
+				],
+				"presentation": {
+					"title": "Service Type Distribution",
+          "notes": "The service type of the Citrix NetScaler Load Balancing Service.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(current_load) FROM citrix_netscaler_load_balancing_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Current Load",
+					"notes": "Load on the service that is calculated from the bound load based monitor."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(number_of_connections) FROM citrix_netscaler_load_balancing_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Number of Connections",
+					"notes": "The number of client side connections that are still open."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(request_rate) FROM citrix_netscaler_load_balancing_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Request Rate (Bytes per Second)",
+					"notes": "Rate (/s) counter for 'Total Requests Data'"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(response_rate) FROM citrix_netscaler_load_balancing_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Response Rate (Bytes per Second)",
+					"notes": "Rate (/s) counter for 'Total Responses Data'."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(throughput) FROM citrix_netscaler_load_balancing_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Throughput (Megabits per Second)",
+					"notes": "Number of bytes received or sent by this service (Mbps)."
+				}
+			}
+		]
+	}
+}

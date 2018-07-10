@@ -1,0 +1,363 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft SQL Server Instance",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage IS NULL OR cpu_usage < 85) AND (failed_jobs IS NULL OR failed_jobs < 1) AND (lock_timeouts_rate IS NULL OR lock_timeouts_rate < 1) AND (number_of_unhealthy_cluster_nodes IS NULL OR number_of_unhealthy_cluster_nodes < 1) AND (wait_time_rate IS NULL OR wait_time_rate < 1000)) AS 'Health Score' FROM microsoft_sqlserver_instance FACET microsoft_sqlserver_instance_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Instance Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_sqlserver_instance_name) AS 'Instances' FROM microsoft_sqlserver_instance FACET cluster_status"
+					}
+				],
+				"presentation": {
+					"title": "Cluster Status Distribution",
+          "notes": "The worst status across all nodes in the cluster.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage (Percent)",
+					"notes": "The CPU Usage of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_usage) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Usage (Percent)",
+					"notes": "The percentage of memory that is being utilized by SQL Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(iops_rate) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "IOPS (Operations per Second)",
+					"notes": "Total amount of disk write and read operations."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_query_cpu_time) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Query CPU Time (Milliseconds)",
+					"notes": "The Average Query CPU Time of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_wait_time) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Wait Time (Milliseconds)",
+					"notes": "The Average Wait Time of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_query_executions) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Query Executions",
+					"notes": "The Average Query Executions of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(lock_wait_time) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Lock Wait Time (Milliseconds)",
+					"notes": "The Lock Wait Time of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(dead_locked_queries) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Dead Locked Queries",
+					"notes": "The Dead Locked Queries of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(lock_timeouts_rate) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Lock Timeouts (per Second)",
+					"notes": "The Lock Timeouts of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(number_of_unhealthy_cluster_nodes) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Number of Unhealthy Cluster Nodes",
+					"notes": "The number of nodes in a cluster in a down, paused, or unknown state."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(failed_jobs) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Failed Jobs",
+					"notes": "The Failed Jobs of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(buffer_cache_hit_ratio) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Buffer Cache Hit Ratio",
+					"notes": "The Buffer Cache Hit Ratio of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(buffer_pool_hit_ratio) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Buffer Pool Hit Ratio",
+					"notes": "The Buffer Pool Hit Ratio of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(log_cache_hit_ratio) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Log Cache Hit Ratio",
+					"notes": "The Log Cache Hit Ratio of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(sleeping_processes) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Sleeping Processes",
+					"notes": "The Sleeping Processes of the Instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 7,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(suspended_processes) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Suspended Processes",
+					"notes": "The Suspended Processes of the Instance."
+				}
+			}
+		]
+	}
+}

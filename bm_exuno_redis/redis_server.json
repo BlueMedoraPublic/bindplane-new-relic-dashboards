@@ -1,0 +1,175 @@
+
+
+{
+	"dashboard": {
+		"title": "Redis Server",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (rejected_connections_rate IS NULL OR rejected_connections_rate < 1) AND (sync_partial_error_rate IS NULL OR sync_partial_error_rate < 1)) AS 'Health Score' FROM redis_server FACET redis_server_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Server Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(redis_server_name) AS 'Servers' FROM redis_server FACET redis_cluster_name"
+					}
+				],
+				"presentation": {
+					"title": "Cluster Distribution",
+          "notes": "The parent Cluster of this Server",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(redis_server_name) AS 'Servers' FROM redis_server FACET role"
+					}
+				],
+				"presentation": {
+					"title": "Role Distribution",
+          "notes": "Value is \"master\" if the instance is slave of no one, or \"slave\" if the instance is enslaved to a master. Note that a slave can be master of another slave (daisy chaining).",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(rejected_connections_rate) FROM redis_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Rejected Connections (per Second)",
+					"notes": "Number of connections rejected because of maxclients limit."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(sync_partial_error_rate) FROM redis_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Sync Partial Error (per Second)",
+					"notes": "Number of times partial syncs have failed."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(used_cpu_system_rate) FROM redis_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Used CPU System (Milliseconds per Second)",
+					"notes": "System CPU consumed by the Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(used_cpu_user_rate) FROM redis_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Used CPU User (Milliseconds per Second)",
+					"notes": "User CPU consumed by the Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(loading_loaded_percent) FROM redis_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Loading Loaded Percent (Percent)",
+					"notes": "Percentage of bytes already loaded."
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,194 @@
+
+
+{
+	"dashboard": {
+		"title": "Kubernetes Node",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage_ratio IS NULL OR cpu_usage_ratio < 95) AND (memory_usage_ratio IS NULL OR memory_usage_ratio < 95) AND (failed_pod_count IS NULL OR failed_pod_count <= 0)) AS 'Health Score' FROM kubernetes_node FACET kubernetes_node_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Node Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(kubernetes_node_name) AS 'Nodes' FROM kubernetes_node FACET operating_system"
+					}
+				],
+				"presentation": {
+					"title": "Operating System Distribution",
+          "notes": "The Operating System reported by the Node.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(kubernetes_node_name) AS 'Nodes' FROM kubernetes_node FACET architecture"
+					}
+				],
+				"presentation": {
+					"title": "Architecture Distribution",
+          "notes": "The Architecture reported by the Node.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage_ratio) FROM kubernetes_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage Ratio (Percent)",
+					"notes": "Total CPU usage (sum of all cores) averaged over the sample window."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_usage_ratio) FROM kubernetes_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Usage Ratio (Percent)",
+					"notes": "Total memory in use. This includes all memory regardless of when it was accessed."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(received_data_rate) FROM kubernetes_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Received Data (Bytes per Second)",
+					"notes": "Cumulative amount of data received."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(transmitted_data_rate) FROM kubernetes_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transmitted Data (Bytes per Second)",
+					"notes": "Cumulative amount of data transmitted."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(used_space_ratio) FROM kubernetes_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Used Space Ratio (Percent)",
+					"notes": "The storage space used on the filesystem."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(failed_pod_count) FROM kubernetes_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Failed Pod Count",
+					"notes": "The current number of pods hosted by this Node in a Failed phase."
+				}
+			}
+		]
+	}
+}

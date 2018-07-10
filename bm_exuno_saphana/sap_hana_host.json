@@ -1,0 +1,215 @@
+
+
+{
+	"dashboard": {
+		"title": "SAP HANA Host",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (active IS NULL OR active = 'YES') AND (cpu_usage_rate IS NULL OR cpu_usage_rate < 85) AND (failover_status IS NULL OR failover_status = 'No failover pending or active') AND (status IS NULL OR status = 'OK')) AS 'Health Score' FROM sap_hana_host FACET sap_hana_host_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Host Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(sap_hana_host_name) AS 'Hosts' FROM sap_hana_host FACET sap_hana_system_name"
+					}
+				],
+				"presentation": {
+					"title": "System Distribution",
+          "notes": "The parent System of this Host",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(sap_hana_host_name) AS 'Hosts' FROM sap_hana_host FACET active"
+					}
+				],
+				"presentation": {
+					"title": "Active Distribution",
+          "notes": "Whether the host is currently active",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(sap_hana_host_name) AS 'Hosts' FROM sap_hana_host FACET status"
+					}
+				],
+				"presentation": {
+					"title": "Status Distribution",
+          "notes": "Whether the host is currently OK or in some other state",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage_rate) FROM sap_hana_host COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage (Milliseconds per Second)",
+					"notes": "The sum of user time, system time, and wait I/O time and usages"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(database_memory_utilization) FROM sap_hana_host COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Database Memory Utilization (Percent)",
+					"notes": "Total memory used as a proportion of the sum of used and free physical memory"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(physical_memory_utilization) FROM sap_hana_host COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Physical Memory Utilization (Percent)",
+					"notes": "Used physical memory as a proportion of the sum of used and free physical memory"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(request_rate) FROM sap_hana_host COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Request Rate (Requests per Second)",
+					"notes": "The number of requests made in one second"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(swap_space_utilization) FROM sap_hana_host COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Swap Space Utilization (Percent)",
+					"notes": "Used swap space as a proportion of the sum of used and free swap space"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(total_data_transferred_rate) FROM sap_hana_host COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Data Transferred (Bytes per Second)",
+					"notes": "The sum of sent and received message data"
+				}
+			}
+		]
+	}
+}

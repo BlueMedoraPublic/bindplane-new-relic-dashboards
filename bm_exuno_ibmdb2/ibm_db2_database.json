@@ -1,0 +1,194 @@
+
+
+{
+	"dashboard": {
+		"title": "IBM DB2 Database",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (active_applications IS NULL OR active_applications < maximum_active_applications) AND (buffer_pool_data_hit_ratio IS NULL OR buffer_pool_data_hit_ratio > 85) AND (current_size IS NULL OR current_size < allocated_size) AND (deadlocks_rate IS NULL OR deadlocks_rate < 1) AND (lock_timeouts_rate IS NULL OR lock_timeouts_rate < 1) AND (log_space_utilization IS NULL OR log_space_utilization < 85) AND (percentage_of_applications_waiting_on_locks IS NULL OR percentage_of_applications_waiting_on_locks < 15)) AS 'Health Score' FROM ibm_db2_database FACET ibm_db2_database_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Database Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(ibm_db2_database_name) AS 'Databases' FROM ibm_db2_database FACET ibm_db2_hadr_name"
+					}
+				],
+				"presentation": {
+					"title": "HADR Distribution",
+          "notes": "The parent HADR of this Database",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(ibm_db2_database_name) AS 'Databases' FROM ibm_db2_database FACET status"
+					}
+				],
+				"presentation": {
+					"title": "Status Distribution",
+          "notes": "Status",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(active_applications) FROM ibm_db2_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Active Applications",
+					"notes": "Active Applications"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(buffer_pool_data_hit_ratio) FROM ibm_db2_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Buffer Pool Data Hit Ratio (Percent)",
+					"notes": "Buffer Pool Data Hit Ratio"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(deadlocks_rate) FROM ibm_db2_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Deadlocks (per Second)",
+					"notes": "Deadlocks"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(lock_timeouts_rate) FROM ibm_db2_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Lock Timeouts (per Second)",
+					"notes": "Lock Timeouts"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(log_space_utilization) FROM ibm_db2_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Log Space Utilization (Percent)",
+					"notes": "Log Space Utilization"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(percentage_of_applications_waiting_on_locks) FROM ibm_db2_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Percentage of Applications Waiting on Locks (Percent)",
+					"notes": "Percentage of Applications Waiting on Locks"
+				}
+			}
+		]
+	}
+}

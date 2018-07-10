@@ -1,0 +1,314 @@
+
+
+{
+	"dashboard": {
+		"title": "Apache Hadoop Name Node",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (capacity_used_ratio IS NULL OR capacity_used_ratio < 85) AND (current_heap_memory_used IS NULL OR current_heap_memory_used < maximum_heap_memory_size) AND (current_non_heap_memory_used IS NULL OR current_non_heap_memory_used < maximum_non_heap_memory_size) AND (physical_memory_utilization IS NULL OR physical_memory_utilization < 85) AND (process_cpu_load IS NULL OR process_cpu_load < 85) AND (space_used_percent IS NULL OR space_used_percent < 85) AND (system_cpu_load IS NULL OR system_cpu_load < 85) AND (total_error_log_messages_rate IS NULL OR total_error_log_messages_rate < 1) AND (total_fatal_log_messages_rate IS NULL OR total_fatal_log_messages_rate < 1) AND (volume_failures_total IS NULL OR volume_failures_total < 1)) AS 'Health Score' FROM apache_hadoop_name_node FACET apache_hadoop_name_node_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Name Node Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(apache_hadoop_name_node_name) AS 'Name Nodes' FROM apache_hadoop_name_node FACET apache_hadoop_cluster_name"
+					}
+				],
+				"presentation": {
+					"title": "Cluster Distribution",
+          "notes": "The parent Cluster of this Name Node",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(apache_hadoop_name_node_name) AS 'Name Nodes' FROM apache_hadoop_name_node FACET hadoop_version"
+					}
+				],
+				"presentation": {
+					"title": "Hadoop Version Distribution",
+          "notes": "Attribute SoftwareVersion from Bean Hadoop:service=NameNode,name=NameNodeInfo",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(apache_hadoop_name_node_name) AS 'Name Nodes' FROM apache_hadoop_name_node FACET high_availability_state"
+					}
+				],
+				"presentation": {
+					"title": "High Availability State Distribution",
+          "notes": "Attribute tag.HAState from Bean Hadoop:service=NameNode,name=FSNamesystem",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(apache_hadoop_name_node_name) AS 'Name Nodes' FROM apache_hadoop_name_node FACET os_name"
+					}
+				],
+				"presentation": {
+					"title": "OS Name Distribution",
+          "notes": "Attribute Name from Bean java.lang:type=OperatingSystem",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(apache_hadoop_name_node_name) AS 'Name Nodes' FROM apache_hadoop_name_node FACET state"
+					}
+				],
+				"presentation": {
+					"title": "State Distribution",
+          "notes": "Attribute State from Bean Hadoop:service=NameNode,name=NameNodeStatus",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(system_cpu_load) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "System CPU Load (Percent)",
+					"notes": "Attribute SystemCpuLoad from Bean java.lang:type=OperatingSystem"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(process_cpu_load) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Process CPU Load (Percent)",
+					"notes": "Attribute ProcessCpuLoad from Bean java.lang:type=OperatingSystem"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(space_used_percent) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Space Used Percent (Percent)",
+					"notes": "Attribute PercentUsed from Bean Hadoop:service=NameNode,name=NameNodeInfo"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(capacity_used_ratio) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Capacity Used Ratio (Percent)",
+					"notes": "Capacity Used Ratio"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(current_heap_memory_used) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Current Heap Memory Used (Mebibytes)",
+					"notes": "Attribute MemHeapUsedM from Bean Hadoop:service=\\w+,name=JvmMetrics"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(current_non_heap_memory_used) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Current Non-heap Memory Used (Mebibytes)",
+					"notes": "Attribute MemNonHeapUsedM from Bean Hadoop:service=\\w+,name=JvmMetrics"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(physical_memory_utilization) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Physical Memory Utilization (Percent)",
+					"notes": "Physical Memory Utilization"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(data_nodes_dead) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "DataNodes Dead",
+					"notes": "Attribute NumDeadDataNodes from Bean Hadoop:service=NameNode,name=FSNamesystemState"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(volume_failures_total) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Volume Failures Total",
+					"notes": "Attribute VolumeFailuresTotal from Bean Hadoop:service=NameNode,name=FSNamesystemState"
+				}
+			}
+		]
+	}
+}

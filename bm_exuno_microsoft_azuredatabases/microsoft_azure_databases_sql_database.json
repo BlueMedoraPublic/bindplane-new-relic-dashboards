@@ -1,0 +1,312 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft Azure Databases SQL Database",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage IS NULL OR cpu_usage < 85) AND (data_warehouse_node_level_cpu_usage IS NULL OR data_warehouse_node_level_cpu_usage < 85) AND (database_storage_usage IS NULL OR database_storage_usage < 85) AND (deadlocks IS NULL OR deadlocks < 1) AND (dtu_usage IS NULL OR dtu_usage < 85) AND (dwu_consumption_usage IS NULL OR dwu_consumption_usage < 85) AND (failed_connections IS NULL OR failed_connections < 1) AND (sessions_usage IS NULL OR sessions_usage < 85) AND (workers_usage IS NULL OR workers_usage < 85)) AS 'Health Score' FROM microsoft_azure_databases_sql_database FACET microsoft_azure_databases_sql_database_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "SQL Database Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_databases_sql_database_name) AS 'SQL Databases' FROM microsoft_azure_databases_sql_database FACET microsoft_azure_databases_sql_server_name"
+					}
+				],
+				"presentation": {
+					"title": "SQL Server Distribution",
+          "notes": "The parent SQL Server of this SQL Database",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_databases_sql_database_name) AS 'SQL Databases' FROM microsoft_azure_databases_sql_database FACET edition"
+					}
+				],
+				"presentation": {
+					"title": "Edition Distribution",
+          "notes": "The edition of the database",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_databases_sql_database_name) AS 'SQL Databases' FROM microsoft_azure_databases_sql_database FACET kind"
+					}
+				],
+				"presentation": {
+					"title": "Kind Distribution",
+          "notes": "Kind of database",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_databases_sql_database_name) AS 'SQL Databases' FROM microsoft_azure_databases_sql_database FACET location"
+					}
+				],
+				"presentation": {
+					"title": "Location Distribution",
+          "notes": "Resource location of the database",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage (Percent)",
+					"notes": "CPU usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(sessions_usage) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Sessions Usage (Percent)",
+					"notes": "Sessions usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(successful_connections) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Successful Connections (Connections)",
+					"notes": "Successful Connections"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(failed_connections) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Failed Connections (Connections)",
+					"notes": "Failed Connections"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(deadlocks) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Deadlocks",
+					"notes": "Deadlocks"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(dtu_usage) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "DTU Usage (Percent)",
+					"notes": "DTU usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(dwu_consumption_usage) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "DWU Consumption Usage (Percent)",
+					"notes": "DWU usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(physical_data_read_usage) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Physical Data Read Usage (Percent)",
+					"notes": "Data I/O usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(data_warehouse_node_data_read_usage) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data Warehouse Node Data Read Usage (Percent)",
+					"notes": "DW node level Data I/O usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(data_warehouse_node_level_cpu_usage) FROM microsoft_azure_databases_sql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data Warehouse Node Level CPU Usage (Percent)",
+					"notes": "DW node level CPU usage"
+				}
+			}
+		]
+	}
+}

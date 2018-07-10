@@ -1,0 +1,196 @@
+
+
+{
+	"dashboard": {
+		"title": "Google Cloud SQL Instance",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 85) AND (disk_utilization IS NULL OR disk_utilization < 85.0) AND (memory_utilization IS NULL OR memory_utilization < 90.0)) AS 'Health Score' FROM google_cloudsql_instance FACET google_cloudsql_instance_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Instance Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(google_cloudsql_instance_name) AS 'Instances' FROM google_cloudsql_instance FACET tier"
+					}
+				],
+				"presentation": {
+					"title": "Tier Distribution",
+          "notes": "The tier or machine type for this instance, for example db-n1-standard-1. For MySQL instances, this field determines whether the instance is Second Generation (recommended) or First Generation. For more information, see pricing.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(google_cloudsql_instance_name) AS 'Instances' FROM google_cloudsql_instance FACET data_disk_type"
+					}
+				],
+				"presentation": {
+					"title": " Data Disk Type  Distribution",
+          "notes": "The type of data disk: PD_SSD (default) or PD_HDD. Applies only to Second Generation instances.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(google_cloudsql_instance_name) AS 'Instances' FROM google_cloudsql_instance FACET type_of_instance"
+					}
+				],
+				"presentation": {
+					"title": "Type Of Instance Distribution",
+          "notes": "The instance type. CLOUD_SQL_INSTANCE, ON_PREMISES_INSTANCE, READ_REPLICA_INSTANCE.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_utilization) FROM google_cloudsql_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Utilization (Percent)",
+					"notes": "The fraction of the reserved CPU that is currently in use."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(disk_utilization) FROM google_cloudsql_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Disk Utilization (Percent)",
+					"notes": "The fraction of the disk quota that is currently in use."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_utilization) FROM google_cloudsql_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Utilization (Percent)",
+					"notes": "The fraction of the memory quota that is currently in use."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_operations) FROM google_cloudsql_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Operations (Reads)",
+					"notes": "Delta count of data disk read IO operations."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_operations) FROM google_cloudsql_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Operations (Writes)",
+					"notes": "Delta count of data disk write IO operations."
+				}
+			}
+		]
+	}
+}

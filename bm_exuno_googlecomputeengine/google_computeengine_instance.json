@@ -1,0 +1,137 @@
+
+
+{
+	"dashboard": {
+		"title": "Google Compute Engine Instance",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 85) AND (status IS NULL OR status = 'RUNNING')) AS 'Health Score' FROM google_computeengine_instance FACET google_computeengine_instance_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Instance Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(google_computeengine_instance_name) AS 'Instances' FROM google_computeengine_instance FACET machine_type"
+					}
+				],
+				"presentation": {
+					"title": "Machine Type Distribution",
+          "notes": "Full or partial URL of the machine type resource used for this instance.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(google_computeengine_instance_name) AS 'Instances' FROM google_computeengine_instance FACET zone"
+					}
+				],
+				"presentation": {
+					"title": "Zone Distribution",
+          "notes": "URL of the zone where the instance resides.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_utilization) FROM google_computeengine_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Utilization (Percent)",
+					"notes": "The fraction of the allocated CPU that is currently in use on the instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(received_throughput) FROM google_computeengine_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Received Throughput (Bytes)",
+					"notes": "Delta count of bytes received from the network."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(sent_throughput) FROM google_computeengine_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Sent Throughput (Bytes)",
+					"notes": "Delta count of bytes sent over the network."
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,156 @@
+
+
+{
+	"dashboard": {
+		"title": "Kubernetes Pod",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (used_ephemeral_space_ratio IS NULL OR used_ephemeral_space_ratio < 95)) AS 'Health Score' FROM kubernetes_pod FACET kubernetes_pod_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Pod Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(kubernetes_pod_name) AS 'Pods' FROM kubernetes_pod FACET phase"
+					}
+				],
+				"presentation": {
+					"title": "Phase Distribution",
+          "notes": "Current condition of the Pod.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(kubernetes_pod_name) AS 'Pods' FROM kubernetes_pod FACET component"
+					}
+				],
+				"presentation": {
+					"title": "Component Distribution",
+          "notes": "The component label of the Pod.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(restart_count) FROM kubernetes_pod COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Restart Count",
+					"notes": "The number of times Containers running on this Pod have restarted."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage) FROM kubernetes_pod COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage (Nanocores)",
+					"notes": "Total CPU usage (sum of all cores) averaged over the sample window."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_usage) FROM kubernetes_pod COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Usage (Bytes)",
+					"notes": "Total memory in use. This includes all memory regardless of when it was accessed."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(used_ephemeral_space_ratio) FROM kubernetes_pod COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Used Ephemeral Space Ratio (Percent)",
+					"notes": "The ephemeral storage space used."
+				}
+			}
+		]
+	}
+}

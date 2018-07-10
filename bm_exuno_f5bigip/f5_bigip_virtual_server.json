@@ -1,0 +1,156 @@
+
+
+{
+	"dashboard": {
+		"title": "F5 BIG-IP Virtual Server",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (availability_state IS NULL OR availability_state = 'available')) AS 'Health Score' FROM f5_bigip_virtual_server FACET f5_bigip_virtual_server_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Virtual Server Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(f5_bigip_virtual_server_name) AS 'Virtual Servers' FROM f5_bigip_virtual_server FACET availability_state"
+					}
+				],
+				"presentation": {
+					"title": "Availability State Distribution",
+          "notes": "BIG-IP defined availability",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(f5_bigip_virtual_server_name) AS 'Virtual Servers' FROM f5_bigip_virtual_server FACET f5_bigip_system_name"
+					}
+				],
+				"presentation": {
+					"title": "System Distribution",
+          "notes": "The parent System of this Virtual Server",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(current_connections) FROM f5_bigip_virtual_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Current Connections (Connections)",
+					"notes": "Current number of connections from BIG-IP"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(packets_in_rate) FROM f5_bigip_virtual_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Packets In (Packets per Second)",
+					"notes": "The number of packets received from the BIG-IP Virtual Server"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(packets_out_rate) FROM f5_bigip_virtual_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Packets Out (Packets per Second)",
+					"notes": "The number of packets sent to the BIG-IP Virtual Server"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(requests_rate) FROM f5_bigip_virtual_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Requests (Packets per Second)",
+					"notes": "Number of requests in the last collection interval to BIG-IP"
+				}
+			}
+		]
+	}
+}

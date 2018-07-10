@@ -1,0 +1,156 @@
+
+
+{
+	"dashboard": {
+		"title": "NetApp API Services VServer",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (operational_state IS NULL OR operational_state = 'running') AND (state IS NULL OR state = 'running') AND (used_capacity_percent IS NULL OR used_capacity_percent < 80)) AS 'Health Score' FROM netapp_apiservices_vserver FACET netapp_apiservices_vserver_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "VServer Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(netapp_apiservices_vserver_name) AS 'VServers' FROM netapp_apiservices_vserver FACET netapp_apiservices_cluster_name"
+					}
+				],
+				"presentation": {
+					"title": "Cluster Distribution",
+          "notes": "The parent Cluster of this VServer",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(netapp_apiservices_vserver_name) AS 'VServers' FROM netapp_apiservices_vserver FACET state"
+					}
+				],
+				"presentation": {
+					"title": "State Distribution",
+          "notes": "The State of the VServer.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(used_capacity_percent) FROM netapp_apiservices_vserver COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Used Capacity Percent (Percent)",
+					"notes": "The Used Capacity Percent of the VServer."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_throughput) FROM netapp_apiservices_vserver COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Throughput (Kilobytes per Second)",
+					"notes": "The Total Throughput of the VServer."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(total_operations) FROM netapp_apiservices_vserver COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Operations (Operations per Second)",
+					"notes": "The Total Operations of the VServer."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(total_latency) FROM netapp_apiservices_vserver COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Latency (Microseconds)",
+					"notes": "The Total Latency of the VServer."
+				}
+			}
+		]
+	}
+}

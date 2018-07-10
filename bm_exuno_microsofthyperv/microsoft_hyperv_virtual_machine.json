@@ -1,0 +1,230 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft Hyper-V Virtual Machine",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (average_memory_pressure IS NULL OR average_memory_pressure < 85) AND (cpu_usage IS NULL OR cpu_usage < 85) AND (memory_utilization IS NULL OR memory_utilization < 85) AND (target_memory_pressure_average IS NULL OR target_memory_pressure_average < 85)) AS 'Health Score' FROM microsoft_hyperv_virtual_machine FACET microsoft_hyperv_virtual_machine_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Virtual Machine Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_hyperv_virtual_machine_name) AS 'Virtual Machines' FROM microsoft_hyperv_virtual_machine FACET microsoft_hyperv_host_name"
+					}
+				],
+				"presentation": {
+					"title": "Host Distribution",
+          "notes": "The parent Host of this Virtual Machine",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage (Percent)",
+					"notes": "CPU Usage of the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_utilization) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Utilization (Percent)",
+					"notes": "Percentage of memory used on the Virtual Machine"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_disk_latency) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Disk Latency (Microseconds)",
+					"notes": "Average Disk Latency for all disks on the Virtual Machine"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_normalized_iops) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Normalized IOPS (per Second)",
+					"notes": "Average Normalized IOPS for all disks on the Virtual Machine"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_disk_usage) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Disk Usage (Percent)",
+					"notes": "Total percentage of all storage used that is attached to the Virtual Machine"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_memory_pressure) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Memory Pressure (Percent)",
+					"notes": "This is a calculation of how much memory the VM wants divided by the amount of memory the VM currently has and then multiplied by 100."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(inbound_traffic_rate) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Inbound Traffic (Bytes per Second)",
+					"notes": "Inbound traffic to the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(outbound_traffic_rate) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Outbound Traffic (Bytes per Second)",
+					"notes": "Outbound traffic from the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_demand) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Demand (Bytes)",
+					"notes": "Memory demanded by this Virtual Machine."
+				}
+			}
+		]
+	}
+}

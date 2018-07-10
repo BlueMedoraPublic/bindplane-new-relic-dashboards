@@ -1,0 +1,232 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft SQL Server Database",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (read_delay_rate IS NULL OR read_delay_rate < 1000) AND (space_available IS NULL OR space_available > 15) AND (write_delay_rate IS NULL OR write_delay_rate < 1000)) AS 'Health Score' FROM microsoft_sqlserver_database FACET microsoft_sqlserver_database_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Database Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_sqlserver_database_name) AS 'Databases' FROM microsoft_sqlserver_database FACET microsoft_sqlserver_always_on_availability_group_name"
+					}
+				],
+				"presentation": {
+					"title": "Always On Availability Group Distribution",
+          "notes": "The parent Always On Availability Group of this Database",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_sqlserver_database_name) AS 'Databases' FROM microsoft_sqlserver_database FACET microsoft_sqlserver_instance_name"
+					}
+				],
+				"presentation": {
+					"title": "Instance Distribution",
+          "notes": "The parent Instance of this Database",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(iops_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "IOPS (Operations per Second)",
+					"notes": "The IOPS of the Database."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(space_available) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Space Available (Percent)",
+					"notes": "Percentage of space available on disk used by database."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_delay_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Delay (Milliseconds per Second)",
+					"notes": "The Read Delay of the Database."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_delay_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Delay (Milliseconds per Second)",
+					"notes": "The Write Delay of the Database."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_operations_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Operations (Operations per Second)",
+					"notes": "The Read Operations of the Database."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_operations_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Operations (Operations per Second)",
+					"notes": "The Write Operations of the Database."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(log_cache_hit_ratio) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Log Cache Hit Ratio",
+					"notes": "Database log cache hit ratio."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(transactions_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transactions (per Second per Second)",
+					"notes": "Database transactions over time."
+				}
+			}
+		]
+	}
+}

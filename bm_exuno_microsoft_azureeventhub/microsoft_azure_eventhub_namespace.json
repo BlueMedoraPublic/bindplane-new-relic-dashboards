@@ -1,0 +1,268 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft Azure Event Hub Namespace",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (failed_requests IS NULL OR failed_requests = 0) AND (internal_server_errors IS NULL OR internal_server_errors = 0) AND (miscellaneous_server_errors IS NULL OR miscellaneous_server_errors = 0) AND (quota_exceeded_errors IS NULL OR quota_exceeded_errors = 0) AND (server_busy_errors IS NULL OR server_busy_errors = 0) AND (server_errors IS NULL OR server_errors = 0) AND (throttled_requests IS NULL OR throttled_requests = 0)) AS 'Health Score' FROM microsoft_azure_eventhub_namespace FACET microsoft_azure_eventhub_namespace_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Namespace Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_eventhub_namespace_name) AS 'Namespaces' FROM microsoft_azure_eventhub_namespace FACET resource_group"
+					}
+				],
+				"presentation": {
+					"title": "Resource Group Distribution",
+          "notes": "The Resource Group of the Azure resource.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(quota_exceeded_errors) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Quota Exceeded Errors",
+					"notes": "Quota Exceeded Errors for Microsoft.EventHub."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(throttled_requests) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Throttled Requests (Requests)",
+					"notes": "Throttled Requests for Microsoft.EventHub."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(archived_messages_throughput) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Archived Messages Throughput (EHAMBS) (Bytes)",
+					"notes": "Event Hub archived message throughput in a namespace"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(outgoing_message_throughput) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Outgoing Message Throughput (EHOUTBYTES) (Bytes)",
+					"notes": "Event Hub outgoing message throughput for a namespace"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(active_connections) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Active Connections",
+					"notes": "Total Active Connections for Microsoft.EventHub."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(event_hub_incoming_requests) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Event Hub Incoming Requests (Requests)",
+					"notes": "Incoming Requests for Microsoft.EventHub."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(failed_requests) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Failed Requests (FAILREQ) (Requests)",
+					"notes": "Total failed requests for a namespace"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(internal_server_errors) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Internal Server Errors (INTERR)",
+					"notes": "Total internal server errors for a namespace"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(server_errors) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Server Errors",
+					"notes": "Server Errors for Microsoft.EventHub."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(server_busy_errors) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Server Busy Errors (SVRBSY)",
+					"notes": "Total server busy errors for a namespace"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(miscellaneous_server_errors) FROM microsoft_azure_eventhub_namespace COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Miscellaneous Server Errors (MISCERR)",
+					"notes": "Miscellaneous server errors for a namespace"
+				}
+			}
+		]
+	}
+}

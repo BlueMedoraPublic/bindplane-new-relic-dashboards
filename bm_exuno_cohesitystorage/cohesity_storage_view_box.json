@@ -1,0 +1,230 @@
+
+
+{
+	"dashboard": {
+		"title": "Cohesity Storage View Box",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cloud_and_local_total_physical_usage IS NULL OR cloud_and_local_total_physical_usage < cloud_and_local_physical_capacity) AND (cloud_and_local_system_usage IS NULL OR cloud_and_local_system_usage < cloud_and_local_system_capacity)) AS 'Health Score' FROM cohesity_storage_view_box FACET cohesity_storage_view_box_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "View Box Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cohesity_storage_view_box_name) AS 'View Boxs' FROM cohesity_storage_view_box FACET cohesity_storage_partition_name"
+					}
+				],
+				"presentation": {
+					"title": "Partition Distribution",
+          "notes": "The parent Partition of this View Box",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(cloud_and_local_system_usage) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local System Usage (Bytes)",
+					"notes": "The usage, as computed by the Linux ?statfs? command, after the size of the data is reduced by change-block tracking, compression and deduplication."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(cloud_and_local_total_physical_usage) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local Total Physical Usage (Bytes)",
+					"notes": "The total capacity, as computed by the Cohesity Cluster, after the size of the data has been reduced by change-block tracking, compression and deduplication."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cloud_and_local_data_read) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local Data Read (Bytes)",
+					"notes": "Provides the total amount of data read."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cloud_and_local_data_written) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local Data Written (Bytes)",
+					"notes": "Provides the total amount of data written."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cloud_and_local_read_latency) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local Read Latency (Milliseconds)",
+					"notes": "The Read latency for Read IOS."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cloud_and_local_write_latency) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local Write Latency (Milliseconds)",
+					"notes": "The Write latency for Read IOS."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cloud_and_local_reads) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local Reads (Operations)",
+					"notes": "Provides the Read latency for Read IOs."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cloud_and_local_writes) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local Writes (Operations)",
+					"notes": "Provides the Write latency for Write IOs."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(data_reduction_ratio) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data Reduction Ratio",
+					"notes": "The ratio of logical bytes (not reduced by change-block tracking, compression and deduplication) to physical bytes (reduced by change-block tracking, compression and deduplication)."
+				}
+			}
+		]
+	}
+}

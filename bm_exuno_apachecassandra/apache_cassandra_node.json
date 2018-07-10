@@ -1,0 +1,178 @@
+
+
+{
+	"dashboard": {
+		"title": "Apache Cassandra Node",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (pending_read_stage_tasks IS NULL OR pending_read_stage_tasks < 10) AND (pending_gossip_stage_tasks IS NULL OR pending_gossip_stage_tasks < 1) AND (pending_mutation_stage_tasks IS NULL OR pending_mutation_stage_tasks < 5) AND (pending_compaction_executor_tasks IS NULL OR pending_compaction_executor_tasks < 1) AND (operation_mode IS NULL OR operation_mode = 'NORMAL')) AS 'Health Score' FROM apache_cassandra_node FACET apache_cassandra_node_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Node Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(apache_cassandra_node_name) AS 'Nodes' FROM apache_cassandra_node FACET apache_cassandra_cluster_name"
+					}
+				],
+				"presentation": {
+					"title": "Cluster Distribution",
+          "notes": "The parent Cluster of this Node",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(apache_cassandra_node_name) AS 'Nodes' FROM apache_cassandra_node FACET operation_mode"
+					}
+				],
+				"presentation": {
+					"title": "Operation Mode Distribution",
+          "notes": "Operational mode (leaving, joining, normal, decommissioned, client)",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(apache_cassandra_node_name) AS 'Nodes' FROM apache_cassandra_node FACET release_version"
+					}
+				],
+				"presentation": {
+					"title": "Release Version Distribution",
+          "notes": "Version of Cassandra",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_total_latency_rate) FROM apache_cassandra_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Total Latency (Microseconds per Second)",
+					"notes": "Time spent in Read events since process start"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_total_latency_rate) FROM apache_cassandra_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Total Latency (Microseconds per Second)",
+					"notes": "Time spent in Write events since process start"
+				}
+			},
+			{
+				"visualization": "faceted_area_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT latest(storage_load) FROM apache_cassandra_node FACET apache_cassandra_node_name TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Storage Load (Bytes)",
+					"notes": "Size of the on disk data size this node manages"
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(process_cpu_load) FROM apache_cassandra_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Process CPU Load",
+					"notes": "Process CPU Load"
+				}
+			}
+		]
+	}
+}

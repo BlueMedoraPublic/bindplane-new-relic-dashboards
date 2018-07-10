@@ -1,0 +1,285 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft Azure SQL Database ",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (average_cpu_utilization IS NULL OR average_cpu_utilization < 85) AND (average_log_write_resource_utilization IS NULL OR average_log_write_resource_utilization < 85) AND (average_memory_usage IS NULL OR average_memory_usage < 85) AND (in_memory_oltp_storage_utilization IS NULL OR in_memory_oltp_storage_utilization < 85) AND (maximum_concurrent_sessions IS NULL OR maximum_concurrent_sessions < 85) AND (maximum_concurrent_workers IS NULL OR maximum_concurrent_workers < 85) AND (read_delay_rate IS NULL OR read_delay_rate < 1000) AND (write_delay_rate IS NULL OR write_delay_rate < 1000)) AS 'Health Score' FROM microsoft_azuresqldatabase_database FACET microsoft_azuresqldatabase_database_name"
+						
+					}
+				],
+				"presentation": {
+					"title": " Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(average_cpu_utilization) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average CPU Utilization (Percent)",
+					"notes": "Average compute utilization in percentage of the limit of the service tier."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(average_memory_usage) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Memory Usage (Percent)",
+					"notes": "Average memory utilization in percentage of the limit of the service tier."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(read_delay_rate) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Delay (Milliseconds per Second)",
+					"notes": "Total time, in milliseconds, that the users waited for reads issued on files for the database"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(write_delay_rate) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Delay (Milliseconds per Second)",
+					"notes": "Total time, in milliseconds, that users waited for writes to be completed on files for the database"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(iops_rate) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "IOPS (Operations per Second)",
+					"notes": "Total amount of disk write and read operations."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(data_space_usage) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data Space Usage (Mebibytes)",
+					"notes": "Database data space"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(index_space_usage) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Index Space Usage (Mebibytes)",
+					"notes": "Database index space"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(in_memory_oltp_storage_utilization) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "In-Memory OLTP Storage Utilization (Percent)",
+					"notes": "Storage utilization for In-Memory OLTP in percentage of the limit of the service tier (at the end of the reporting interval)."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(average_log_write_resource_utilization) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Log Write Resource Utilization (Percent)",
+					"notes": "Average write resource utilization in percentage of the limit of the service tier."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(active_connections) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Active Connections (Connections)",
+					"notes": "The number of active connections to the database"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(active_transactions) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Active Transactions",
+					"notes": "Number of active transactions on database"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(maximum_concurrent_sessions) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Maximum Concurrent Sessions (Percent)",
+					"notes": "Maximum concurrent sessions in percentage of the limit of the database's service tier."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(maximum_concurrent_workers) FROM microsoft_azuresqldatabase_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Maximum Concurrent Workers (Percent)",
+					"notes": "Maximum concurrent workers (requests) in percentage of the limit of the database's service tier."
+				}
+			}
+		]
+	}
+}
