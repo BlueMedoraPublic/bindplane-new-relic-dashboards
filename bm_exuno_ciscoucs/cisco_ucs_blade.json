@@ -1,0 +1,139 @@
+
+
+{
+	"dashboard": {
+		"title": "Cisco UCS Blade",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (memory_usage IS NULL OR memory_usage < 90)) AS 'Health Score' FROM cisco_ucs_blade FACET cisco_ucs_blade_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Blade Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_ucs_blade_name) AS 'Blades' FROM cisco_ucs_blade FACET cisco_ucs_chassis_name"
+					}
+				],
+				"presentation": {
+					"title": "Chassis Distribution",
+          "notes": "The parent Chassis of this Blade",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  3,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_ucs_blade_name) AS 'Blades' FROM cisco_ucs_blade FACET cisco_ucs_fabric_interconnect_name"
+					}
+				],
+				"presentation": {
+					"title": "Fabric Interconnect Distribution",
+          "notes": "The parent Fabric Interconnect of this Blade",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  3,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_ucs_blade_name) AS 'Blades' FROM cisco_ucs_blade FACET operating_state"
+					}
+				],
+				"presentation": {
+					"title": "Operating State Distribution",
+          "notes": "Operating State",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(available_memory) FROM cisco_ucs_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Available Memory (Mebibytes)",
+					"notes": "Effective Memory"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_usage) FROM cisco_ucs_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Usage (Percent)",
+					"notes": "Memory Usage"
+				}
+			}
+		]
+	}
+}

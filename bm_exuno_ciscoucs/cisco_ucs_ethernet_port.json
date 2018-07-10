@@ -1,0 +1,198 @@
+
+
+{
+	"dashboard": {
+		"title": "Cisco UCS Ethernet Port",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (errors_received_rate IS NULL OR errors_received_rate < 1) AND (frame_check_sequence_errors_rate IS NULL OR frame_check_sequence_errors_rate < 1)) AS 'Health Score' FROM cisco_ucs_ethernet_port FACET cisco_ucs_ethernet_port_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Ethernet Port Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_ucs_ethernet_port_name) AS 'Ethernet Ports' FROM cisco_ucs_ethernet_port FACET cisco_ucs_blade_name"
+					}
+				],
+				"presentation": {
+					"title": "Blade Distribution",
+          "notes": "The parent Blade of this Ethernet Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_ucs_ethernet_port_name) AS 'Ethernet Ports' FROM cisco_ucs_ethernet_port FACET cisco_ucs_io_module_name"
+					}
+				],
+				"presentation": {
+					"title": "IO Module Distribution",
+          "notes": "The parent IO Module of this Ethernet Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_ucs_ethernet_port_name) AS 'Ethernet Ports' FROM cisco_ucs_ethernet_port FACET cisco_ucs_fabric_interconnect_name"
+					}
+				],
+				"presentation": {
+					"title": "Fabric Interconnect Distribution",
+          "notes": "The parent Fabric Interconnect of this Ethernet Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  3,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_ucs_ethernet_port_name) AS 'Ethernet Ports' FROM cisco_ucs_ethernet_port FACET cisco_ucs_port_channel_name"
+					}
+				],
+				"presentation": {
+					"title": "Port Channel Distribution",
+          "notes": "The parent Port Channel of this Ethernet Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(data_received_rate) FROM cisco_ucs_ethernet_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data Received (Bits per Second)",
+					"notes": "Received Bits"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(data_sent_rate) FROM cisco_ucs_ethernet_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data Sent (Bits per Second)",
+					"notes": "Sent Bits"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(errors_received_rate) FROM cisco_ucs_ethernet_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Errors Received (Errors per Second)",
+					"notes": "Errors Received"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(frame_check_sequence_errors_rate) FROM cisco_ucs_ethernet_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Frame Check Sequence Errors (Errors per Second)",
+					"notes": "Frame Check Sequence Errors"
+				}
+			}
+		]
+	}
+}
