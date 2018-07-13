@@ -1,0 +1,139 @@
+
+
+{
+	"dashboard": {
+		"title": "Lenovo Network Port",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (errors_with_inbound_packets IS NULL OR errors_with_inbound_packets < 1) AND (outbound_packet_errors IS NULL OR outbound_packet_errors < 1)) AS 'Health Score' FROM lenovo_network_port FACET lenovo_network_port_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Port Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(lenovo_network_port_name) AS 'Ports' FROM lenovo_network_port FACET lenovo_network_switch_name"
+					}
+				],
+				"presentation": {
+					"title": "Switch Distribution",
+          "notes": "The parent Switch of this Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  3,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(lenovo_network_port_name) AS 'Ports' FROM lenovo_network_port FACET operational_state"
+					}
+				],
+				"presentation": {
+					"title": "Operational State Distribution",
+          "notes": "Operational State",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  3,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(lenovo_network_port_name) AS 'Ports' FROM lenovo_network_port FACET type"
+					}
+				],
+				"presentation": {
+					"title": "Type Distribution",
+          "notes": "Type",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(errors_with_inbound_packets) FROM lenovo_network_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Errors with Inbound Packets (Errors)",
+					"notes": "Errors with Inbound Packets"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(outbound_packet_errors) FROM lenovo_network_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Outbound Packet Errors (Errors)",
+					"notes": "Outbound Packet Errors"
+				}
+			}
+		]
+	}
+}

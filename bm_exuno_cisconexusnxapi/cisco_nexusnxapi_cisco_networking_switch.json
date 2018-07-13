@@ -1,0 +1,272 @@
+
+
+{
+	"dashboard": {
+		"title": "Cisco Nexus NX API Switch",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 85.0) AND (fan_error_percentage IS NULL OR fan_error_percentage < 10) AND (memory_utilization IS NULL OR memory_utilization < 90) AND (port_error_percentage IS NULL OR port_error_percentage < 1) AND (power_supplies_in_error_state IS NULL OR power_supplies_in_error_state < 1) AND (power_supply_error_percentage IS NULL OR power_supply_error_percentage < 10) AND (sensor_error_percentage IS NULL OR sensor_error_percentage < 10) AND (sensors_in_error_state IS NULL OR sensors_in_error_state < 1)) AS 'Health Score' FROM cisco_nexusnxapi_cisco_networking_switch FACET cisco_nexusnxapi_cisco_networking_switch_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Switch Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_nexusnxapi_cisco_networking_switch_name) AS 'Switchs' FROM cisco_nexusnxapi_cisco_networking_switch FACET device_type"
+					}
+				],
+				"presentation": {
+					"title": "Device Type Distribution",
+          "notes": "Device Type for this Switch",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_nexusnxapi_cisco_networking_switch_name) AS 'Switchs' FROM cisco_nexusnxapi_cisco_networking_switch FACET health_status"
+					}
+				],
+				"presentation": {
+					"title": "Health Status Distribution",
+          "notes": "System Health Status for this Switch",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_nexusnxapi_cisco_networking_switch_name) AS 'Switchs' FROM cisco_nexusnxapi_cisco_networking_switch FACET system_state"
+					}
+				],
+				"presentation": {
+					"title": "System State Distribution",
+          "notes": "System State for this Switch",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_utilization) FROM cisco_nexusnxapi_cisco_networking_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Utilization (Percent)",
+					"notes": "CPU Utilization for this Switch"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_utilization) FROM cisco_nexusnxapi_cisco_networking_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Utilization (Percent)",
+					"notes": "Memory Utilization for this Switch"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(fan_error_percentage) FROM cisco_nexusnxapi_cisco_networking_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Fan Error Percentage (Percent)",
+					"notes": "Fan Status In Error Percentage of this Switch"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(port_error_percentage) FROM cisco_nexusnxapi_cisco_networking_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Port Error Percentage (Percent)",
+					"notes": "Port Status In Error Percentage of this Switch"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(power_supplies_in_error_state) FROM cisco_nexusnxapi_cisco_networking_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Power Supplies In Error State",
+					"notes": "Power Module Status In Error Count of this Switch"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(power_supply_error_percentage) FROM cisco_nexusnxapi_cisco_networking_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Power Supply Error Percentage (Percent)",
+					"notes": "Power Module Status In Error Percentage of this Switch"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(sensor_error_percentage) FROM cisco_nexusnxapi_cisco_networking_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Sensor Error Percentage (Percent)",
+					"notes": "Sensor Status In Error Percentage of this Switch"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(sensors_in_error_state) FROM cisco_nexusnxapi_cisco_networking_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Sensors In Error State",
+					"notes": "Sensor Status In Error Count of this Switch"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(system_uptime) FROM cisco_nexusnxapi_cisco_networking_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "System Uptime (Days)",
+					"notes": "System Uptime for this Switch"
+				}
+			}
+		]
+	}
+}

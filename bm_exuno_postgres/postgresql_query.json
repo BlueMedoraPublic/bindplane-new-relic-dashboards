@@ -1,0 +1,118 @@
+
+
+{
+	"dashboard": {
+		"title": "PostgreSQL Query",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT latest(timestamp) AS 'Last Updated' FROM postgresql_query FACET postgresql_query_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Query Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(postgresql_query_name) AS 'Querys' FROM postgresql_query FACET postgresql_database_name"
+					}
+				],
+				"presentation": {
+					"title": "Database Distribution",
+          "notes": "The parent Database of this Query",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  3,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(postgresql_query_name) AS 'Querys' FROM postgresql_query FACET username"
+					}
+				],
+				"presentation": {
+					"title": "Username Distribution",
+          "notes": "Name of the user who executed the statement",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_time) FROM postgresql_query COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Time (Milliseconds)",
+					"notes": "Average time spent in the statement per execution"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(calls_rate) FROM postgresql_query COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Calls (Calls per Second)",
+					"notes": "Number of times executed"
+				}
+			}
+		]
+	}
+}

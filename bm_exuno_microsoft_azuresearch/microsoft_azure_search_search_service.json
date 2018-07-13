@@ -1,0 +1,158 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft Azure Search Search Service",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (throttled_search_queries IS NULL OR throttled_search_queries < 10.0)) AS 'Health Score' FROM microsoft_azure_search_search_service FACET microsoft_azure_search_search_service_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Search Service Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_search_search_service_name) AS 'Search Services' FROM microsoft_azure_search_search_service FACET resource_group"
+					}
+				],
+				"presentation": {
+					"title": "Resource Group Distribution",
+          "notes": "The Resource Group of the Azure resource.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_search_search_service_name) AS 'Search Services' FROM microsoft_azure_search_search_service FACET type"
+					}
+				],
+				"presentation": {
+					"title": "Type Distribution",
+          "notes": "Microsoft Azure resource type",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  3,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_search_search_service_name) AS 'Search Services' FROM microsoft_azure_search_search_service FACET status"
+					}
+				],
+				"presentation": {
+					"title": "Status Distribution",
+          "notes": "The status of the search service",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(throttled_search_queries) FROM microsoft_azure_search_search_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Throttled Search Queries (Percent)",
+					"notes": "Percentage of search queries that were throttled for the search service"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(search_latency) FROM microsoft_azure_search_search_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Search Latency (Seconds)",
+					"notes": "Average search latency for the search service"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(search_queries) FROM microsoft_azure_search_search_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Search Queries (per Second)",
+					"notes": "Search queries per second for the search service"
+				}
+			}
+		]
+	}
+}

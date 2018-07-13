@@ -1,0 +1,310 @@
+
+
+{
+	"dashboard": {
+		"title": "HPE Onboard Administrator Blade",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (ambient_zone_temperature_sensors_above_caution IS NULL OR ambient_zone_temperature_sensors_above_caution < 1) AND (ambient_zone_temperature_sensors_above_critical IS NULL OR ambient_zone_temperature_sensors_above_critical < 1) AND (chassis_zone_temperature_sensors_above_caution IS NULL OR chassis_zone_temperature_sensors_above_caution < 1) AND (chassis_zone_temperature_sensors_above_critical IS NULL OR chassis_zone_temperature_sensors_above_critical < 1) AND (cooling_status IS NULL OR cooling_status = 'OK') AND (cpu_zone_temperature_sensors_above_caution IS NULL OR cpu_zone_temperature_sensors_above_caution < 1) AND (cpu_zone_temperature_sensors_above_critical IS NULL OR cpu_zone_temperature_sensors_above_critical < 1) AND (device_degraded_status IS NULL OR device_degraded_status = 'OK') AND (device_failure_status IS NULL OR device_failure_status = 'OK') AND (disk_zone_temperature_sensors_above_caution IS NULL OR disk_zone_temperature_sensors_above_caution < 1) AND (disk_zone_temperature_sensors_above_critical IS NULL OR disk_zone_temperature_sensors_above_critical < 1) AND (health IS NULL OR health = 'OK') AND (ilo_network_status IS NULL OR ilo_network_status = 'OK') AND (internal_data_status IS NULL OR internal_data_status = 'OK') AND (io_board_zone_temperature_sensors_above_caution IS NULL OR io_board_zone_temperature_sensors_above_caution < 1) AND (io_board_zone_temperature_sensors_above_critical IS NULL OR io_board_zone_temperature_sensors_above_critical < 1) AND (io_configuration_status IS NULL OR io_configuration_status = 'OK') AND (location_status IS NULL OR location_status = 'OK') AND (management_processor_status IS NULL OR management_processor_status = 'OK') AND (memory_zone_temperature_sensors_above_caution IS NULL OR memory_zone_temperature_sensors_above_caution < 1) AND (memory_zone_temperature_sensors_above_critical IS NULL OR memory_zone_temperature_sensors_above_critical < 1) AND (mezzanine_card_status IS NULL OR mezzanine_card_status = 'OK') AND (power_status IS NULL OR power_status = 'OK') AND (power_supply_zone_temperature_sensors_above_caution IS NULL OR power_supply_zone_temperature_sensors_above_caution < 1) AND (power_supply_zone_temperature_sensors_above_critical IS NULL OR power_supply_zone_temperature_sensors_above_critical < 1) AND (system_zone_temperature_sensors_above_caution IS NULL OR system_zone_temperature_sensors_above_caution < 1) AND (system_zone_temperature_sensors_above_critical IS NULL OR system_zone_temperature_sensors_above_critical < 1) AND (vcm_configured_status IS NULL OR vcm_configured_status = 'OK') AND (virtual_fan IS NULL OR virtual_fan < 90)) AS 'Health Score' FROM hpe_onboardadministrator_blade FACET hpe_onboardadministrator_blade_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Blade Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hpe_onboardadministrator_blade_name) AS 'Blades' FROM hpe_onboardadministrator_blade FACET hpe_onboardadministrator_enclosure_name"
+					}
+				],
+				"presentation": {
+					"title": "Enclosure Distribution",
+          "notes": "The parent Enclosure of this Blade",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hpe_onboardadministrator_blade_name) AS 'Blades' FROM hpe_onboardadministrator_blade FACET health"
+					}
+				],
+				"presentation": {
+					"title": "Health Distribution",
+          "notes": "Health of the blade",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hpe_onboardadministrator_blade_name) AS 'Blades' FROM hpe_onboardadministrator_blade FACET model"
+					}
+				],
+				"presentation": {
+					"title": "Model Distribution",
+          "notes": "The model of the blade.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(current_power_consumption) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Current Power Consumption (Watts)",
+					"notes": "The blade's current power consumption"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(memory) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory (Mebibytes)",
+					"notes": "Memory on the blade"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(ambient_zone_temperature_sensors_above_critical) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Ambient Zone Temperature Sensors Above Critical",
+					"notes": "Number of Ambient Zone Temperature Sensors reported by the blade with values greater than the critical threshold"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(chassis_zone_temperature_sensors_above_critical) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Chassis Zone Temperature Sensors Above Critical",
+					"notes": "Number of Chassis Zone Temperature Sensors reported by the blade with values greater than the critical threshold"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(cpu_zone_temperature_sensors_above_critical) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Zone Temperature Sensors Above Critical",
+					"notes": "Number of CPU Zone Temperature Sensors reported by the blade with values greater than the critical threshold"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(disk_zone_temperature_sensors_above_critical) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Disk Zone Temperature Sensors Above Critical",
+					"notes": "Number of Disk Zone Temperature Sensors reported by the blade with values greater than the critical threshold"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(io_board_zone_temperature_sensors_above_critical) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "I/O Board Zone Temperature Sensors Above Critical",
+					"notes": "Number of I/O Board Zone Temperature Sensors reported by the blade with values greater than the critical threshold"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(memory_zone_temperature_sensors_above_critical) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Zone Temperature Sensors Above Critical",
+					"notes": "Number of Memory Zone Temperature Sensors reported by the blade with values greater than the critical threshold"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(power_supply_zone_temperature_sensors_above_critical) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Power Supply Zone Temperature Sensors Above Critical",
+					"notes": "Number of Power Supply Zone Temperature Sensors reported by the blade with values greater than the critical threshold"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(system_zone_temperature_sensors_above_critical) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "System Zone Temperature Sensors Above Critical",
+					"notes": "Number of System Zone Temperature Sensors reported by the blade with values greater than the critical threshold"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(virtual_fan) FROM hpe_onboardadministrator_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Virtual Fan (Percent)",
+					"notes": "The blade's virtual fan usage"
+				}
+			}
+		]
+	}
+}

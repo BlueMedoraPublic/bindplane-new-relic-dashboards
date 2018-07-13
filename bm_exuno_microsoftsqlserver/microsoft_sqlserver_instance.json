@@ -103,6 +103,25 @@
 				"account_id": 1825180,
 				"data": [
 					{
+						"nrql": "SELECT average(number_of_unhealthy_cluster_nodes) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Number of Unhealthy Cluster Nodes",
+					"notes": "The number of nodes in a cluster in a down, paused, or unknown state."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
 						"nrql": "SELECT average(iops_rate) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -116,8 +135,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 2,
-					"column": 3
+					"row": 3,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -136,17 +155,17 @@
 					"width": 1,
 					"height": 1,
 					"row": 3,
-					"column": 2
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(average_wait_time) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(wait_time_rate) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Average Wait Time (Milliseconds)",
-					"notes": "The Average Wait Time of the Instance."
+					"title": "Wait Time (Milliseconds per Second)",
+					"notes": "The Wait Time of the Instance."
 				}
 			},
 			{
@@ -154,8 +173,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
-					"column": 3
+					"row": 4,
+					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
@@ -174,7 +193,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 4,
-					"column": 1
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -193,7 +212,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 4,
-					"column": 2
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -211,8 +230,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 4,
-					"column": 3
+					"row": 5,
+					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
@@ -223,25 +242,6 @@
 				"presentation": {
 					"title": "Lock Timeouts (per Second)",
 					"notes": "The Lock Timeouts of the Instance."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 5,
-					"column": 1
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(number_of_unhealthy_cluster_nodes) FROM microsoft_sqlserver_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Number of Unhealthy Cluster Nodes",
-					"notes": "The number of nodes in a cluster in a down, paused, or unknown state."
 				}
 			},
 			{

@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT latest(timestamp) AS 'Last Updated' FROM postgresql_database FACET postgresql_database_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (deadlocks_rate IS NULL OR deadlocks_rate < 1) AND (queries_canceled_due_to_conflicts_rate IS NULL OR queries_canceled_due_to_conflicts_rate < 1)) AS 'Health Score' FROM postgresql_database FACET postgresql_database_name"
 						
 					}
 				],
@@ -65,6 +65,44 @@
 				"account_id": 1825180,
 				"data": [
 					{
+						"nrql": "SELECT sum(deadlocks_rate) FROM postgresql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Deadlocks (Locks per Second)",
+					"notes": "Number of deadlocks detected in this database"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(queries_canceled_due_to_conflicts_rate) FROM postgresql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Queries Canceled Due to Conflicts (per Second)",
+					"notes": "Number of queries canceled due to conflicts with recovery in this database. (Conflicts occur only on standby servers, see pg_stat_database_conflicts for details.)"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
 						"nrql": "SELECT sum(active_connections) FROM postgresql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -78,7 +116,7 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 1,
+					"row": 2,
 					"column": 3
 				},
 				"account_id": 1825180,
@@ -97,7 +135,7 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 2,
+					"row": 3,
 					"column": 2
 				},
 				"account_id": 1825180,
@@ -116,7 +154,7 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 2,
+					"row": 3,
 					"column": 3
 				},
 				"account_id": 1825180,
@@ -135,18 +173,18 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
-					"column": 2
+					"row": 4,
+					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(transactions_committed_rate) FROM postgresql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(size) FROM postgresql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Transactions Committed (Transactions per Second)",
-					"notes": "Number of transactions in this database that have been committed"
+					"title": "Size (Bytes)",
+					"notes": "Disk space used by the database"
 				}
 			},
 			{
@@ -154,18 +192,37 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(rows_inserted_rate) FROM postgresql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Rows Inserted (Rows per Second)",
+					"notes": "Number of rows inserted by queries in this database"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
 					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(transactions_rolled_back_rate) FROM postgresql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(rows_deleted_rate) FROM postgresql_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Transactions Rolled Back (Transactions per Second)",
-					"notes": "Number of transactions in this database that have been rolled back"
+					"title": "Rows Deleted (Rows per Second)",
+					"notes": "Number of rows deleted by queries in this database"
 				}
 			}
 		]

@@ -107,25 +107,6 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(request_latency_50%) FROM amazon_elasticbeanstalk_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Request Latency 50% (Milliseconds)",
-					"notes": "The average latency for the slowest 50 percent of requests."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 1,
-					"column": 3
-				},
-				"account_id": 1825180,
-				"data": [
-					{
 						"nrql": "SELECT average(fastest_50%_application_latency) FROM amazon_elasticbeanstalk_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -139,8 +120,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 2,
-					"column": 2
+					"row": 1,
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -159,7 +140,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 2,
-					"column": 3
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -177,8 +158,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
-					"column": 2
+					"row": 2,
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -197,7 +178,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 3,
-					"column": 3
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -213,10 +194,10 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 2,
+					"width": 1,
 					"height": 1,
-					"row": 4,
-					"column": 2
+					"row": 3,
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -227,6 +208,25 @@
 				"presentation": {
 					"title": "Status Codes 5XX (Percent)",
 					"notes": "The percentage of requests that resulted in a 5xx (500, 501, etc.) status code."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(request_latency_50%) FROM amazon_elasticbeanstalk_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Request Latency 50% (Milliseconds)",
+					"notes": "The average latency for the slowest 50 percent of requests."
 				}
 			}
 		]

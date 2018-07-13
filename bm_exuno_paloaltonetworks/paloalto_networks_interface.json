@@ -1,0 +1,411 @@
+
+
+{
+	"dashboard": {
+		"title": "Palo Alto Networks Interface",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_errors_rate IS NULL OR cpu_errors_rate < 1) AND (errors_received_rate IS NULL OR errors_received_rate < 1) AND (forwarding_errors_rate IS NULL OR forwarding_errors_rate < 1) AND (ip_spoof_attacks_rate IS NULL OR ip_spoof_attacks_rate < 1) AND (local_area_network_denial_attacks_rate IS NULL OR local_area_network_denial_attacks_rate < 1) AND (mac_spoof_attacks_rate IS NULL OR mac_spoof_attacks_rate < 1) AND (ping_of_death_attacks_rate IS NULL OR ping_of_death_attacks_rate < 1) AND (teardrop_attacks_rate IS NULL OR teardrop_attacks_rate < 1)) AS 'Health Score' FROM paloalto_networks_interface FACET paloalto_networks_interface_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Interface Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(paloalto_networks_interface_name) AS 'Interfaces' FROM paloalto_networks_interface FACET paloalto_networks_virtual_router_name"
+					}
+				],
+				"presentation": {
+					"title": "Virtual Router Distribution",
+          "notes": "The parent Virtual Router of this Interface",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(paloalto_networks_interface_name) AS 'Interfaces' FROM paloalto_networks_interface FACET paloalto_networks_firewall_name"
+					}
+				],
+				"presentation": {
+					"title": "Firewall Distribution",
+          "notes": "The parent Firewall of this Interface",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(paloalto_networks_interface_name) AS 'Interfaces' FROM paloalto_networks_interface FACET paloalto_networks_vsys_name"
+					}
+				],
+				"presentation": {
+					"title": "VSYS Distribution",
+          "notes": "The parent VSYS of this Interface",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(paloalto_networks_interface_name) AS 'Interfaces' FROM paloalto_networks_interface FACET mode"
+					}
+				],
+				"presentation": {
+					"title": "Mode Distribution",
+          "notes": "Mode",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(paloalto_networks_interface_name) AS 'Interfaces' FROM paloalto_networks_interface FACET state"
+					}
+				],
+				"presentation": {
+					"title": "State Distribution",
+          "notes": "State",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 7,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(paloalto_networks_interface_name) AS 'Interfaces' FROM paloalto_networks_interface FACET type"
+					}
+				],
+				"presentation": {
+					"title": "Type Distribution",
+          "notes": "Type",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(physical_port_received_throughput_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Physical Port Received Throughput (Bytes per Second)",
+					"notes": "Physical port received throughput from MAC"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(physical_port_sent_throughput_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Physical Port Sent Throughput (Bytes per Second)",
+					"notes": "Physical port sent throughput from MAC"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(hardware_received_throughput_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Hardware Received Throughput (Bytes per Second)",
+					"notes": "Hardware interface received throughput from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(hardware_sent_throughput_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Hardware Sent Throughput (Bytes per Second)",
+					"notes": "Hardware interface sent throughput from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(logical_received_throughput_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Logical Received Throughput (Bytes per Second)",
+					"notes": "Logical interface throughput received from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(logical_sent_throughput_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Logical Sent Throughput (Bytes per Second)",
+					"notes": "Logical interface sent throughput from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(errors_received_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Errors Received (Errors per Second)",
+					"notes": "Hardware interface errors received from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(data_dropped_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Data Dropped (Packets per Second)",
+					"notes": "Logical interface packets dropped from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(ip_spoof_attacks_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "IP Spoof Attacks (per Second)",
+					"notes": "Logical interface IP spoof attacks from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(local_area_network_denial_attacks_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Local Area Network Denial Attacks (per Second)",
+					"notes": "Logical interface LAN Denial attacks from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(mac_spoof_attacks_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "MAC Spoof Attacks (per Second)",
+					"notes": "Logical interface MAC spoof attacks from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(ping_of_death_attacks_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Ping-Of-Death Attacks (per Second)",
+					"notes": "Logical interface ping-of-death attacks from CPU"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 7,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(teardrop_attacks_rate) FROM paloalto_networks_interface COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Teardrop Attacks (per Second)",
+					"notes": "Logical interface MAC teardrop from CPU"
+				}
+			}
+		]
+	}
+}

@@ -55,6 +55,27 @@
 			}
 			,
 			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_hyperv_virtual_machine_name) AS 'Virtual Machines' FROM microsoft_hyperv_virtual_machine FACET state"
+					}
+				],
+				"presentation": {
+					"title": "State Distribution",
+          "notes": "State of the Virtual Machine.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
 				"visualization": "comparison_line_chart",
 				"layout": {
 					"width": 1,
@@ -174,7 +195,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 4,
-					"column": 1
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -193,7 +214,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 4,
-					"column": 2
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -209,10 +230,10 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 1,
+					"width": 3,
 					"height": 1,
-					"row": 4,
-					"column": 3
+					"row": 5,
+					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [

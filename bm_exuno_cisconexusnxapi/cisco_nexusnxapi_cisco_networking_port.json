@@ -1,0 +1,198 @@
+
+
+{
+	"dashboard": {
+		"title": "Cisco Nexus NX API Port",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (outbound_packet_errors_rate IS NULL OR outbound_packet_errors_rate < 1) AND (inbound_packet_errors_rate IS NULL OR inbound_packet_errors_rate < 1)) AS 'Health Score' FROM cisco_nexusnxapi_cisco_networking_port FACET cisco_nexusnxapi_cisco_networking_port_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Port Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_nexusnxapi_cisco_networking_port_name) AS 'Ports' FROM cisco_nexusnxapi_cisco_networking_port FACET cisco_nexusnxapi_cisco_networking_vsan_name"
+					}
+				],
+				"presentation": {
+					"title": "VSAN Distribution",
+          "notes": "The parent VSAN of this Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_nexusnxapi_cisco_networking_port_name) AS 'Ports' FROM cisco_nexusnxapi_cisco_networking_port FACET cisco_nexusnxapi_cisco_networking_l3_interface_name"
+					}
+				],
+				"presentation": {
+					"title": "L3 Interface Distribution",
+          "notes": "The parent L3 Interface of this Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_nexusnxapi_cisco_networking_port_name) AS 'Ports' FROM cisco_nexusnxapi_cisco_networking_port FACET cisco_nexusnxapi_cisco_networking_switch_name"
+					}
+				],
+				"presentation": {
+					"title": "Switch Distribution",
+          "notes": "The parent Switch of this Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  3,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cisco_nexusnxapi_cisco_networking_port_name) AS 'Ports' FROM cisco_nexusnxapi_cisco_networking_port FACET ethernet_type"
+					}
+				],
+				"presentation": {
+					"title": "Ethernet Type Distribution",
+          "notes": "The Ethernet Type of this Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(inbound_packet_errors_rate) FROM cisco_nexusnxapi_cisco_networking_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Inbound Packet Errors (Errors per Second)",
+					"notes": "The Inbound Packet Errors of this Port"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(inbound_throughput_rate) FROM cisco_nexusnxapi_cisco_networking_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Inbound Throughput Rate (Bits per Second)",
+					"notes": "The Inbound Bits of this Port"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(outbound_packet_errors_rate) FROM cisco_nexusnxapi_cisco_networking_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Outbound Packet Errors (Errors per Second)",
+					"notes": "The Outbound Packet Errors of this Port"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(outbound_throughput_rate_rate) FROM cisco_nexusnxapi_cisco_networking_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Outbound Throughput Rate (Bits per Second per Second)",
+					"notes": "The Outbound Bits of this Port"
+				}
+			}
+		]
+	}
+}

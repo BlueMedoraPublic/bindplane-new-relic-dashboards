@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (active IS NULL OR active = 'YES') AND (cpu_usage_rate IS NULL OR cpu_usage_rate < 85) AND (failover_status IS NULL OR failover_status = 'No failover pending or active') AND (status IS NULL OR status = 'OK')) AS 'Health Score' FROM sap_hana_host FACET sap_hana_host_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (active IS NULL OR active = 'YES') AND (physical_memory_utilization IS NULL OR physical_memory_utilization < 90) AND (failover_status IS NULL OR failover_status = 'No failover pending or active') AND (status IS NULL OR status = 'OK')) AS 'Health Score' FROM sap_hana_host FACET sap_hana_host_name"
 						
 					}
 				],
@@ -126,25 +126,6 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(database_memory_utilization) FROM sap_hana_host COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Database Memory Utilization (Percent)",
-					"notes": "Total memory used as a proportion of the sum of used and free physical memory"
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 2,
-					"column": 2
-				},
-				"account_id": 1825180,
-				"data": [
-					{
 						"nrql": "SELECT average(physical_memory_utilization) FROM sap_hana_host COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -156,10 +137,10 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 1,
+					"width": 2,
 					"height": 1,
 					"row": 2,
-					"column": 3
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [

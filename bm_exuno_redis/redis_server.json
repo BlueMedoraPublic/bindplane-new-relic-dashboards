@@ -105,12 +105,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(sync_partial_error_rate) FROM redis_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(ping) FROM redis_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Sync Partial Error (per Second)",
-					"notes": "Number of times partial syncs have failed."
+					"title": "Ping (Milliseconds)",
+					"notes": "How long it takes for the PING command to return."
 				}
 			},
 			{
@@ -162,12 +162,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(loading_loaded_percent) FROM redis_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(evicted_keys_rate) FROM redis_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Loading Loaded Percent (Percent)",
-					"notes": "Percentage of bytes already loaded."
+					"title": "Evicted Keys (per Second)",
+					"notes": "Number of evicted keys due to maxmemory limit."
 				}
 			}
 		]

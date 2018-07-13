@@ -44,12 +44,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(vmware_vcenter_virtual_machine_name) AS 'Virtual Machines' FROM vmware_vcenter_virtual_machine FACET cluster_name"
+						"nrql": "SELECT uniqueCount(vmware_vcenter_virtual_machine_name) AS 'Virtual Machines' FROM vmware_vcenter_virtual_machine FACET guest_os_full_name"
 					}
 				],
 				"presentation": {
-					"title": "Cluster Name Distribution",
-          "notes": "The Cluster Name of the Virtual Machine.",
+					"title": "Guest OS Full Name Distribution",
+          "notes": "The Guest OS Full Name of the Virtual Machine.",
 					"drilldown_dashboard_id": null
 				}
 			}

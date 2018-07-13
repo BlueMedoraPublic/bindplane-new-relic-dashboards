@@ -1,0 +1,175 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft Internet Information Services Web Server",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage IS NULL OR cpu_usage < 85) AND (private_memory_usage IS NULL OR private_memory_usage < 85) AND (status IS NULL OR status = 'Started')) AS 'Health Score' FROM microsoft_internetinformationservices_web_server FACET microsoft_internetinformationservices_web_server_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Web Server Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_internetinformationservices_web_server_name) AS 'Web Servers' FROM microsoft_internetinformationservices_web_server FACET status"
+					}
+				],
+				"presentation": {
+					"title": "Status Distribution",
+          "notes": "The status of the web server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_internetinformationservices_web_server_name) AS 'Web Servers' FROM microsoft_internetinformationservices_web_server FACET version"
+					}
+				],
+				"presentation": {
+					"title": "Version Distribution",
+          "notes": "The version of the web server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage) FROM microsoft_internetinformationservices_web_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage (Percent)",
+					"notes": "The percentage of CPU being used by web server processes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(private_memory_usage) FROM microsoft_internetinformationservices_web_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Private Memory Usage (Percent)",
+					"notes": "The percentage of system memory currently used as web server process private bytes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(active_requests) FROM microsoft_internetinformationservices_web_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Active Requests (Requests)",
+					"notes": "The number of requests that are currently being processed by the web server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(io_operations) FROM microsoft_internetinformationservices_web_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "I/O Operations (Operations)",
+					"notes": "The number of read and write operations performed by all application pool processes in the last second."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_requests_rate) FROM microsoft_internetinformationservices_web_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Requests (Requests per Second)",
+					"notes": "The number of requests that have been served since the web server started."
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,196 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft Internet Information Services Website",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage IS NULL OR cpu_usage < 85) AND (private_memory_usage IS NULL OR private_memory_usage < 85) AND (status IS NULL OR status < 'Started')) AS 'Health Score' FROM microsoft_internetinformationservices_website FACET microsoft_internetinformationservices_website_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Website Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_internetinformationservices_website_name) AS 'Websites' FROM microsoft_internetinformationservices_website FACET microsoft_internetinformationservices_web_server_name"
+					}
+				],
+				"presentation": {
+					"title": "Web Server Distribution",
+          "notes": "The parent Web Server of this Website",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_internetinformationservices_website_name) AS 'Websites' FROM microsoft_internetinformationservices_website FACET enabled_protocols"
+					}
+				],
+				"presentation": {
+					"title": "Enabled Protocols Distribution",
+          "notes": "Specifies the protocols that requests can use to access an application.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_internetinformationservices_website_name) AS 'Websites' FROM microsoft_internetinformationservices_website FACET status"
+					}
+				],
+				"presentation": {
+					"title": "Status Distribution",
+          "notes": "The status of the website.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(active_requests) FROM microsoft_internetinformationservices_website COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Active Requests",
+					"notes": "The number of requests that are currently being processed by the website."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage) FROM microsoft_internetinformationservices_website COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage (Percent)",
+					"notes": "The percentage of CPU being used by website processes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(private_memory_usage) FROM microsoft_internetinformationservices_website COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Private Memory Usage (Percent)",
+					"notes": "The percentage of system memory currently used as website process private bytes."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(current_connections) FROM microsoft_internetinformationservices_website COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Current Connections",
+					"notes": "The number of active connections that are open on the website."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(io_operations) FROM microsoft_internetinformationservices_website COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "I/O Operations (Operations)",
+					"notes": "The number of read and write operations performed by all application pool processes in the last second."
+				}
+			}
+		]
+	}
+}

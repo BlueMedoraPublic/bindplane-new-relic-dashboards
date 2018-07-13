@@ -65,7 +65,7 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(instances_with_severe_health) FROM amazon_elasticbeanstalk_environment COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(instances_with_severe_health) FROM amazon_elasticbeanstalk_environment COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
@@ -84,12 +84,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(request_latency_50%) FROM amazon_elasticbeanstalk_environment COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(warning_instances) FROM amazon_elasticbeanstalk_environment COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Request Latency 50% (Milliseconds)",
-					"notes": "The average latency for the slowest 50 percent of requests."
+					"title": "Warning Instances",
+					"notes": "The number of instances with Warning health status."
 				}
 			},
 			{
@@ -179,12 +179,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(warning_instances) FROM amazon_elasticbeanstalk_environment COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(request_latency_50%) FROM amazon_elasticbeanstalk_environment COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Warning Instances",
-					"notes": "The number of instances with Warning health status."
+					"title": "Request Latency 50% (Milliseconds)",
+					"notes": "The average latency for the slowest 50 percent of requests."
 				}
 			}
 		]

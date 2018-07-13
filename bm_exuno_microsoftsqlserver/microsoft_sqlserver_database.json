@@ -86,12 +86,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(iops_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(read_total_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "IOPS (Operations per Second)",
-					"notes": "The IOPS of the Database."
+					"title": "Read Total (Bytes per Second)",
+					"notes": "The Read Total of the Database."
 				}
 			},
 			{
@@ -105,12 +105,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(space_available) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(write_total_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Space Available (Percent)",
-					"notes": "Percentage of space available on disk used by database."
+					"title": "write_total (Bytes per Second)",
+					"notes": "The write_total of the Database."
 				}
 			},
 			{
@@ -124,12 +124,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_delay_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(iops_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read Delay (Milliseconds per Second)",
-					"notes": "The Read Delay of the Database."
+					"title": "IOPS (Operations per Second)",
+					"notes": "The IOPS of the Database."
 				}
 			},
 			{
@@ -143,12 +143,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_delay_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(space_available) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Write Delay (Milliseconds per Second)",
-					"notes": "The Write Delay of the Database."
+					"title": "Space Available (Percent)",
+					"notes": "Percentage of space available on disk used by database."
 				}
 			},
 			{
@@ -200,6 +200,44 @@
 				"account_id": 1825180,
 				"data": [
 					{
+						"nrql": "SELECT average(read_delay_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Delay (Milliseconds per Second)",
+					"notes": "The Read Delay of the Database."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_delay_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Delay (Milliseconds per Second)",
+					"notes": "The Write Delay of the Database."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
 						"nrql": "SELECT average(log_cache_hit_ratio) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -211,10 +249,10 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 1,
+					"width": 3,
 					"height": 1,
-					"row": 4,
-					"column": 3
+					"row": 6,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [

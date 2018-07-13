@@ -1,0 +1,249 @@
+
+
+{
+	"dashboard": {
+		"title": "Cloud Foundry Diego Cell",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (rep_actual_lrp_synchronization_maximum_duration IS NULL OR rep_actual_lrp_synchronization_maximum_duration > 5000000000) AND (rep_is_unhealthy IS NULL OR rep_is_unhealthy = 'false') AND (rep_remaining_disk_available IS NULL OR rep_remaining_disk_available > 16384) AND (rep_remaining_memory_available IS NULL OR rep_remaining_memory_available > 65536) AND (vm_active_memory_utilization IS NULL OR vm_active_memory_utilization < 80) AND (vm_cpu_utilization IS NULL OR vm_cpu_utilization < 85) AND (vm_ephemeral_disk_utilization IS NULL OR vm_ephemeral_disk_utilization < 80) AND (vm_persistent_disk_utilization IS NULL OR vm_persistent_disk_utilization < 80) AND (vm_swap_utilization IS NULL OR vm_swap_utilization < 85) AND (vm_system_disk_utilization IS NULL OR vm_system_disk_utilization < 80) AND (vm_user_cpu_utilization IS NULL OR vm_user_cpu_utilization < 85)) AS 'Health Score' FROM cloudfoundryfoundation_cloudfoundry_diego_cell FACET cloudfoundryfoundation_cloudfoundry_diego_cell_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Diego Cell Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(cloudfoundryfoundation_cloudfoundry_diego_cell_name) AS 'Diego Cells' FROM cloudfoundryfoundation_cloudfoundry_diego_cell FACET cloudfoundryfoundation_cloudfoundry_availability_zone_name"
+					}
+				],
+				"presentation": {
+					"title": "Availability Zone Distribution",
+          "notes": "The parent Availability Zone of this Diego Cell",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(vm_cpu_utilization) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "VM CPU Utilization (Percent)",
+					"notes": "Combined amount of CPU spent in system and user processes"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(vm_user_cpu_utilization) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "VM User CPU Utilization (Percent)",
+					"notes": "Time CPU spent in user mode"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(vm_load_average_15m) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "VM Load Average (15m)",
+					"notes": "Unix-style load average for the past 15 minutes"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(vm_system_disk_utilization) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "VM System Disk Utilization (Percent)",
+					"notes": "VM System Disk Utilization"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(vm_persistent_disk_utilization) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "VM Persistent Disk Utilization (Percent)",
+					"notes": "VM Persistent Disk Utilization"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(vm_ephemeral_disk_utilization) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "VM Ephemeral Disk Utilization (Percent)",
+					"notes": "VM Ephemeral Disk Utilization"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(vm_active_memory_utilization) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "VM Active Memory Utilization (Percent)",
+					"notes": "VM Active Memory Utilization"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(vm_swap_utilization) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "VM Swap Utilization (Percent)",
+					"notes": "VM Swap Utilization"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(rep_remaining_disk_available) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "REP Remaining Disk Available (Mebibytes)",
+					"notes": "Remaining amount of disk available for this cell to allocate to containers."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(rep_remaining_memory_available) FROM cloudfoundryfoundation_cloudfoundry_diego_cell COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "REP Remaining Memory Available (Mebibytes)",
+					"notes": "Remaining amount of memory available for this cell to allocate to containers."
+				}
+			}
+		]
+	}
+}

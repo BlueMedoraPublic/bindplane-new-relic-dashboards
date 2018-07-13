@@ -1,0 +1,177 @@
+
+
+{
+	"dashboard": {
+		"title": "HPE Onboard Administrator Interconnect Port",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (remote_drop_events_rate IS NULL OR remote_drop_events_rate < 1) AND (tcp_ip_outbound_error_packets_rate IS NULL OR tcp_ip_outbound_error_packets_rate < 1)) AS 'Health Score' FROM hpe_onboardadministrator_interconnect_port FACET hpe_onboardadministrator_interconnect_port_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Interconnect Port Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hpe_onboardadministrator_interconnect_port_name) AS 'Interconnect Ports' FROM hpe_onboardadministrator_interconnect_port FACET hpe_onboardadministrator_port_name"
+					}
+				],
+				"presentation": {
+					"title": "Port Distribution",
+          "notes": "The parent Port of this Interconnect Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hpe_onboardadministrator_interconnect_port_name) AS 'Interconnect Ports' FROM hpe_onboardadministrator_interconnect_port FACET hpe_onboardadministrator_interconnect_name"
+					}
+				],
+				"presentation": {
+					"title": "Interconnect Distribution",
+          "notes": "The parent Interconnect of this Interconnect Port",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hpe_onboardadministrator_interconnect_port_name) AS 'Interconnect Ports' FROM hpe_onboardadministrator_interconnect_port FACET status"
+					}
+				],
+				"presentation": {
+					"title": "Status Distribution",
+          "notes": "Status",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(received_data) FROM hpe_onboardadministrator_interconnect_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Received Data (Kibibits per Second)",
+					"notes": "Received Data"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(transmitted_data) FROM hpe_onboardadministrator_interconnect_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transmitted Data (Kibibits per Second)",
+					"notes": "Transmitted Data"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(received_packets) FROM hpe_onboardadministrator_interconnect_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Received Packets (Kibibits per Second)",
+					"notes": "Received Packets"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(transmitted_packets) FROM hpe_onboardadministrator_interconnect_port COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transmitted Packets (Packets per Second)",
+					"notes": "Transmitted Packets"
+				}
+			}
+		]
+	}
+}

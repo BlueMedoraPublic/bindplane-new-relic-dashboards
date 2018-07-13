@@ -1,0 +1,295 @@
+
+
+{
+	"dashboard": {
+		"title": "Pure Storage FlashArray Volume",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (read_latency IS NULL OR read_latency < 100) AND (san_read_latency IS NULL OR san_read_latency < 100) AND (san_write_latency IS NULL OR san_write_latency < 100) AND (total_used_space_ratio IS NULL OR total_used_space_ratio < 85) AND (write_latency IS NULL OR write_latency < 100)) AS 'Health Score' FROM purestorage_flasharray_volume FACET purestorage_flasharray_volume_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Volume Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_volume_group_name"
+					}
+				],
+				"presentation": {
+					"title": "Volume Group Distribution",
+          "notes": "The parent Volume Group of this Volume",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_protection_group_name"
+					}
+				],
+				"presentation": {
+					"title": "Protection Group Distribution",
+          "notes": "The parent Protection Group of this Volume",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_host_name"
+					}
+				],
+				"presentation": {
+					"title": "Host Distribution",
+          "notes": "The parent Host of this Volume",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_host_group_name"
+					}
+				],
+				"presentation": {
+					"title": "Host Group Distribution",
+          "notes": "The parent Host Group of this Volume",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_array_name"
+					}
+				],
+				"presentation": {
+					"title": "Array Distribution",
+          "notes": "The parent Array of this Volume",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(total_used_space_ratio) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Used Space Ratio (Percent)",
+					"notes": "The percentage of physical space occupied by system, shared space, volume, and snapshot data."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(snapshot_space_ratio) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Snapshot Space Ratio (Percent)",
+					"notes": "The percentage of physical space occupied by snapshots."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(read_bandwidth) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Bandwidth (Bytes per Second)",
+					"notes": "The number of bytes read per second."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(write_bandwidth) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Bandwidth (Bytes per Second)",
+					"notes": "The number of bytes written per second."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_iops) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read IOPS (Reads per Second)",
+					"notes": "The number of read requests processed per second."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_iops) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write IOPS (Writes per Second)",
+					"notes": "The number of write requests processed per second."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(read_latency) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Latency (Microseconds)",
+					"notes": "The average time it takes to process an I/O read request."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_latency) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Latency (Microseconds)",
+					"notes": "The average time it takes to process an I/O write request."
+				}
+			}
+		]
+	}
+}
