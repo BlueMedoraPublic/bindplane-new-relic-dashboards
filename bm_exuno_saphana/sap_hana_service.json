@@ -1,0 +1,177 @@
+
+
+{
+	"dashboard": {
+		"title": "SAP HANA Service",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (active IS NULL OR active = 'YES') AND (cpu_utilization IS NULL OR cpu_utilization < 85) AND (memory_utilization IS NULL OR memory_utilization < 85)) AS 'Health Score' FROM sap_hana_service FACET sap_hana_service_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Service Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(sap_hana_service_name) AS 'Services' FROM sap_hana_service FACET sap_hana_host_name"
+					}
+				],
+				"presentation": {
+					"title": "Host Distribution",
+          "notes": "The parent Host of this Service",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(sap_hana_service_name) AS 'Services' FROM sap_hana_service FACET active"
+					}
+				],
+				"presentation": {
+					"title": "Active Distribution",
+          "notes": "Whether the service is currently active",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(sap_hana_service_name) AS 'Services' FROM sap_hana_service FACET role"
+					}
+				],
+				"presentation": {
+					"title": "Role Distribution",
+          "notes": "Coordinator type in distributed landscape",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_utilization) FROM sap_hana_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Utilization (Percent)",
+					"notes": "The total memory used as a percentage of the effective memory allocation limit"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_utilization) FROM sap_hana_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Utilization (Percent)",
+					"notes": "Percentage of CPU time spent on this service"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(blocked_transactions) FROM sap_hana_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Blocked Transactions",
+					"notes": "Transactions waiting for a record lock"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(response_time) FROM sap_hana_service COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Response Time (Milliseconds)",
+					"notes": "Average time for the service to respond to requests"
+				}
+			}
+		]
+	}
+}

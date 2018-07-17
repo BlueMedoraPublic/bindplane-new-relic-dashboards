@@ -1,0 +1,194 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon API Gateway Stage",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (integration_latency IS NULL OR integration_latency < 100) AND (latency IS NULL OR latency < 100)) AS 'Health Score' FROM amazon_apigateway_stage FACET amazon_apigateway_stage_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Stage Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_apigateway_stage_name) AS 'Stages' FROM amazon_apigateway_stage FACET cache_cluster_status"
+					}
+				],
+				"presentation": {
+					"title": "Cache Cluster Status Distribution",
+          "notes": "The status of the cache cluster for the stage, if enabled.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_apigateway_stage_name) AS 'Stages' FROM amazon_apigateway_stage FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(integration_latency) FROM amazon_apigateway_stage COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Integration Latency (Milliseconds)",
+					"notes": "The time between when API Gateway relays a request to the back end and when it receives a response from the back end."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(latency) FROM amazon_apigateway_stage COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Latency (Milliseconds)",
+					"notes": "The time between when API Gateway receives a request from a client and when it returns a response to the client. The latency includes the integration latency and other API Gateway overhead."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(`4xx_errors`) FROM amazon_apigateway_stage COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "4xx Errors (Errors)",
+					"notes": "The number of client-side errors captured"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(`5xx_errors`) FROM amazon_apigateway_stage COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "5xx Errors (Errors)",
+					"notes": "The number of server-side errors captured."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(calls_count) FROM amazon_apigateway_stage COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Calls Count (Calls)",
+					"notes": "The number of calls to API methods."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(cache_miss_count) FROM amazon_apigateway_stage COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cache Miss Count (Requests)",
+					"notes": "The number of requests served from the back end when API caching is enabled."
+				}
+			}
+		]
+	}
+}

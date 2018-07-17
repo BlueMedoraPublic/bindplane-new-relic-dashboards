@@ -1,0 +1,234 @@
+
+
+{
+	"dashboard": {
+		"title": "VMware vCenter Virtual Machine",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (status IS NULL OR status = 'green')) AS 'Health Score' FROM vmware_vcenter_virtual_machine FACET vmware_vcenter_virtual_machine_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Virtual Machine Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(vmware_vcenter_virtual_machine_name) AS 'Virtual Machines' FROM vmware_vcenter_virtual_machine FACET guest_os_full_name"
+					}
+				],
+				"presentation": {
+					"title": "Guest OS Full Name Distribution",
+          "notes": "The Guest OS Full Name of the Virtual Machine.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(vmware_vcenter_virtual_machine_name) AS 'Virtual Machines' FROM vmware_vcenter_virtual_machine FACET datacenter_name"
+					}
+				],
+				"presentation": {
+					"title": "Datacenter Name Distribution",
+          "notes": "The Datacenter of the Virtual Machine.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(vmware_vcenter_virtual_machine_name) AS 'Virtual Machines' FROM vmware_vcenter_virtual_machine FACET host_name"
+					}
+				],
+				"presentation": {
+					"title": "Host Name Distribution",
+          "notes": "The Host System Name of the Virtual Machine.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_used) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Used (Percent)",
+					"notes": "The CPU Used of the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(disk_space_used) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Disk Space Used (Percent)",
+					"notes": "The Disk Space Used of the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(disk_read_latency) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Disk Read Latency (Milliseconds)",
+					"notes": "The Disk Read Latency of the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(disk_write_latency) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Disk Write Latency (Milliseconds)",
+					"notes": "The Disk Write Latency of the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(disk_throughput) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Disk Throughput (Kilobytes per Second)",
+					"notes": "The Disk Throughput Counter of the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(network_throughput) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Network Throughput (Kilobytes per Second)",
+					"notes": "The Network Throughput Counter of the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_used) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Used (Percent)",
+					"notes": "The Memory Used of the Virtual Machine."
+				}
+			}
+		]
+	}
+}

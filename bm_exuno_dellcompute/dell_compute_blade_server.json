@@ -1,0 +1,449 @@
+
+
+{
+	"dashboard": {
+		"title": "Dell Compute Blade Server",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (amperage_probe_relatives_in_healthy_state IS NULL OR amperage_probe_relatives_in_healthy_state > 95) AND (global_storage_status IS NULL OR global_storage_status = 'OK') AND (lcd_status IS NULL OR lcd_status = 'OK') AND (memory_device_relatives_in_healthy_state IS NULL OR memory_device_relatives_in_healthy_state > 95) AND (physical_disk_relatives_in_healthy_state IS NULL OR physical_disk_relatives_in_healthy_state > 95) AND (processor_device_relatives_in_healthy_state IS NULL OR processor_device_relatives_in_healthy_state > 95) AND (status IS NULL OR status = 'OK') AND (system_battery_relatives_in_healthy_state IS NULL OR system_battery_relatives_in_healthy_state > 95) AND (temperature_probe_relatives_in_healthy_state IS NULL OR temperature_probe_relatives_in_healthy_state > 95) AND (virtual_disk_relatives_in_healthy_state IS NULL OR virtual_disk_relatives_in_healthy_state > 95) AND (voltage_probe_relatives_in_healthy_state IS NULL OR voltage_probe_relatives_in_healthy_state > 95)) AS 'Health Score' FROM dell_compute_blade_server FACET dell_compute_blade_server_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Blade Server Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_blade_server_name) AS 'Blade Servers' FROM dell_compute_blade_server FACET dell_compute_chassis_name"
+					}
+				],
+				"presentation": {
+					"title": "Chassis Distribution",
+          "notes": "The parent Chassis of this Blade Server",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_blade_server_name) AS 'Blade Servers' FROM dell_compute_blade_server FACET model_name"
+					}
+				],
+				"presentation": {
+					"title": "Model Name Distribution",
+          "notes": "The Model Name of the Blade Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_blade_server_name) AS 'Blade Servers' FROM dell_compute_blade_server FACET operating_system_name"
+					}
+				],
+				"presentation": {
+					"title": "Operating System Name Distribution",
+          "notes": "The OS Name of the Blade Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_blade_server_name) AS 'Blade Servers' FROM dell_compute_blade_server FACET version"
+					}
+				],
+				"presentation": {
+					"title": "Version Distribution",
+          "notes": "The Version of the Blade Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 7,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_blade_server_name) AS 'Blade Servers' FROM dell_compute_blade_server FACET version"
+					}
+				],
+				"presentation": {
+					"title": "Version Distribution",
+          "notes": "The Version of the Blade Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 8,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_blade_server_name) AS 'Blade Servers' FROM dell_compute_blade_server FACET version"
+					}
+				],
+				"presentation": {
+					"title": "Version Distribution",
+          "notes": "The Version of the Blade Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_memory_device_size) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Memory Device Size (Gibibytes)",
+					"notes": "The Total Memory Device Size of the Blade Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_temperature_probe_reading) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Temperature Probe Reading (Celsius)",
+					"notes": "The Average Temperature Probe Reading of the Blade Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_physical_disk_available_raid) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Physical Disk Available RAID (Mebibytes)",
+					"notes": "The Total Physical Disk Available RAID of the Blade Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_server_power) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Server Power (Watts)",
+					"notes": "The Average Server Power of the Blade Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_server_current) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Server Current (Amperes)",
+					"notes": "The Average Server Amperage of the Blade Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_processor_speed) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Processor Speed (Megahertz)",
+					"notes": "The Average Processor Device Current Speed of the Blade Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_processor_voltage) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Processor Voltage (Millivolts)",
+					"notes": "The Average Processor Device Voltage of the Blade Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(amperage_probe_relatives_in_healthy_state) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Amperage Probe Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type amperage_probe whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(memory_device_relatives_in_healthy_state) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Device Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type memory_device whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(physical_disk_relatives_in_healthy_state) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Physical Disk Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type physical_disk whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(processor_device_relatives_in_healthy_state) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Processor Device Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type processor_device whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(system_battery_relatives_in_healthy_state) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "System Battery Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type system_battery whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 7,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(temperature_probe_relatives_in_healthy_state) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Temperature Probe Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type temperature_probe whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 7,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(virtual_disk_relatives_in_healthy_state) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Virtual Disk Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type virtual_disk whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 8,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(voltage_probe_relatives_in_healthy_state) FROM dell_compute_blade_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Voltage Probe Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type voltage_probe whose status doesn't warrant creating an event."
+				}
+			}
+		]
+	}
+}

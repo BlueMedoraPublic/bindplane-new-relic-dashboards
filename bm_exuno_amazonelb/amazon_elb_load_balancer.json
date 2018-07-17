@@ -1,0 +1,291 @@
+
+
+{
+	"dashboard": {
+		"title": "Amazon ELB Classic Load Balancer",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (backend_connection_errors IS NULL OR backend_connection_errors < 1) AND (http_code_count_backend_4xx IS NULL OR http_code_count_backend_4xx < 1) AND (http_code_count_backend_5xx IS NULL OR http_code_count_backend_5xx < 1) AND (http_code_count_elb_4xx IS NULL OR http_code_count_elb_4xx < 1) AND (http_code_count_elb_5xx IS NULL OR http_code_count_elb_5xx < 1) AND (unhealthy_host_count IS NULL OR unhealthy_host_count < 1)) AS 'Health Score' FROM amazon_elb_load_balancer FACET amazon_elb_load_balancer_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Classic Load Balancer Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_elb_load_balancer_name) AS 'Classic Load Balancers' FROM amazon_elb_load_balancer FACET region"
+					}
+				],
+				"presentation": {
+					"title": "Region Distribution",
+          "notes": "The AWS Region this object belongs to.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_elb_load_balancer_name) AS 'Classic Load Balancers' FROM amazon_elb_load_balancer FACET scheme"
+					}
+				],
+				"presentation": {
+					"title": "Scheme Distribution",
+          "notes": "The AWS Load Balancer Scheme, internal or internet-facing.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(amazon_elb_load_balancer_name) AS 'Classic Load Balancers' FROM amazon_elb_load_balancer FACET security_groups"
+					}
+				],
+				"presentation": {
+					"title": "Security Groups Distribution",
+          "notes": "The ids of the security groups the load balancer is part of.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(latency) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Latency (Seconds)",
+					"notes": "The amount of time between sending a request and receiving a response from a registered instance."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(estimated_data_processed) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Estimated Data Processed (Bytes)",
+					"notes": "The estimated amount of data processed by the Application Load Balancer."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(unhealthy_host_count) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Unhealthy Host Count",
+					"notes": "The number of unhealthy instances registered with your load balancer."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(backend_connection_errors) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Backend Connection Errors (Connections)",
+					"notes": "The number of connections that were not successfully established between the load balancer and the registered instances."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(healthy_host_count) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Healthy Host Count",
+					"notes": "The number of healthy instances registered with the load balancer."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(http_code_count_backend_4xx) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "HTTP Code Count - Backend - 4XX",
+					"notes": "The number of HTTP 4XX response codes generated by registered instances."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(http_code_count_backend_5xx) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "HTTP Code Count - Backend - 5XX",
+					"notes": "The number of HTTP 5XX response codes generated by registered instances."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(http_code_count_elb_4xx) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "HTTP Code Count - ELB - 4XX",
+					"notes": "The number of HTTP 4XX server error codes generated by the load balancer."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(http_code_count_elb_5xx) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "HTTP Code Count - ELB - 5XX",
+					"notes": "The number of HTTP 5XX server error codes generated by the load balancer."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(request_count) FROM amazon_elb_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Request Count (Requests)",
+					"notes": "The number of requests completed or connections made."
+				}
+			}
+		]
+	}
+}

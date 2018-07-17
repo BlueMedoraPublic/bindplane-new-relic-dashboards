@@ -1,0 +1,253 @@
+
+
+{
+	"dashboard": {
+		"title": "HP Compute Rack",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (average_cpu_temperature IS NULL OR average_cpu_temperature < 75) AND (average_memory_temperature IS NULL OR average_memory_temperature < 75) AND (fans_health_critical IS NULL OR fans_health_critical < 1) AND (fans_health_warning IS NULL OR fans_health_warning < 1) AND (health IS NULL OR health = 'OK') AND (network_adapter_health_critical IS NULL OR network_adapter_health_critical < 1) AND (network_adapter_health_warning IS NULL OR network_adapter_health_warning < 1) AND (power_consumed IS NULL OR power_consumed < power_capacity) AND (power_supply_health_critical IS NULL OR power_supply_health_critical < 1) AND (power_supply_health_warning IS NULL OR power_supply_health_warning < 1) AND (processor_health IS NULL OR processor_health = 'OK')) AS 'Health Score' FROM hp_compute_rack FACET hp_compute_rack_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Rack Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hp_compute_rack_name) AS 'Racks' FROM hp_compute_rack FACET health"
+					}
+				],
+				"presentation": {
+					"title": "Health Distribution",
+          "notes": "The Health of the Rack.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hp_compute_rack_name) AS 'Racks' FROM hp_compute_rack FACET model"
+					}
+				],
+				"presentation": {
+					"title": "Model Distribution",
+          "notes": "The Model of the Rack.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(hp_compute_rack_name) AS 'Racks' FROM hp_compute_rack FACET type"
+					}
+				],
+				"presentation": {
+					"title": "Type Distribution",
+          "notes": "The Type of the Rack.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(power_consumed) FROM hp_compute_rack COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Power Consumed (Watts)",
+					"notes": "The Power Consumed of the Rack."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_cpu_temperature) FROM hp_compute_rack COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average CPU Temperature (Celsius)",
+					"notes": "The Average CPU Temperature of the Rack."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(fans_health_critical) FROM hp_compute_rack COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Fans Health Critical (Percent)",
+					"notes": "The Fans Health Critical of the Rack."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(power_supply_health_critical) FROM hp_compute_rack COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Power Supply Health Critical (Percent)",
+					"notes": "The Power Supply Health Critical of the Rack."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(fans_health_warning) FROM hp_compute_rack COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Fans Health Warning (Percent)",
+					"notes": "The Fans Health Warning of the Rack."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(power_supply_health_warning) FROM hp_compute_rack COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Power Supply Health Warning (Percent)",
+					"notes": "The Power Supply Health Warning of the Rack."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(network_adapter_health_critical) FROM hp_compute_rack COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Network Adapter Health Critical (Percent)",
+					"notes": "The Network Adapter Health Critical of the Rack."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(network_adapter_health_warning) FROM hp_compute_rack COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Network Adapter Health Warning (Percent)",
+					"notes": "The Network Adapter Health Warning of the Rack."
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,154 @@
+
+
+{
+	"dashboard": {
+		"title": "Citrix NetScaler Appliance",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage_percent IS NULL OR cpu_usage_percent < 85.0) AND (disk_0_percent_usage IS NULL OR disk_0_percent_usage < 90) AND (disk_1_percent_usage IS NULL OR disk_1_percent_usage < 90) AND (memory_usage_percent IS NULL OR memory_usage_percent < 90)) AS 'Health Score' FROM citrix_netscaler_appliance FACET citrix_netscaler_appliance_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Appliance Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(citrix_netscaler_appliance_name) AS 'Appliances' FROM citrix_netscaler_appliance FACET system_type"
+					}
+				],
+				"presentation": {
+					"title": "System Type Distribution",
+          "notes": "The type of the System.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage_percent) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage Percent (Percent)",
+					"notes": "CPU utilization percentage."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(disk_0_percent_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Disk 0 Percent Usage (Percent)",
+					"notes": "Used space in /flash partition of the disk, as a percentage."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(disk_1_percent_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Disk 1 Percent Usage (Percent)",
+					"notes": "Used space in /var partition of the disk, as a percentage."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(management_cpu_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Management CPU Usage (Percent)",
+					"notes": "Management CPU utilization percentage."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_usage_percent) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Usage Percent (Percent)",
+					"notes": "Percentage of memory utilization on NetScaler."
+				}
+			}
+		]
+	}
+}

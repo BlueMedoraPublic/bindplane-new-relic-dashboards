@@ -1,0 +1,236 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft Azure Databases Elastic Pool",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage IS NULL OR cpu_usage < 85) AND (dtu_usage IS NULL OR dtu_usage < 85) AND (edtu_used IS NULL OR edtu_used < edtu_limit) AND (sessions_usage IS NULL OR sessions_usage < 85) AND (storage_usage IS NULL OR storage_usage < 85) AND (workers_usage IS NULL OR workers_usage < 85)) AS 'Health Score' FROM microsoft_azure_databases_elastic_pool FACET microsoft_azure_databases_elastic_pool_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Elastic Pool Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 2,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_databases_elastic_pool_name) AS 'Elastic Pools' FROM microsoft_azure_databases_elastic_pool FACET microsoft_azure_databases_sql_server_name"
+					}
+				],
+				"presentation": {
+					"title": "SQL Server Distribution",
+          "notes": "The parent SQL Server of this Elastic Pool",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_databases_elastic_pool_name) AS 'Elastic Pools' FROM microsoft_azure_databases_elastic_pool FACET edition"
+					}
+				],
+				"presentation": {
+					"title": "Edition Distribution",
+          "notes": "The edition of the elastic pool",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_databases_elastic_pool_name) AS 'Elastic Pools' FROM microsoft_azure_databases_elastic_pool FACET location"
+					}
+				],
+				"presentation": {
+					"title": "Location Distribution",
+          "notes": "Resource location of the elastic pool",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_databases_elastic_pool_name) AS 'Elastic Pools' FROM microsoft_azure_databases_elastic_pool FACET resource_group"
+					}
+				],
+				"presentation": {
+					"title": "Resource Group Distribution",
+          "notes": "The Resource Group of the Azure resource.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cpu_usage) FROM microsoft_azure_databases_elastic_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "CPU Usage (Percent)",
+					"notes": "CPU Usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(storage_usage) FROM microsoft_azure_databases_elastic_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Storage Usage (Percent)",
+					"notes": "Storage Usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(workers_usage) FROM microsoft_azure_databases_elastic_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Workers Usage (Percent)",
+					"notes": "Workers Usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(sessions_usage) FROM microsoft_azure_databases_elastic_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Sessions Usage (Percent)",
+					"notes": "Sessions Usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(dtu_usage) FROM microsoft_azure_databases_elastic_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "DTU Usage (Percent)",
+					"notes": "DTU Usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(edtu_limit) FROM microsoft_azure_databases_elastic_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "EDTU Limit",
+					"notes": "eDTU limit"
+				}
+			}
+		]
+	}
+}
