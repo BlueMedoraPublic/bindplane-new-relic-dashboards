@@ -44,12 +44,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_volume_group_name"
+						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_array_name"
 					}
 				],
 				"presentation": {
-					"title": "Volume Group Distribution",
-          "notes": "The parent Volume Group of this Volume",
+					"title": "Array Distribution",
+          "notes": "The parent Array of this Volume",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -60,27 +60,6 @@
 					"width":  1,
 					"height": 1,
 					"row": 3,
-					"column": 1
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_protection_group_name"
-					}
-				],
-				"presentation": {
-					"title": "Protection Group Distribution",
-          "notes": "The parent Protection Group of this Volume",
-					"drilldown_dashboard_id": null
-				}
-			}
-			,
-			{
-				"visualization": "facet_pie_chart",
-				"layout": {
-					"width":  1,
-					"height": 1,
-					"row": 4,
 					"column": 1
 				},
 				"account_id": 1825180,
@@ -101,7 +80,7 @@
 				"layout": {
 					"width":  1,
 					"height": 1,
-					"row": 5,
+					"row": 4,
 					"column": 1
 				},
 				"account_id": 1825180,
@@ -122,18 +101,39 @@
 				"layout": {
 					"width":  1,
 					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_volume_group_name"
+					}
+				],
+				"presentation": {
+					"title": "Volume Group Distribution",
+          "notes": "The parent Volume Group of this Volume",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
 					"row": 6,
 					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_array_name"
+						"nrql": "SELECT uniqueCount(purestorage_flasharray_volume_name) AS 'Volumes' FROM purestorage_flasharray_volume FACET purestorage_flasharray_protection_group_name"
 					}
 				],
 				"presentation": {
-					"title": "Array Distribution",
-          "notes": "The parent Array of this Volume",
+					"title": "Protection Group Distribution",
+          "notes": "The parent Protection Group of this Volume",
 					"drilldown_dashboard_id": null
 				}
 			}

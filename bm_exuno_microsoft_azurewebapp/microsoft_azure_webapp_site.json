@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (average_response_time IS NULL OR average_response_time < 1.0) AND (enabled IS NULL OR enabled = 'true')) AS 'Health Score' FROM microsoft_azure_webapp_site FACET microsoft_azure_webapp_site_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (average_response_time IS NULL OR average_response_time < 1.0) AND (enabled IS NULL OR enabled = 1)) AS 'Health Score' FROM microsoft_azure_webapp_site FACET microsoft_azure_webapp_site_name"
 						
 					}
 				],

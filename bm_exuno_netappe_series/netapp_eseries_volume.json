@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (group_iops_utilization IS NULL OR group_iops_utilization < 85) AND (offline IS NULL OR offline = 'false')) AS 'Health Score' FROM netapp_eseries_volume FACET netapp_eseries_volume_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (group_iops_utilization IS NULL OR group_iops_utilization < 85) AND (offline IS NULL OR offline = 0)) AS 'Health Score' FROM netapp_eseries_volume FACET netapp_eseries_volume_name"
 						
 					}
 				],

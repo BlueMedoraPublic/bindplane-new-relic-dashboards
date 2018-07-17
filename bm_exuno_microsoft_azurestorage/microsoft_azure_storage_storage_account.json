@@ -1,0 +1,350 @@
+
+
+{
+	"dashboard": {
+		"title": "Microsoft Azure Storage Account",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (availability IS NULL OR availability > 95) AND (transactions_authorization_error IS NULL OR transactions_authorization_error < 1) AND (transactions_network_error IS NULL OR transactions_network_error < 1) AND (transactions_server_busy_error IS NULL OR transactions_server_busy_error < 1) AND (transactions_server_other_error IS NULL OR transactions_server_other_error < 1) AND (transactions_server_timeout_error IS NULL OR transactions_server_timeout_error < 1)) AS 'Health Score' FROM microsoft_azure_storage_storage_account FACET microsoft_azure_storage_storage_account_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Account Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_storage_storage_account_name) AS 'Accounts' FROM microsoft_azure_storage_storage_account FACET location"
+					}
+				],
+				"presentation": {
+					"title": "Location Distribution",
+          "notes": "The location of the storage account",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_storage_storage_account_name) AS 'Accounts' FROM microsoft_azure_storage_storage_account FACET resource_group"
+					}
+				],
+				"presentation": {
+					"title": "Resource Group Distribution",
+          "notes": "The Resource Group of the Azure resource.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_storage_storage_account_name) AS 'Accounts' FROM microsoft_azure_storage_storage_account FACET sku_tier"
+					}
+				],
+				"presentation": {
+					"title": "SKU Tier Distribution",
+          "notes": "The the tier of the SKU associated with the storage account",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(microsoft_azure_storage_storage_account_name) AS 'Accounts' FROM microsoft_azure_storage_storage_account FACET kind"
+					}
+				],
+				"presentation": {
+					"title": "Kind Distribution",
+          "notes": "Indicates the type of storage account",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(availability) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Availability (Percent)",
+					"notes": "Availability is calculated by taking the TotalBillableRequests value and dividing it by the number of applicable requests, including those that produced unexpected errors. All unexpected errors result in reduced availability for the service."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(transactions_authorization_error) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transactions Authorization Error (Requests)",
+					"notes": "The number of requests made to a storage service that failed due to unauthorized access of data or an authorization failure."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(transactions_network_error) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transactions Network Error (Requests)",
+					"notes": "The number of requests made to a storage service that failed due to network errors. This most commonly occurs when a client prematurely closes a connection before timeout expiration."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(transactions_server_busy_error) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transactions Server Busy Error (Requests)",
+					"notes": "The number of requests made to a storage service that resulted in busy server error (status code 503)."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(transactions_server_other_error) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transactions Server Other Error (Requests)",
+					"notes": "The number of requests made to a storage service that resulted in an unspecified server error."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(transactions_server_timeout_error) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transactions Server Timeout Error (Requests)",
+					"notes": "The number of requests made to a storage service that resulted in a server timeout error (status code 500). The timeout obscured due to a server error."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(ingress) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Ingress (Bytes)",
+					"notes": "The amount of ingress data. This number includes ingress from an external client into Azure Storage as well as ingress within Azure."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(egress) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Egress (Bytes)",
+					"notes": "The amount of egress data. This number includes egress from an external client into Azure Storage as well as egress within Azure. As a result, this number does not reflect billable egress."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(transactions) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Transactions (Requests)",
+					"notes": "The number of requests made to a storage service. This number includes successful and failed requests, as well as requests which produced errors."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(used_capacity) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Used Capacity (Bytes)",
+					"notes": "Account used capacity"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(success_e2e_latency) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Success E2E Latency (Milliseconds)",
+					"notes": "The average end-to-end latency of successful requests made to this service. This value includes the required processing time within Azure Storage to read the request, send the response, and receive acknowledgment of the response."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(success_server_latency) FROM microsoft_azure_storage_storage_account COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Success Server Latency (Milliseconds)",
+					"notes": "The average latency used by Azure Storage to process a successful request. This value does not include the network latency specified in AverageE2ELatency."
+				}
+			}
+		]
+	}
+}

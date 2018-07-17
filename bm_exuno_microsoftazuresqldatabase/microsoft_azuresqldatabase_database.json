@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "Microsoft Azure SQL Database ",
+		"title": "Microsoft Azure SQL Database",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",
@@ -27,7 +27,7 @@
 					}
 				],
 				"presentation": {
-					"title": " Selector",
+					"title": "Database Selector",
 					"notes": null,
 					"drilldown_dashboard_id": null
 				}

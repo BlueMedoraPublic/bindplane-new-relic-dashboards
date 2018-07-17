@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "Citrix NetScaler Appliance",
+		"title": "EMC VNX Block LUN",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",
@@ -22,12 +22,12 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage_percent IS NULL OR cpu_usage_percent < 85.0) AND (disk_0_percent_usage IS NULL OR disk_0_percent_usage < 90) AND (disk_1_percent_usage IS NULL OR disk_1_percent_usage < 90) AND (memory_usage_percent IS NULL OR memory_usage_percent < 90)) AS 'Health Score' FROM citrix_netscaler_appliance FACET citrix_netscaler_appliance_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (capacity_utilization IS NULL OR capacity_utilization < 85) AND (sp_a_utilization IS NULL OR sp_a_utilization < 85) AND (sp_b_utilization IS NULL OR sp_b_utilization < 85)) AS 'Health Score' FROM emc_vnxblock_lun FACET emc_vnxblock_lun_name"
 						
 					}
 				],
 				"presentation": {
-					"title": "Appliance Selector",
+					"title": "LUN Selector",
 					"notes": null,
 					"drilldown_dashboard_id": null
 				}
@@ -44,12 +44,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(citrix_netscaler_appliance_name) AS 'Appliances' FROM citrix_netscaler_appliance FACET system_type"
+						"nrql": "SELECT uniqueCount(emc_vnxblock_lun_name) AS 'LUNs' FROM emc_vnxblock_lun FACET emc_vnxblock_array_name"
 					}
 				],
 				"presentation": {
-					"title": "System Type Distribution",
-          "notes": "The type of the System.",
+					"title": "Array Distribution",
+          "notes": "The parent Array of this LUN",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -65,12 +65,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(cpu_usage_percent) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(capacity_utilization) FROM emc_vnxblock_lun COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "CPU Usage Percent (Percent)",
-					"notes": "CPU utilization percentage."
+					"title": "Capacity Utilization (Percent)",
+					"notes": "LUN Total Capacity Utilization"
 				}
 			},
 			{
@@ -84,12 +84,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(disk_0_percent_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(fast_cache_read_hit_ratio) FROM emc_vnxblock_lun COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Disk 0 Percent Usage (Percent)",
-					"notes": "Used space in /flash partition of the disk, as a percentage."
+					"title": "FAST Cache Read Hit Ratio (Percent)",
+					"notes": "Ratio of FAST Cache read hits to calls"
 				}
 			},
 			{
@@ -103,12 +103,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(disk_1_percent_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(fast_cache_write_hit_ratio) FROM emc_vnxblock_lun COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Disk 1 Percent Usage (Percent)",
-					"notes": "Used space in /var partition of the disk, as a percentage."
+					"title": "FAST Cache Write Hit Ratio (Percent)",
+					"notes": "Ratio of FAST Cache write hits to calls"
 				}
 			},
 			{
@@ -122,12 +122,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(management_cpu_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(sp_a_utilization) FROM emc_vnxblock_lun COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Management CPU Usage (Percent)",
-					"notes": "Management CPU utilization percentage."
+					"title": "SP A Utilization (Percent)",
+					"notes": "Storage Processor A Utilization"
 				}
 			},
 			{
@@ -141,12 +141,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(memory_usage_percent) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(sp_b_utilization) FROM emc_vnxblock_lun COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Memory Usage Percent (Percent)",
-					"notes": "Percentage of memory utilization on NetScaler."
+					"title": "SP B Utilization (Percent)",
+					"notes": "Storage Processor B Utilization"
 				}
 			}
 		]

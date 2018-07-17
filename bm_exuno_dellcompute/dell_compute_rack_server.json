@@ -1,0 +1,485 @@
+
+
+{
+	"dashboard": {
+		"title": "Dell Compute Rack Server",
+		"icon": "bar-chart",
+		"visibility": "all",
+		"editable": "editable_by_all",
+		"metadata": {
+			"version": 1
+		},
+		"widgets": [
+			{
+				"visualization": "facet_table",
+				"layout": {
+					"width": 1,
+					"height": 2,
+					"row": 1,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (global_storage_status IS NULL OR global_storage_status = 'OK') AND (lcd_status IS NULL OR lcd_status = 'OK') AND (status IS NULL OR status = 'OK') AND (amperage_probe_relatives_in_healthy_state IS NULL OR amperage_probe_relatives_in_healthy_state > 95) AND (cooling_device_relatives_in_healthy_state IS NULL OR cooling_device_relatives_in_healthy_state > 95) AND (intrusion_probe_relatives_in_healthy_state IS NULL OR intrusion_probe_relatives_in_healthy_state > 95) AND (memory_device_relatives_in_healthy_state IS NULL OR memory_device_relatives_in_healthy_state > 95) AND (physical_disk_relatives_in_healthy_state IS NULL OR physical_disk_relatives_in_healthy_state > 95) AND (power_unit_relatives_in_healthy_state IS NULL OR power_unit_relatives_in_healthy_state > 95) AND (processor_device_relatives_in_healthy_state IS NULL OR processor_device_relatives_in_healthy_state > 95) AND (rack_power_supply_relatives_in_healthy_state IS NULL OR rack_power_supply_relatives_in_healthy_state > 95) AND (system_battery_relatives_in_healthy_state IS NULL OR system_battery_relatives_in_healthy_state > 95) AND (temperature_probe_relatives_in_healthy_state IS NULL OR temperature_probe_relatives_in_healthy_state > 95) AND (voltage_probe_relatives_in_healthy_state IS NULL OR voltage_probe_relatives_in_healthy_state > 95)) AS 'Health Score' FROM dell_compute_rack_server FACET dell_compute_rack_server_name"
+						
+					}
+				],
+				"presentation": {
+					"title": "Rack Server Selector",
+					"notes": null,
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_rack_server_name) AS 'Rack Servers' FROM dell_compute_rack_server FACET model_name"
+					}
+				],
+				"presentation": {
+					"title": "Model Name Distribution",
+          "notes": "The Model Name of the Rack Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_rack_server_name) AS 'Rack Servers' FROM dell_compute_rack_server FACET version"
+					}
+				],
+				"presentation": {
+					"title": "Version Distribution",
+          "notes": "The Version of the Rack Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_rack_server_name) AS 'Rack Servers' FROM dell_compute_rack_server FACET lcd_status"
+					}
+				],
+				"presentation": {
+					"title": "LCD Status Distribution",
+          "notes": "The LCD Status of the Rack Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 6,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_rack_server_name) AS 'Rack Servers' FROM dell_compute_rack_server FACET status"
+					}
+				],
+				"presentation": {
+					"title": "Status Distribution",
+          "notes": "The Status of the Rack Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 7,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(dell_compute_rack_server_name) AS 'Rack Servers' FROM dell_compute_rack_server FACET operating_system_name"
+					}
+				],
+				"presentation": {
+					"title": "Operating System Name Distribution",
+          "notes": "The OS Name of the Rack Server.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_memory_device_size) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Memory Device Size (Gibibytes)",
+					"notes": "The Total Memory Device Size of the Rack Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_temperature_probe_reading) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Temperature Probe Reading (Celsius)",
+					"notes": "The Average Temperature Probe Reading of the Rack Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_voltage_probe_reading) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Voltage Probe Reading (Millivolts)",
+					"notes": "The Average Voltage Probe Reading of the Rack Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_power_supply) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Power Supply (Amperes)",
+					"notes": "The Average Power Supply of the Rack Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_server_power) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Server Power (Watts)",
+					"notes": "The Average Server Power of the Rack Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_processor_speed) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Processor Speed (Megahertz)",
+					"notes": "The Average Processor Device Current Speed of the Rack Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(average_processor_voltage) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Average Processor Voltage (Millivolts)",
+					"notes": "The Average Processor Device Voltage of the Rack Server."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(amperage_probe_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Amperage Probe Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type amperage_probe whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cooling_device_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cooling Device Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type cooling_device whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 5,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(intrusion_probe_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Intrusion Probe Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type intrusion_probe whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_device_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Device Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type memory_device whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 6,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(physical_disk_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Physical Disk Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type physical_disk whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 7,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(power_unit_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Power Unit Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type power_unit whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 7,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(processor_device_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Processor Device Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type processor_device whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 8,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(rack_power_supply_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Rack Power Supply Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type rack_power_supply whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 8,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(system_battery_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "System Battery Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type system_battery whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 8,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(temperature_probe_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Temperature Probe Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type temperature_probe whose status doesn't warrant creating an event."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 9,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(voltage_probe_relatives_in_healthy_state) FROM dell_compute_rack_server COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Voltage Probe Relatives in Healthy State (Percent)",
+					"notes": "The percentage of relatives of type voltage_probe whose status doesn't warrant creating an event."
+				}
+			}
+		]
+	}
+}

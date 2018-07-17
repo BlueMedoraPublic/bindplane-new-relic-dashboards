@@ -14,7 +14,7 @@
 				"visualization": "facet_table",
 				"layout": {
 					"width": 1,
-					"height": 1,
+					"height": 2,
 					"row": 1,
 					"column": 1
 				},
@@ -38,7 +38,7 @@
 				"layout": {
 					"width":  1,
 					"height": 1,
-					"row": 2,
+					"row": 3,
 					"column": 1
 				},
 				"account_id": 1825180,
@@ -59,7 +59,7 @@
 				"layout": {
 					"width":  1,
 					"height": 1,
-					"row": 3,
+					"row": 4,
 					"column": 1
 				},
 				"account_id": 1825180,
@@ -80,81 +80,18 @@
 				"layout": {
 					"width":  1,
 					"height": 1,
-					"row": 4,
-					"column": 1
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT uniqueCount(nimble_storage_volume_name) AS 'Volumes' FROM nimble_storage_volume FACET collection_id"
-					}
-				],
-				"presentation": {
-					"title": "Collection ID Distribution",
-          "notes": "Collection ID",
-					"drilldown_dashboard_id": null
-				}
-			}
-			,
-			{
-				"visualization": "facet_pie_chart",
-				"layout": {
-					"width":  1,
-					"height": 1,
 					"row": 5,
 					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(nimble_storage_volume_name) AS 'Volumes' FROM nimble_storage_volume FACET folder_id"
+						"nrql": "SELECT uniqueCount(nimble_storage_volume_name) AS 'Volumes' FROM nimble_storage_volume FACET state"
 					}
 				],
 				"presentation": {
-					"title": "Folder ID Distribution",
-          "notes": "Folder ID",
-					"drilldown_dashboard_id": null
-				}
-			}
-			,
-			{
-				"visualization": "facet_pie_chart",
-				"layout": {
-					"width":  1,
-					"height": 1,
-					"row": 6,
-					"column": 1
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT uniqueCount(nimble_storage_volume_name) AS 'Volumes' FROM nimble_storage_volume FACET performance_policy_id"
-					}
-				],
-				"presentation": {
-					"title": "Performance Policy ID Distribution",
-          "notes": "Performance Policy ID",
-					"drilldown_dashboard_id": null
-				}
-			}
-			,
-			{
-				"visualization": "facet_pie_chart",
-				"layout": {
-					"width":  1,
-					"height": 1,
-					"row": 7,
-					"column": 1
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT uniqueCount(nimble_storage_volume_name) AS 'Volumes' FROM nimble_storage_volume FACET pool_id"
-					}
-				],
-				"presentation": {
-					"title": "Pool ID Distribution",
-          "notes": "Pool ID",
+					"title": "State Distribution",
+          "notes": "State",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -238,7 +175,7 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 2,
+					"width": 1,
 					"height": 1,
 					"row": 3,
 					"column": 2
@@ -257,10 +194,10 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 2,
+					"width": 1,
 					"height": 1,
-					"row": 4,
-					"column": 2
+					"row": 3,
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -276,9 +213,9 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 2,
+					"width": 1,
 					"height": 1,
-					"row": 5,
+					"row": 4,
 					"column": 2
 				},
 				"account_id": 1825180,
@@ -295,10 +232,10 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 2,
+					"width": 1,
 					"height": 1,
-					"row": 6,
-					"column": 2
+					"row": 4,
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -316,7 +253,7 @@
 				"layout": {
 					"width": 2,
 					"height": 1,
-					"row": 7,
+					"row": 5,
 					"column": 2
 				},
 				"account_id": 1825180,

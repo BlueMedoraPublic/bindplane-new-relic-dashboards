@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "Microsoft SQL Server Database",
+		"title": "Dell EMC Isilon Cluster",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",
@@ -22,12 +22,12 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (read_delay_rate IS NULL OR read_delay_rate < 1000) AND (space_available IS NULL OR space_available > 15) AND (write_delay_rate IS NULL OR write_delay_rate < 1000)) AS 'Health Score' FROM microsoft_sqlserver_database FACET microsoft_sqlserver_database_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (system_cpu_utilization IS NULL OR system_cpu_utilization < 85) AND (cpu_utilization IS NULL OR cpu_utilization < 85) AND (user_cpu_utilization IS NULL OR user_cpu_utilization < 85) AND (ifs_utilization IS NULL OR ifs_utilization < 85)) AS 'Health Score' FROM dellemc_isilon_cluster FACET dellemc_isilon_cluster_name"
 						
 					}
 				],
 				"presentation": {
-					"title": "Database Selector",
+					"title": "Cluster Selector",
 					"notes": null,
 					"drilldown_dashboard_id": null
 				}
@@ -44,12 +44,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(microsoft_sqlserver_database_name) AS 'Databases' FROM microsoft_sqlserver_database FACET microsoft_sqlserver_always_on_availability_group_name"
+						"nrql": "SELECT uniqueCount(dellemc_isilon_cluster_name) AS 'Clusters' FROM dellemc_isilon_cluster FACET release_version"
 					}
 				],
 				"presentation": {
-					"title": "Always On Availability Group Distribution",
-          "notes": "The parent Always On Availability Group of this Database",
+					"title": "Release Version Distribution",
+          "notes": "Kernel release number.",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -65,12 +65,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(microsoft_sqlserver_database_name) AS 'Databases' FROM microsoft_sqlserver_database FACET microsoft_sqlserver_instance_name"
+						"nrql": "SELECT uniqueCount(dellemc_isilon_cluster_name) AS 'Clusters' FROM dellemc_isilon_cluster FACET type"
 					}
 				],
 				"presentation": {
-					"title": "Instance Distribution",
-          "notes": "The parent Instance of this Database",
+					"title": "Type Distribution",
+          "notes": "Kernel release type.",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -86,12 +86,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_total_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(cpu_utilization) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read Total (Bytes per Second)",
-					"notes": "The Read Total of the Database."
+					"title": "CPU Utilization (Percent)",
+					"notes": "The percentage CPU utilization."
 				}
 			},
 			{
@@ -105,12 +105,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_total_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(system_cpu_utilization) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "write_total (Bytes per Second)",
-					"notes": "The write_total of the Database."
+					"title": "System CPU Utilization (Percent)",
+					"notes": "Cluster average of system CPU usage"
 				}
 			},
 			{
@@ -124,12 +124,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(iops_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(user_cpu_utilization) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "IOPS (Operations per Second)",
-					"notes": "The IOPS of the Database."
+					"title": "User CPU Utilization (Percent)",
+					"notes": "Cluster average of user CPU usage"
 				}
 			},
 			{
@@ -143,12 +143,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(space_available) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(ifs_utilization) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Space Available (Percent)",
-					"notes": "Percentage of space available on disk used by database."
+					"title": "IFS Utilization (Percent)",
+					"notes": "Percent of /ifs filesystem used for storage"
 				}
 			},
 			{
@@ -162,12 +162,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_operations_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(total_protocol_throughput) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read Operations (Operations per Second)",
-					"notes": "The Read Operations of the Database."
+					"title": "Total Protocol Throughput (Bytes per Second)",
+					"notes": "The total throughput for all protocols listed."
 				}
 			},
 			{
@@ -181,12 +181,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_operations_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(ssd_utilization) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Write Operations (Operations per Second)",
-					"notes": "The Write Operations of the Database."
+					"title": "SSD Utilization (Percent)",
+					"notes": "Percent of SSD space in /ifs filesystem used for storage"
 				}
 			},
 			{
@@ -200,12 +200,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_delay_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_in) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read Delay (Milliseconds per Second)",
-					"notes": "The Read Delay of the Database."
+					"title": "Disk In (Bytes per Second)",
+					"notes": "Traffic to disk."
 				}
 			},
 			{
@@ -219,12 +219,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_delay_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_out) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Write Delay (Milliseconds per Second)",
-					"notes": "The Write Delay of the Database."
+					"title": "Disk Out (Bytes per Second)",
+					"notes": "Traffic from disk."
 				}
 			},
 			{
@@ -238,12 +238,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(log_cache_hit_ratio) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(network_traffic_in) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Log Cache Hit Ratio",
-					"notes": "Database log cache hit ratio."
+					"title": "Network Traffic In (Bytes per Second)",
+					"notes": "Incoming network traffic for all operations."
 				}
 			},
 			{
@@ -257,12 +257,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(transactions_rate) FROM microsoft_sqlserver_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(network_traffic_out) FROM dellemc_isilon_cluster COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Transactions (per Second per Second)",
-					"notes": "Database transactions over time."
+					"title": "Network Traffic Out (Bytes per Second)",
+					"notes": "Outgoing network traffic throughput for all operations."
 				}
 			}
 		]

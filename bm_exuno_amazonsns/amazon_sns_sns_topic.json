@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "Amazon SNS SNS Topic",
+		"title": "Amazon SNS Topic",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",
@@ -22,12 +22,12 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (failed_notifications IS NULL OR failed_notifications = 0)) AS 'Health Score' FROM amazon_sns_sns_topic FACET amazon_sns_sns_topic_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (failed_notifications IS NULL OR failed_notifications < 1)) AS 'Health Score' FROM amazon_sns_sns_topic FACET amazon_sns_sns_topic_name"
 						
 					}
 				],
 				"presentation": {
-					"title": "SNS Topic Selector",
+					"title": "Topic Selector",
 					"notes": null,
 					"drilldown_dashboard_id": null
 				}
@@ -44,7 +44,7 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(amazon_sns_sns_topic_name) AS 'SNS Topics' FROM amazon_sns_sns_topic FACET region"
+						"nrql": "SELECT uniqueCount(amazon_sns_sns_topic_name) AS 'Topics' FROM amazon_sns_sns_topic FACET region"
 					}
 				],
 				"presentation": {
@@ -65,6 +65,25 @@
 				"account_id": 1825180,
 				"data": [
 					{
+						"nrql": "SELECT sum(failed_notifications) FROM amazon_sns_sns_topic COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Failed Notifications",
+					"notes": "The number of messages that failed to deliver."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
 						"nrql": "SELECT average(average_size_of_messages_published) FROM amazon_sns_sns_topic COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -78,8 +97,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 1,
-					"column": 3
+					"row": 2,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -98,7 +117,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 2,
-					"column": 2
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -116,8 +135,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 2,
-					"column": 3
+					"row": 3,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -136,7 +155,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 3,
-					"column": 2
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -152,10 +171,10 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 1,
+					"width": 3,
 					"height": 1,
-					"row": 3,
-					"column": 3
+					"row": 4,
+					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
@@ -166,25 +185,6 @@
 				"presentation": {
 					"title": "Delivered Notifications",
 					"notes": "The number of messages successfully delivered."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 3,
-					"height": 1,
-					"row": 4,
-					"column": 1
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT sum(failed_notifications) FROM amazon_sns_sns_topic COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Failed Notifications",
-					"notes": "The number of messages that failed to deliver."
 				}
 			}
 		]
