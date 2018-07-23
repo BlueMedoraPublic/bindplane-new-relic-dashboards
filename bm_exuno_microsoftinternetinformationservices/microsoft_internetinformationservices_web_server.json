@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "Microsoft Internet Information Services Web Server",
+		"title": "Microsoft IIS Web Server",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",

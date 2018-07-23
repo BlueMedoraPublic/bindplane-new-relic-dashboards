@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage_percent IS NULL OR cpu_usage_percent < 85.0) AND (disk_0_percent_usage IS NULL OR disk_0_percent_usage < 90) AND (disk_1_percent_usage IS NULL OR disk_1_percent_usage < 90) AND (memory_usage_percent IS NULL OR memory_usage_percent < 90)) AS 'Health Score' FROM citrix_netscaler_appliance FACET citrix_netscaler_appliance_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 85.0) AND (disk_0_utilization IS NULL OR disk_0_utilization < 90) AND (disk_1_utilization IS NULL OR disk_1_utilization < 90) AND (memory_utilization IS NULL OR memory_utilization < 90)) AS 'Health Score' FROM citrix_netscaler_appliance FACET citrix_netscaler_appliance_name"
 						
 					}
 				],
@@ -65,11 +65,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(cpu_usage_percent) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(cpu_utilization) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "CPU Usage Percent (Percent)",
+					"title": "CPU Utilization (Percent)",
 					"notes": "CPU utilization percentage."
 				}
 			},
@@ -84,12 +84,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(disk_0_percent_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(management_cpu_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Disk 0 Percent Usage (Percent)",
-					"notes": "Used space in /flash partition of the disk, as a percentage."
+					"title": "Management CPU Usage (Percent)",
+					"notes": "Management CPU utilization percentage."
 				}
 			},
 			{
@@ -103,12 +103,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(disk_1_percent_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_0_utilization) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Disk 1 Percent Usage (Percent)",
-					"notes": "Used space in /var partition of the disk, as a percentage."
+					"title": "Disk 0 Utilization (Percent)",
+					"notes": "Used space in /flash partition of the disk, as a percentage."
 				}
 			},
 			{
@@ -122,12 +122,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(management_cpu_usage) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_1_utilization) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Management CPU Usage (Percent)",
-					"notes": "Management CPU utilization percentage."
+					"title": "Disk 1 Utilization (Percent)",
+					"notes": "Used space in /var partition of the disk, as a percentage."
 				}
 			},
 			{
@@ -141,11 +141,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(memory_usage_percent) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(memory_utilization) FROM citrix_netscaler_appliance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Memory Usage Percent (Percent)",
+					"title": "Memory Utilization (Percent)",
 					"notes": "Percentage of memory utilization on NetScaler."
 				}
 			}

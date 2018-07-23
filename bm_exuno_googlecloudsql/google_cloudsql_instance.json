@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 85) AND (disk_utilization IS NULL OR disk_utilization < 85.0) AND (memory_utilization IS NULL OR memory_utilization < 90.0)) AS 'Health Score' FROM google_cloudsql_instance FACET google_cloudsql_instance_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 1.0) AND (disk_utilization IS NULL OR disk_utilization < 1.0) AND (memory_utilization IS NULL OR memory_utilization < 1.0)) AS 'Health Score' FROM google_cloudsql_instance FACET google_cloudsql_instance_name"
 						
 					}
 				],
@@ -111,7 +111,7 @@
 					}
 				],
 				"presentation": {
-					"title": "CPU Utilization (Percent)",
+					"title": "CPU Utilization",
 					"notes": "The fraction of the reserved CPU that is currently in use."
 				}
 			},
@@ -130,7 +130,7 @@
 					}
 				],
 				"presentation": {
-					"title": "Disk Utilization (Percent)",
+					"title": "Disk Utilization",
 					"notes": "The fraction of the disk quota that is currently in use."
 				}
 			},
@@ -149,7 +149,7 @@
 					}
 				],
 				"presentation": {
-					"title": "Memory Utilization (Percent)",
+					"title": "Memory Utilization",
 					"notes": "The fraction of the memory quota that is currently in use."
 				}
 			},

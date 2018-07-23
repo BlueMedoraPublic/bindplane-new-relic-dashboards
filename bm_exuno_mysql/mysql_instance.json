@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (buffer_flush_percent_for_dirty IS NULL OR buffer_flush_percent_for_dirty < 85) AND (buffer_flush_percent_for_lsn IS NULL OR buffer_flush_percent_for_lsn < 85) AND (threads_connected IS NULL OR threads_connected < maximum_connections)) AS 'Health Score' FROM mysql_instance FACET mysql_instance_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (buffer_flush_for_dirty IS NULL OR buffer_flush_for_dirty < 85) AND (buffer_flush_for_lsn IS NULL OR buffer_flush_for_lsn < 85) AND (threads_connected IS NULL OR threads_connected < maximum_connections)) AS 'Health Score' FROM mysql_instance FACET mysql_instance_name"
 						
 					}
 				],
@@ -200,11 +200,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(buffer_flush_percent_for_dirty) FROM mysql_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(buffer_flush_for_dirty) FROM mysql_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Buffer Flush Percent For Dirty (Percent)",
+					"title": "Buffer Flush For Dirty (Percent)",
 					"notes": "The percent of I/O capacity used to avoid max dirty page limit."
 				}
 			},
@@ -219,11 +219,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(buffer_flush_percent_for_lsn) FROM mysql_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(buffer_flush_for_lsn) FROM mysql_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Buffer Flush Percent For LSN (Percent)",
+					"title": "Buffer Flush For LSN (Percent)",
 					"notes": "The percent of I/O capacity used to avoid reusable redo space limit"
 				}
 			},

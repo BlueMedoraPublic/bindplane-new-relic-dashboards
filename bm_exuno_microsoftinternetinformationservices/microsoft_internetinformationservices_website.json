@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "Microsoft Internet Information Services Website",
+		"title": "Microsoft IIS Website",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",

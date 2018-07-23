@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (percent_of_limit IS NULL OR percent_of_limit < 85)) AS 'Health Score' FROM amazon_budgets_budget FACET amazon_budgets_budget_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (limit_spent IS NULL OR limit_spent < 85)) AS 'Health Score' FROM amazon_budgets_budget FACET amazon_budgets_budget_name"
 						
 					}
 				],
@@ -86,12 +86,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(percent_of_limit) FROM amazon_budgets_budget COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(limit_spent) FROM amazon_budgets_budget COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Percent of Limit (Percent)",
-					"notes": "Percent of Limit"
+					"title": "Limit Spent (Percent)",
+					"notes": "Limit Spent"
 				}
 			},
 			{
@@ -105,12 +105,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(percent_of_estimated_spend) FROM amazon_budgets_budget COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(estimate_spent) FROM amazon_budgets_budget COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Percent of Estimated Spend (Percent)",
-					"notes": "Percent of Estimated Spend"
+					"title": "Estimate Spent (Percent)",
+					"notes": "Estimate Spent"
 				}
 			},
 			{

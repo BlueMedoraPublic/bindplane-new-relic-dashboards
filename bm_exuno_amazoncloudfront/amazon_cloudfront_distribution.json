@@ -124,11 +124,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(bytes_downloaded) FROM amazon_cloudfront_distribution COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(data_downloaded) FROM amazon_cloudfront_distribution COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Bytes Downloaded (Bytes)",
+					"title": "Data Downloaded (Bytes)",
 					"notes": "The number of bytes downloaded by viewers for GET, HEAD, and OPTIONS requests."
 				}
 			},
@@ -143,11 +143,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(bytes_uploaded) FROM amazon_cloudfront_distribution COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(data_uploaded) FROM amazon_cloudfront_distribution COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Bytes Uploaded (Bytes)",
+					"title": "Data Uploaded (Bytes)",
 					"notes": "The number of bytes uploaded to your origin with CloudFront using POST and PUT requests."
 				}
 			}

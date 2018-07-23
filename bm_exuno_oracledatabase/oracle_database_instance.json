@@ -86,12 +86,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(sessions_current_utilization) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(cpu_usage) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Sessions Current Utilization",
-					"notes": "The number of sessions (with maximum sessions_limit) that are currently being used."
+					"title": "CPU Usage (Centiseconds per Second)",
+					"notes": "CPU Usage"
 				}
 			},
 			{
@@ -124,6 +124,44 @@
 				"account_id": 1825180,
 				"data": [
 					{
+						"nrql": "SELECT average(user_calls) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "User Calls (per Second)",
+					"notes": "User Calls"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(sessions_current_utilization) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Sessions Current Utilization",
+					"notes": "The number of sessions (with maximum sessions_limit) that are currently being used."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
 						"nrql": "SELECT average(average_io_time) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -137,8 +175,27 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 2,
+					"row": 3,
 					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(io_throughput) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "I/O Throughput (Megabytes per Second)",
+					"notes": "I/O Throughput"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -156,8 +213,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
-					"column": 2
+					"row": 4,
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -175,27 +232,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
-					"column": 3
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(cpu_usage) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "CPU Usage (Centiseconds per Second)",
-					"notes": "CPU Usage"
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 4,
-					"column": 2
+					"row": 5,
+					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
@@ -213,27 +251,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 4,
-					"column": 3
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(host_cpu_usage) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Host CPU Usage (Centiseconds per Second)",
-					"notes": "Host CPU Usage"
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
 					"row": 5,
-					"column": 1
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -244,25 +263,6 @@
 				"presentation": {
 					"title": "Host CPU Utilization (Percent)",
 					"notes": "Host CPU Utilization"
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 5,
-					"column": 2
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT sum(io_throughput) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "I/O Throughput (Megabytes per Second)",
-					"notes": "I/O Throughput"
 				}
 			},
 			{
@@ -301,25 +301,6 @@
 				"presentation": {
 					"title": "Physical Write Total I/O Requests (per Second)",
 					"notes": "Physical Write Total I/O Requests"
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 3,
-					"height": 1,
-					"row": 7,
-					"column": 2
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(user_calls) FROM oracle_database_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "User Calls (per Second)",
-					"notes": "User Calls"
 				}
 			}
 		]

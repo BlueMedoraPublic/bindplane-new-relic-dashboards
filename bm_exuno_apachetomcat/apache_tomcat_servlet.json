@@ -95,7 +95,7 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 1,
+					"width": 2,
 					"height": 1,
 					"row": 2,
 					"column": 2
@@ -109,25 +109,6 @@
 				"presentation": {
 					"title": "Load Time (Milliseconds)",
 					"notes": "The Load Time of the Servlet"
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 2,
-					"column": 3
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT sum(error_count) FROM apache_tomcat_servlet COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Error Count (Errors)",
-					"notes": "The Error Count of the Servlet"
 				}
 			},
 			{

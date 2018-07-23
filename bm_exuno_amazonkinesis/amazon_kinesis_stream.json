@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (get_records_latency IS NULL OR get_records_latency < 0.1) AND (put_record_latency IS NULL OR put_record_latency < 0.1) AND (put_records_latency IS NULL OR put_records_latency < 0.1) AND (read_provisioned_throughput_exceeded IS NULL OR read_provisioned_throughput_exceeded <= 0) AND (write_provisioned_throughput_exceeded IS NULL OR write_provisioned_throughput_exceeded <= 0)) AS 'Health Score' FROM amazon_kinesis_stream FACET amazon_kinesis_stream_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (get_records_latency IS NULL OR get_records_latency < 100) AND (put_record_latency IS NULL OR put_record_latency < 100) AND (put_records_latency IS NULL OR put_records_latency < 100) AND (read_provisioned_throughput_exceeded IS NULL OR read_provisioned_throughput_exceeded <= 0) AND (write_provisioned_throughput_exceeded IS NULL OR write_provisioned_throughput_exceeded <= 0)) AS 'Health Score' FROM amazon_kinesis_stream FACET amazon_kinesis_stream_name"
 						
 					}
 				],
@@ -84,7 +84,7 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(get_records_successes) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(get_records_successes) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
@@ -122,7 +122,7 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(put_record_successes) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(put_record_successes) FROM amazon_kinesis_stream COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {

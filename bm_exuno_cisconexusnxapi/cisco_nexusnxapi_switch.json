@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 85.0) AND (fan_error_percentage IS NULL OR fan_error_percentage < 10) AND (memory_utilization IS NULL OR memory_utilization < 90) AND (port_error_percentage IS NULL OR port_error_percentage < 1) AND (power_supplies_in_error_state IS NULL OR power_supplies_in_error_state < 1) AND (power_supply_error_percentage IS NULL OR power_supply_error_percentage < 10) AND (sensor_error_percentage IS NULL OR sensor_error_percentage < 10) AND (sensors_in_error_state IS NULL OR sensors_in_error_state < 1)) AS 'Health Score' FROM cisco_nexusnxapi_switch FACET cisco_nexusnxapi_switch_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 85.0) AND (fans_in_error IS NULL OR fans_in_error < 10) AND (memory_utilization IS NULL OR memory_utilization < 90) AND (ports_in_errors IS NULL OR ports_in_errors < 1) AND (power_supplies_in_error_state IS NULL OR power_supplies_in_error_state < 1) AND (power_supplies_in_error IS NULL OR power_supplies_in_error < 10) AND (sensors_in_error IS NULL OR sensors_in_error < 10) AND (sensors_in_error_state IS NULL OR sensors_in_error_state < 1)) AS 'Health Score' FROM cisco_nexusnxapi_switch FACET cisco_nexusnxapi_switch_name"
 						
 					}
 				],
@@ -145,11 +145,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(fan_error_percentage) FROM cisco_nexusnxapi_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(fans_in_error) FROM cisco_nexusnxapi_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Fan Error Percentage (Percent)",
+					"title": "Fans In Errors (Percent)",
 					"notes": "Fan Status In Error Percentage of this Switch"
 				}
 			},
@@ -164,11 +164,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(port_error_percentage) FROM cisco_nexusnxapi_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(ports_in_errors) FROM cisco_nexusnxapi_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Port Error Percentage (Percent)",
+					"title": "Ports In Error (Percent)",
 					"notes": "Port Status In Error Percentage of this Switch"
 				}
 			},
@@ -202,11 +202,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(power_supply_error_percentage) FROM cisco_nexusnxapi_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(power_supplies_in_error) FROM cisco_nexusnxapi_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Power Supply Error Percentage (Percent)",
+					"title": "Power Supplies In Error (Percent)",
 					"notes": "Power Module Status In Error Percentage of this Switch"
 				}
 			},
@@ -221,11 +221,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(sensor_error_percentage) FROM cisco_nexusnxapi_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(sensors_in_error) FROM cisco_nexusnxapi_switch COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Sensor Error Percentage (Percent)",
+					"title": "Sensors In Error (Percent)",
 					"notes": "Sensor Status In Error Percentage of this Switch"
 				}
 			},

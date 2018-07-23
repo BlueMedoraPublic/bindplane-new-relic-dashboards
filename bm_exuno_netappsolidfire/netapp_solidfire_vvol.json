@@ -259,11 +259,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(actual_iops) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(actual_io_rate) FROM netapp_solidfire_vvol COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Actual IOPS (Operations per Second)",
+					"title": "Actual IO Rate (Operations per Second)",
 					"notes": "The current actual IOPS to the volume in the last 500 milliseconds."
 				}
 			}

@@ -57,7 +57,7 @@
 			{
 				"visualization": "facet_pie_chart",
 				"layout": {
-					"width":  3,
+					"width":  1,
 					"height": 1,
 					"row": 3,
 					"column": 1
@@ -78,7 +78,7 @@
 			{
 				"visualization": "facet_pie_chart",
 				"layout": {
-					"width":  3,
+					"width":  1,
 					"height": 1,
 					"row": 4,
 					"column": 1
@@ -101,7 +101,7 @@
 				"layout": {
 					"width": 2,
 					"height": 1,
-					"row": 3,
+					"row": 1,
 					"column": 2
 				},
 				"account_id": 1825180,
@@ -120,7 +120,7 @@
 				"layout": {
 					"width": 2,
 					"height": 1,
-					"row": 4,
+					"row": 2,
 					"column": 2
 				},
 				"account_id": 1825180,
@@ -132,6 +132,44 @@
 				"presentation": {
 					"title": "Memory Usage (Percent)",
 					"notes": "Memory Usage"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(available_memory) FROM cisco_ucs_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Available Memory (Mebibytes)",
+					"notes": "Effective Memory"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(memory_speed) FROM cisco_ucs_blade COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Speed (Megahertz)",
+					"notes": "Memory Speed"
 				}
 			}
 		]

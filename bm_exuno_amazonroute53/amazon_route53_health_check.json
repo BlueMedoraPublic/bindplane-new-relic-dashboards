@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (healthy_percentage IS NULL OR healthy_percentage = 100.0) AND (status IS NULL OR status = 1)) AS 'Health Score' FROM amazon_route53_health_check FACET amazon_route53_health_check_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (healthy IS NULL OR healthy = 100.0) AND (status IS NULL OR status = 1)) AS 'Health Score' FROM amazon_route53_health_check FACET amazon_route53_health_check_name"
 						
 					}
 				],
@@ -65,11 +65,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(child_healthy_health_checks) FROM amazon_route53_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(children_healthy) FROM amazon_route53_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Child Healthy Health Checks",
+					"title": "Children Healthy",
 					"notes": "The number of health checks that are healthy among the health checks that Amazon Route 53 is monitoring."
 				}
 			},
@@ -84,11 +84,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(healthy_percentage) FROM amazon_route53_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(healthy) FROM amazon_route53_health_check COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Healthy Percentage (Percent)",
+					"title": "Healthy (Percent)",
 					"notes": "The percentage of Amazon Route 53 health checkers that consider the selected endpoint to be healthy."
 				}
 			},

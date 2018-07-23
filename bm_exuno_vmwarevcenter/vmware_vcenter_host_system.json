@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (status IS NULL OR status = 'green')) AS 'Health Score' FROM vmware_vcenter_host_system FACET vmware_vcenter_host_system_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (status IS NULL OR status = 'green') AND (cpu_utilization IS NULL OR cpu_utilization < 85)) AS 'Health Score' FROM vmware_vcenter_host_system FACET vmware_vcenter_host_system_name"
 						
 					}
 				],
@@ -107,12 +107,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(average_cpu_speed) FROM vmware_vcenter_host_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(cpu_utilization) FROM vmware_vcenter_host_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Average CPU Speed (Megahertz)",
-					"notes": "The Average CPU Speed of the Host System."
+					"title": "CPU Utilization (Percent)",
+					"notes": "The CPU Utilization of the Host System."
 				}
 			},
 			{
@@ -126,12 +126,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(cpu_utilization) FROM vmware_vcenter_host_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(memory_utilization) FROM vmware_vcenter_host_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "CPU Utilization (Percent)",
-					"notes": "The CPU Utilization of the Host System."
+					"title": "Memory Utilization (Percent)",
+					"notes": "The Memory Utilization of the Host System."
 				}
 			},
 			{
@@ -259,12 +259,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(memory_utilization) FROM vmware_vcenter_host_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(used_memory) FROM vmware_vcenter_host_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Memory Utilization (Percent)",
-					"notes": "The Memory Utilization of the Host System."
+					"title": "Used Memory (Megabytes)",
+					"notes": "The Used Memory of the Host System."
 				}
 			},
 			{
@@ -278,12 +278,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(used_memory) FROM vmware_vcenter_host_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(average_cpu_speed) FROM vmware_vcenter_host_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Used Memory (Megabytes)",
-					"notes": "The Used Memory of the Host System."
+					"title": "Average CPU Speed (Megahertz)",
+					"notes": "The Average CPU Speed of the Host System."
 				}
 			}
 		]

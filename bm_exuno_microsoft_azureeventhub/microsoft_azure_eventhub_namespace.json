@@ -107,7 +107,7 @@
 					}
 				],
 				"presentation": {
-					"title": "Archived Messages Throughput (EHAMBS) (Bytes)",
+					"title": "Archived Messages Throughput (Bytes)",
 					"notes": "Event Hub archived message throughput in a namespace"
 				}
 			},
@@ -126,7 +126,7 @@
 					}
 				],
 				"presentation": {
-					"title": "Outgoing Message Throughput (EHOUTBYTES) (Bytes)",
+					"title": "Outgoing Message Throughput (Bytes)",
 					"notes": "Event Hub outgoing message throughput for a namespace"
 				}
 			},
@@ -183,7 +183,7 @@
 					}
 				],
 				"presentation": {
-					"title": "Failed Requests (FAILREQ) (Requests)",
+					"title": "Failed Requests (Requests)",
 					"notes": "Total failed requests for a namespace"
 				}
 			},
@@ -202,7 +202,7 @@
 					}
 				],
 				"presentation": {
-					"title": "Internal Server Errors (INTERR)",
+					"title": "Internal Server Errors",
 					"notes": "Total internal server errors for a namespace"
 				}
 			},
@@ -240,7 +240,7 @@
 					}
 				],
 				"presentation": {
-					"title": "Server Busy Errors (SVRBSY)",
+					"title": "Server Busy Errors",
 					"notes": "Total server busy errors for a namespace"
 				}
 			},
@@ -259,7 +259,7 @@
 					}
 				],
 				"presentation": {
-					"title": "Miscellaneous Server Errors (MISCERR)",
+					"title": "Miscellaneous Server Errors",
 					"notes": "Miscellaneous server errors for a namespace"
 				}
 			}

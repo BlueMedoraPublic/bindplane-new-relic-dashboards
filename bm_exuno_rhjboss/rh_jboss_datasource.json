@@ -84,11 +84,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(percent_in_use) FROM rh_jboss_datasource COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(connections_utilization) FROM rh_jboss_datasource COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Percent In Use (Percent)",
+					"title": "Connections Utilization (Percent)",
 					"notes": "The Percent of Connections In Use of the Datasource"
 				}
 			},

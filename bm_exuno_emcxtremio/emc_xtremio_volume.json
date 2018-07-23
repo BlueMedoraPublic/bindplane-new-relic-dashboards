@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "NetApp SolidFire Volume",
+		"title": "EMC XtremIO Volume",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",
@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (volume_utilization IS NULL OR volume_utilization < 1)) AS 'Health Score' FROM netapp_solidfire_volume FACET netapp_solidfire_volume_name"
+							"nrql": "SELECT latest(timestamp) AS 'Last Updated' FROM emc_xtremio_volume FACET emc_xtremio_volume_name"
 						
 					}
 				],
@@ -44,7 +44,7 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(netapp_solidfire_volume_name) AS 'Volumes' FROM netapp_solidfire_volume FACET netapp_solidfire_cluster_name"
+						"nrql": "SELECT uniqueCount(emc_xtremio_volume_name) AS 'Volumes' FROM emc_xtremio_volume FACET emc_xtremio_cluster_name"
 					}
 				],
 				"presentation": {
@@ -65,12 +65,33 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(netapp_solidfire_volume_name) AS 'Volumes' FROM netapp_solidfire_volume FACET status"
+						"nrql": "SELECT uniqueCount(emc_xtremio_volume_name) AS 'Volumes' FROM emc_xtremio_volume FACET snapshot_type"
 					}
 				],
 				"presentation": {
-					"title": "Status Distribution",
-          "notes": "The current status of the volume.",
+					"title": "Snapshot Type Distribution",
+          "notes": "The Snapshot is regular (default) or readonly.",
+					"drilldown_dashboard_id": null
+				}
+			}
+			,
+			{
+				"visualization": "facet_pie_chart",
+				"layout": {
+					"width":  1,
+					"height": 1,
+					"row": 5,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT uniqueCount(emc_xtremio_volume_name) AS 'Volumes' FROM emc_xtremio_volume FACET type"
+					}
+				],
+				"presentation": {
+					"title": "Type Distribution",
+          "notes": "Denotes the Volume type. Values: [regular or readonly]",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -86,12 +107,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(volume_utilization) FROM netapp_solidfire_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(accumulated_read_operation_count) FROM emc_xtremio_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Volume Utilization",
-					"notes": "A floating value that describes how much the client is using the volume. Possible values: 0: The client is not using the volume 1: The client is using their maximum. >1: The client is using their burst"
+					"title": "Accumulated Read Operation Count",
+					"notes": "Total accumulative number of read operations having occurred during the Volume's lifespan"
 				}
 			},
 			{
@@ -105,12 +126,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(size) FROM netapp_solidfire_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(accumulated_write_operation_count) FROM emc_xtremio_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Size (Bytes)",
-					"notes": "Total provisioned capacity in bytes"
+					"title": "Accumulated Write Operation Count",
+					"notes": "Accumulative number of write operations having occurred during the Volume's lifespan"
 				}
 			},
 			{
@@ -124,12 +145,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_latency) FROM netapp_solidfire_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(average_latency) FROM emc_xtremio_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read Latency (Microseconds)",
-					"notes": "The average time, in microseconds, to complete read operations to the volume in the last 500 milliseconds."
+					"title": "Average Latency (Microseconds)",
+					"notes": "Average Latency"
 				}
 			},
 			{
@@ -143,12 +164,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_latency) FROM netapp_solidfire_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(io_rate) FROM emc_xtremio_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Write Latency (Microseconds)",
-					"notes": "The average time, in microseconds, to complete write operations to a volume in the last 500 milliseconds."
+					"title": "IO Rate (Operations per Second)",
+					"notes": "IO Rate"
 				}
 			},
 			{
@@ -162,16 +183,16 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_operations_rate) FROM netapp_solidfire_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(logical_space_in_use) FROM emc_xtremio_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read Operations (Operations per Second)",
-					"notes": "The total read operations to the volume since the creation of the volume."
+					"title": "Logical Space In Use (Tebibytes)",
+					"notes": "Logical Space In Use"
 				}
 			},
 			{
-				"visualization": "comparison_line_chart",
+				"visualization": "heatmap",
 				"layout": {
 					"width": 1,
 					"height": 1,
@@ -181,14 +202,15 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_operations_rate) FROM netapp_solidfire_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT histogram(object_severity, 100, 10) FROM emc_xtremio_volume FACET emc_xtremio_volume_name"
 					}
 				],
 				"presentation": {
-					"title": "Write Operations (Operations per Second)",
-					"notes": "The total cumulative write operations to the volume since the creation of the volume."
+					"title": "Object Severity Histogram",
+					"notes": "Volume's severity, based on severity level of current Alerts (Alerts still uncleared) for this Volume"
 				}
-			},
+			}
+			,
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
@@ -200,12 +222,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(reads_rate) FROM netapp_solidfire_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(read_write_ratio) FROM emc_xtremio_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Reads (Bytes per Second)",
-					"notes": "The total cumulative bytes read from the volume since the creation of the volume."
+					"title": "Read / Write Ratio",
+					"notes": "The ratio of read to write IOPS."
 				}
 			},
 			{
@@ -219,31 +241,31 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(writes_rate) FROM netapp_solidfire_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(size) FROM emc_xtremio_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Writes (Bytes per Second)",
-					"notes": "The total cumulative bytes written to the volume since the creation of the volume"
+					"title": "Size (Tebibytes)",
+					"notes": "Total provisioned capacity. Volume KB size as exposed to Initiators"
 				}
 			},
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 3,
+					"width": 2,
 					"height": 1,
 					"row": 5,
-					"column": 1
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(actual_io_rate) FROM netapp_solidfire_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(throughput) FROM emc_xtremio_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Actual IO Rate (Operations per Second)",
-					"notes": "The current actual IOPS to the volume in the last 500 milliseconds."
+					"title": "Throughput (Kilobytes per Second)",
+					"notes": "Throughput"
 				}
 			}
 		]

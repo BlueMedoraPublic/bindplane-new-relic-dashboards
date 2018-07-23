@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (active_applications IS NULL OR active_applications < maximum_active_applications) AND (buffer_pool_data_hit_ratio IS NULL OR buffer_pool_data_hit_ratio > 85) AND (current_size IS NULL OR current_size < allocated_size) AND (deadlocks_rate IS NULL OR deadlocks_rate < 1) AND (lock_timeouts_rate IS NULL OR lock_timeouts_rate < 1) AND (log_space_utilization IS NULL OR log_space_utilization < 85) AND (percentage_of_applications_waiting_on_locks IS NULL OR percentage_of_applications_waiting_on_locks < 15)) AS 'Health Score' FROM ibm_db2_database FACET ibm_db2_database_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (active_applications IS NULL OR active_applications < maximum_active_applications) AND (buffer_pool_data_hit_ratio IS NULL OR buffer_pool_data_hit_ratio > 85) AND (current_size IS NULL OR current_size < allocated_size) AND (deadlocks_rate IS NULL OR deadlocks_rate < 1) AND (lock_timeouts_rate IS NULL OR lock_timeouts_rate < 1) AND (log_space_utilization IS NULL OR log_space_utilization < 85) AND (applications_waiting_on_locks IS NULL OR applications_waiting_on_locks < 15)) AS 'Health Score' FROM ibm_db2_database FACET ibm_db2_database_name"
 						
 					}
 				],
@@ -217,12 +217,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(percentage_of_applications_waiting_on_locks) FROM ibm_db2_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(applications_waiting_on_locks) FROM ibm_db2_database COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Percentage of Applications Waiting on Locks (Percent)",
-					"notes": "Percentage of Applications Waiting on Locks"
+					"title": "Applications Waiting on Locks (Percent)",
+					"notes": "Applications Waiting on Locks"
 				}
 			}
 		]

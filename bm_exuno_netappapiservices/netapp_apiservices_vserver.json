@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (operational_state IS NULL OR operational_state = 'running') AND (state IS NULL OR state = 'running') AND (used_capacity_percent IS NULL OR used_capacity_percent < 80)) AS 'Health Score' FROM netapp_apiservices_vserver FACET netapp_apiservices_vserver_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (operational_state IS NULL OR operational_state = 'running') AND (state IS NULL OR state = 'running') AND (capacity_utilization IS NULL OR capacity_utilization < 80)) AS 'Health Score' FROM netapp_apiservices_vserver FACET netapp_apiservices_vserver_name"
 						
 					}
 				],
@@ -86,11 +86,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(used_capacity_percent) FROM netapp_apiservices_vserver COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(capacity_utilization) FROM netapp_apiservices_vserver COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Used Capacity Percent (Percent)",
+					"title": "Capacity Utilization (Percent)",
 					"notes": "The Used Capacity Percent of the VServer."
 				}
 			},

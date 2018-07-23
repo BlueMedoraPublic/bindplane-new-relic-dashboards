@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "Microsoft Azure Web App Site",
+		"title": "Microsoft Azure Virtual Machine",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",
@@ -22,12 +22,12 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (average_response_time IS NULL OR average_response_time < 1.0) AND (enabled IS NULL OR enabled = 1)) AS 'Health Score' FROM microsoft_azure_webapp_site FACET microsoft_azure_webapp_site_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_usage IS NULL OR cpu_usage < 85.0)) AS 'Health Score' FROM microsoft_azure_virtual_machine FACET microsoft_azure_virtual_machine_name"
 						
 					}
 				],
 				"presentation": {
-					"title": "Site Selector",
+					"title": "Virtual Machine Selector",
 					"notes": null,
 					"drilldown_dashboard_id": null
 				}
@@ -44,12 +44,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(microsoft_azure_webapp_site_name) AS 'Sites' FROM microsoft_azure_webapp_site FACET state"
+						"nrql": "SELECT uniqueCount(microsoft_azure_virtual_machine_name) AS 'Virtual Machines' FROM microsoft_azure_virtual_machine FACET microsoft_azure_resource_group_name"
 					}
 				],
 				"presentation": {
-					"title": "State Distribution",
-          "notes": "Current state of the slot",
+					"title": "Resource Group Distribution",
+          "notes": "The parent Resource Group of this Virtual Machine",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -65,12 +65,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(microsoft_azure_webapp_site_name) AS 'Sites' FROM microsoft_azure_webapp_site FACET kind"
+						"nrql": "SELECT uniqueCount(microsoft_azure_virtual_machine_name) AS 'Virtual Machines' FROM microsoft_azure_virtual_machine FACET power_state"
 					}
 				],
 				"presentation": {
-					"title": "Kind Distribution",
-          "notes": "Kind of site",
+					"title": "Power State Distribution",
+          "notes": "Power state of the Virtual Machine.",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -86,12 +86,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(average_response_time) FROM microsoft_azure_webapp_site COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(cpu_usage) FROM microsoft_azure_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Average Response Time (Seconds)",
-					"notes": "Average Response Time"
+					"title": "CPU Usage (Percent)",
+					"notes": "Percentage of CPU in use by the Virtual Machine."
 				}
 			},
 			{
@@ -105,12 +105,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(requests) FROM microsoft_azure_webapp_site COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_read) FROM microsoft_azure_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Requests (Requests)",
-					"notes": "Requests"
+					"title": "Disk Read (Bytes per Second)",
+					"notes": "Bytes per second read from disk by the Virtual Machine."
 				}
 			},
 			{
@@ -124,12 +124,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(http_5xx) FROM microsoft_azure_webapp_site COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_read_operations) FROM microsoft_azure_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "HTTP 5xx",
-					"notes": "Http Server Errors"
+					"title": "Disk Read Operations (Operations per Second)",
+					"notes": "Rate of disk read operations performed by the Virtual Machine."
 				}
 			},
 			{
@@ -143,12 +143,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(average_memory_working_set) FROM microsoft_azure_webapp_site COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_write) FROM microsoft_azure_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Average Memory Working Set (Bytes)",
-					"notes": "Average memory working set"
+					"title": "Disk Write (Bytes per Second)",
+					"notes": "Bytes per second written to disk by the Virtual Machine."
 				}
 			},
 			{
@@ -162,12 +162,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(function_execution_count) FROM microsoft_azure_webapp_site COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_write_operations) FROM microsoft_azure_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Function Execution Count",
-					"notes": "Function Execution Count"
+					"title": "Disk Write Operations (Operations per Second)",
+					"notes": "Rate of disk write operations performed by the Virtual Machine."
 				}
 			},
 			{
@@ -181,16 +181,16 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(cpu_time) FROM microsoft_azure_webapp_site COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(network_in) FROM microsoft_azure_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "CPU Time (Seconds)",
-					"notes": "CPU Time"
+					"title": "Network In (Bytes per Second)",
+					"notes": "Bytes per second received by the Virtual Machine."
 				}
 			},
 			{
-				"visualization": "heatmap",
+				"visualization": "comparison_line_chart",
 				"layout": {
 					"width": 2,
 					"height": 1,
@@ -200,15 +200,14 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT histogram(runtime_availability_state, 100, 10) FROM microsoft_azure_webapp_site FACET microsoft_azure_webapp_site_name"
+						"nrql": "SELECT average(network_out) FROM microsoft_azure_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Runtime Availability State Histogram",
-					"notes": "The availability of the website"
+					"title": "Network Out (Bytes per Second)",
+					"notes": "Bytes per second sent by the Virtual Machine."
 				}
 			}
-			
 		]
 	}
 }

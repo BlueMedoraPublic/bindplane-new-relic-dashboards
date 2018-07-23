@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT latest(timestamp) AS 'Last Updated' FROM hpe_3par_virtual_volume FACET hpe_3par_virtual_volume_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (read_latency IS NULL OR read_latency < 100) AND (write_latency IS NULL OR write_latency < 100) AND (total_used_space IS NULL OR total_used_space > 0)) AS 'Health Score' FROM hpe_3par_virtual_volume FACET hpe_3par_virtual_volume_name"
 						
 					}
 				],
@@ -86,6 +86,82 @@
 				"account_id": 1825180,
 				"data": [
 					{
+						"nrql": "SELECT average(read_latency) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Read Latency (Milliseconds)",
+					"notes": "The average time to service a read requested from the volume."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 1,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(write_latency) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Write Latency (Milliseconds)",
+					"notes": "The average time to service a write requested from the volume."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_reserved_space) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Reserved Space (Mebibytes)",
+					"notes": "The amount of total reserved space on the volume."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_used_space) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Used Space (Mebibytes)",
+					"notes": "The amount of total used space on the volume."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
 						"nrql": "SELECT average(average_latency) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -99,7 +175,7 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 1,
+					"row": 3,
 					"column": 3
 				},
 				"account_id": 1825180,
@@ -118,27 +194,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 2,
+					"row": 4,
 					"column": 2
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(compaction_ratio) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Compaction Ratio",
-					"notes": "The overall amount of storage space saved with 3PAR thin technology."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 2,
-					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -156,8 +213,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
-					"column": 2
+					"row": 4,
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -175,46 +232,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
-					"column": 3
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(read_latency) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Read Latency (Milliseconds)",
-					"notes": "The average time to service a read requested from the volume."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 4,
-					"column": 2
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(write_latency) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Write Latency (Milliseconds)",
-					"notes": "The average time to service a write requested from the volume."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 4,
-					"column": 3
+					"row": 5,
+					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
@@ -233,7 +252,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 5,
-					"column": 1
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -244,25 +263,6 @@
 				"presentation": {
 					"title": "Write Throughput (Kilobytes per Second)",
 					"notes": "The average throughput of write I/O operations processed on the volume."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 5,
-					"column": 2
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT sum(total_free_space) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Total Free Space (Mebibytes)",
-					"notes": "The amount of total free space on the volume."
 				}
 			},
 			{
@@ -287,29 +287,10 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 1,
+					"width": 3,
 					"height": 1,
 					"row": 6,
 					"column": 1
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT sum(total_reserved_space) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Total Reserved Space (Mebibytes)",
-					"notes": "The amount of total reserved space on the volume."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 6,
-					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -325,20 +306,20 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 1,
+					"width": 3,
 					"height": 1,
-					"row": 6,
-					"column": 3
+					"row": 7,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(total_used_space) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(compaction_ratio) FROM hpe_3par_virtual_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Total Used Space (Mebibytes)",
-					"notes": "The amount of total used space on the volume."
+					"title": "Compaction Ratio",
+					"notes": "The overall amount of storage space saved with 3PAR thin technology."
 				}
 			}
 		]

@@ -55,53 +55,11 @@
 			}
 			,
 			{
-				"visualization": "facet_pie_chart",
-				"layout": {
-					"width":  3,
-					"height": 1,
-					"row": 3,
-					"column": 1
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT uniqueCount(lenovo_network_port_name) AS 'Ports' FROM lenovo_network_port FACET operational_state"
-					}
-				],
-				"presentation": {
-					"title": "Operational State Distribution",
-          "notes": "Operational State",
-					"drilldown_dashboard_id": null
-				}
-			}
-			,
-			{
-				"visualization": "facet_pie_chart",
-				"layout": {
-					"width":  3,
-					"height": 1,
-					"row": 4,
-					"column": 1
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT uniqueCount(lenovo_network_port_name) AS 'Ports' FROM lenovo_network_port FACET type"
-					}
-				],
-				"presentation": {
-					"title": "Type Distribution",
-          "notes": "Type",
-					"drilldown_dashboard_id": null
-				}
-			}
-			,
-			{
 				"visualization": "comparison_line_chart",
 				"layout": {
 					"width": 2,
 					"height": 1,
-					"row": 3,
+					"row": 1,
 					"column": 2
 				},
 				"account_id": 1825180,
@@ -120,7 +78,7 @@
 				"layout": {
 					"width": 2,
 					"height": 1,
-					"row": 4,
+					"row": 2,
 					"column": 2
 				},
 				"account_id": 1825180,

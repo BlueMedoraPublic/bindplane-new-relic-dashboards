@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (put_media_connection_errors IS NULL OR put_media_connection_errors <= 0) AND (put_media_error_ack_count IS NULL OR put_media_error_ack_count <= 0) AND (put_media_buffering_ack_latency IS NULL OR put_media_buffering_ack_latency < 0.1) AND (put_media_persisted_ack_latency IS NULL OR put_media_persisted_ack_latency < 0.1) AND (put_media_received_ack_latency IS NULL OR put_media_received_ack_latency < 0.1) AND (put_media_fragment_persist_latency IS NULL OR put_media_fragment_persist_latency < 0.1) AND (put_media_fragment_ingestion_latency IS NULL OR put_media_fragment_ingestion_latency < 0.1) AND (list_fragments_latency IS NULL OR list_fragments_latency < 0.1)) AS 'Health Score' FROM amazon_kinesis_video_stream FACET amazon_kinesis_video_stream_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (put_media_connection_errors IS NULL OR put_media_connection_errors <= 0) AND (put_media_error_ack_count IS NULL OR put_media_error_ack_count <= 0) AND (put_media_buffering_ack_latency IS NULL OR put_media_buffering_ack_latency < 100) AND (put_media_persisted_ack_latency IS NULL OR put_media_persisted_ack_latency < 100) AND (put_media_received_ack_latency IS NULL OR put_media_received_ack_latency < 100) AND (put_media_fragment_persist_latency IS NULL OR put_media_fragment_persist_latency < 100) AND (put_media_fragment_ingestion_latency IS NULL OR put_media_fragment_ingestion_latency < 100) AND (list_fragments_latency IS NULL OR list_fragments_latency < 100)) AS 'Health Score' FROM amazon_kinesis_video_stream FACET amazon_kinesis_video_stream_name"
 						
 					}
 				],

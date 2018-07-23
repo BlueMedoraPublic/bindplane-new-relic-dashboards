@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 85.0) AND (percentage_disk_space_used IS NULL OR percentage_disk_space_used < 95.0)) AS 'Health Score' FROM amazon_redshift_node FACET amazon_redshift_node_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 85.0) AND (disk_space_utilization IS NULL OR disk_space_utilization < 95.0)) AS 'Health Score' FROM amazon_redshift_node FACET amazon_redshift_node_name"
 						
 					}
 				],
@@ -105,11 +105,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_iops) FROM amazon_redshift_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(read_io_rate) FROM amazon_redshift_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read IOPS (Operations per Second)",
+					"title": "Read IO Rate (Operations per Second)",
 					"notes": "The average number of disk read operations per second."
 				}
 			},
@@ -124,11 +124,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_iops) FROM amazon_redshift_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(write_io_rate) FROM amazon_redshift_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Write IOPS (Operations per Second)",
+					"title": "Write IO Rate (Operations per Second)",
 					"notes": "The average number of write operations per second."
 				}
 			},
@@ -219,11 +219,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(percentage_disk_space_used) FROM amazon_redshift_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_space_utilization) FROM amazon_redshift_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Percentage Disk Space Used (Percent)",
+					"title": "Disk Space Utilization (Percent)",
 					"notes": "The percent of disk space used."
 				}
 			}

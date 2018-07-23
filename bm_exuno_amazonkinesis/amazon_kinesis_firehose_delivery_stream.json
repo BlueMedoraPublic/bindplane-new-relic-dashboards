@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (describe_delivery_stream_latency IS NULL OR describe_delivery_stream_latency < 0.1) AND (list_delivery_streams_latency IS NULL OR list_delivery_streams_latency < 0.1) AND (put_record_batch_latency IS NULL OR put_record_batch_latency < 0.1) AND (put_record_latency IS NULL OR put_record_latency < 0.1) AND (update_delivery_stream_latency IS NULL OR update_delivery_stream_latency < 0.1)) AS 'Health Score' FROM amazon_kinesis_firehose_delivery_stream FACET amazon_kinesis_firehose_delivery_stream_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (describe_delivery_stream_latency IS NULL OR describe_delivery_stream_latency < 100) AND (list_delivery_streams_latency IS NULL OR list_delivery_streams_latency < 100) AND (put_record_batch_latency IS NULL OR put_record_batch_latency < 100) AND (put_record_latency IS NULL OR put_record_latency < 100) AND (update_delivery_stream_latency IS NULL OR update_delivery_stream_latency < 100)) AS 'Health Score' FROM amazon_kinesis_firehose_delivery_stream FACET amazon_kinesis_firehose_delivery_stream_name"
 						
 					}
 				],

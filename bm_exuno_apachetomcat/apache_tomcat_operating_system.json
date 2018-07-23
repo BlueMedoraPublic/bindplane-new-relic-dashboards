@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (physical_memory_usage_percent IS NULL OR physical_memory_usage_percent < 90) AND (swap_space_usage_percent IS NULL OR swap_space_usage_percent < 90)) AS 'Health Score' FROM apache_tomcat_operating_system FACET apache_tomcat_operating_system_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (physical_memory_utilization IS NULL OR physical_memory_utilization < 90) AND (swap_space_utilization IS NULL OR swap_space_utilization < 90)) AS 'Health Score' FROM apache_tomcat_operating_system FACET apache_tomcat_operating_system_name"
 						
 					}
 				],
@@ -65,11 +65,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(physical_memory_usage_percent) FROM apache_tomcat_operating_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(physical_memory_utilization) FROM apache_tomcat_operating_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Physical Memory Usage Percent (Percent)",
+					"title": "Physical Memory Utilization (Percent)",
 					"notes": "The Free Physical Memory Size of the OS"
 				}
 			},
@@ -84,11 +84,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(swap_space_usage_percent) FROM apache_tomcat_operating_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(swap_space_utilization) FROM apache_tomcat_operating_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Swap Space Usage Percent (Percent)",
+					"title": "Swap Space Utilization (Percent)",
 					"notes": "The Free Swap Space Size of the OS."
 				}
 			}

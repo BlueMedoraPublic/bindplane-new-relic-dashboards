@@ -107,11 +107,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(disk_read_bytes) FROM amazon_ec2_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(disk_read_data) FROM amazon_ec2_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Disk Read Bytes (Bytes)",
+					"title": "Disk Read Data (Bytes)",
 					"notes": "Bytes read from all instance store volumes available to the instance."
 				}
 			},
@@ -126,11 +126,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(disk_write_bytes) FROM amazon_ec2_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(disk_write_data) FROM amazon_ec2_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Disk Write Bytes (Bytes)",
+					"title": "Disk Write Data (Bytes)",
 					"notes": "Bytes read from all instance store volumes available to the instance."
 				}
 			},
@@ -240,11 +240,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(disk_read_ops) FROM amazon_ec2_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_reads) FROM amazon_ec2_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Disk Read Ops",
+					"title": "Disk Reads",
 					"notes": "Completed read operations from all instance store volumes available to the instance in a specified period of time."
 				}
 			},
@@ -259,11 +259,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(disk_write_ops) FROM amazon_ec2_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(disk_writes) FROM amazon_ec2_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Disk Write Ops",
+					"title": "Disk Writes",
 					"notes": "Completed write operations to all instance store volumes available to the instance in a specified period of time."
 				}
 			}

@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "NetApp E Series Volume",
+		"title": "NetApp E-Series Volume",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",
@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (group_iops_utilization IS NULL OR group_iops_utilization < 85) AND (offline IS NULL OR offline = 0)) AS 'Health Score' FROM netapp_eseries_volume FACET netapp_eseries_volume_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (group_io_utilization IS NULL OR group_io_utilization < 85) AND (offline IS NULL OR offline = 0)) AS 'Health Score' FROM netapp_eseries_volume FACET netapp_eseries_volume_name"
 						
 					}
 				],
@@ -149,11 +149,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(combined_iops) FROM netapp_eseries_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(combined_io_rate) FROM netapp_eseries_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Combined IOPS (Operations per Second)",
+					"title": "Combined IO Rate (Operations per Second)",
 					"notes": "Combined IOPS of the volume."
 				}
 			},
@@ -206,11 +206,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(group_iops_utilization) FROM netapp_eseries_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(group_io_utilization) FROM netapp_eseries_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Group IOPS Utilization (Percent)",
+					"title": "Group IO Utilization (Percent)",
 					"notes": "The percentage of the volume group's maximum IOPS used by this volume."
 				}
 			},

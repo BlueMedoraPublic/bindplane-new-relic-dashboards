@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (chunklets_available_failed IS NULL OR chunklets_available_failed < 1) AND (chunklets_used_failed IS NULL OR chunklets_used_failed < 1) AND (spare_chunklets_available_failed IS NULL OR spare_chunklets_available_failed < 1) AND (spare_chunklets_used_failed IS NULL OR spare_chunklets_used_failed < 1) AND (temperature IS NULL OR temperature < 50)) AS 'Health Score' FROM hpe_3par_disk FACET hpe_3par_disk_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (chunklets_available_failed IS NULL OR chunklets_available_failed < 1) AND (chunklets_used_failed IS NULL OR chunklets_used_failed < 1) AND (spare_chunklets_available_failed IS NULL OR spare_chunklets_available_failed < 1) AND (spare_chunklets_used_failed IS NULL OR spare_chunklets_used_failed < 1) AND (temperature IS NULL OR temperature < 50) AND (read_latency IS NULL OR read_latency < 100) AND (write_latency IS NULL OR write_latency < 100)) AS 'Health Score' FROM hpe_3par_disk FACET hpe_3par_disk_name"
 						
 					}
 				],
@@ -348,6 +348,25 @@
 					"height": 1,
 					"row": 7,
 					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(temperature) FROM hpe_3par_disk COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Temperature (Celsius)",
+					"notes": "Internal temperature of the disk drive."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 3,
+					"height": 1,
+					"row": 8,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [

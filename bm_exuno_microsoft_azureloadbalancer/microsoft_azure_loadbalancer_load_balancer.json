@@ -65,12 +65,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(total_data_throughput) FROM microsoft_azure_loadbalancer_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(virtual_ip_availability) FROM microsoft_azure_loadbalancer_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Total Data Throughput (Bytes)",
-					"notes": "Total throughput transmitted within time period"
+					"title": "Virtual IP Availability",
+					"notes": "Availability of VIP endpoints, based on probe results"
 				}
 			},
 			{
@@ -103,12 +103,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(virtual_ip_availability) FROM microsoft_azure_loadbalancer_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(total_data_throughput) FROM microsoft_azure_loadbalancer_load_balancer COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Virtual IP Availability",
-					"notes": "Availability of VIP endpoints, based on probe results"
+					"title": "Total Data Throughput (Bytes)",
+					"notes": "Total throughput transmitted within time period"
 				}
 			},
 			{

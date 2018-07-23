@@ -65,12 +65,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(access_count) FROM apache_tomcat_cache COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(desired_entry_access_rate) FROM apache_tomcat_cache COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Access Count",
-					"notes": "The Access Count of the Cache"
+					"title": "Desired Entry Access Rate",
+					"notes": "The Desired Entry Access Rate of the Cache"
 				}
 			},
 			{
@@ -84,12 +84,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(desired_entry_access_rate) FROM apache_tomcat_cache COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(access_count) FROM apache_tomcat_cache COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Desired Entry Access Rate",
-					"notes": "The Desired Entry Access Rate of the Cache"
+					"title": "Access Count",
+					"notes": "The Access Count of the Cache"
 				}
 			},
 			{

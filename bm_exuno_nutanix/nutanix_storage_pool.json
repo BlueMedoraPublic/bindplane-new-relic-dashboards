@@ -44,12 +44,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT sum(total_read_io_throughput) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(storage_usage) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Total Read IO Throughput (Kilobytes per Second)",
-					"notes": "Total Read IO Throughput"
+					"title": "Storage Usage (Kibibytes)",
+					"notes": "Usage"
 				}
 			},
 			{
@@ -59,63 +59,6 @@
 					"height": 1,
 					"row": 1,
 					"column": 3
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT sum(total_write_io_throughput) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Total Write IO Throughput (Kilobytes per Second)",
-					"notes": "Total Write IO Throughput"
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 2,
-					"column": 2
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(total_read_iops) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Total Read IOPS (Operations per Second)",
-					"notes": "Total Read IOPS"
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 2,
-					"column": 3
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(total_write_iops) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Total Write IOPS (Operations per Second)",
-					"notes": "Total Write IOPS"
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 3,
-					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
@@ -133,18 +76,18 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
+					"row": 2,
 					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(total_iops) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(total_io_rate) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Total IOPS (Operations per Second)",
-					"notes": "Total IOPS"
+					"title": "Total IO Rate (Operations per Second)",
+					"notes": "Total IO Rate"
 				}
 			},
 			{
@@ -152,7 +95,7 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
+					"row": 2,
 					"column": 3
 				},
 				"account_id": 1825180,
@@ -171,18 +114,75 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
+					"row": 3,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_read_io_throughput) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Read IO Throughput (Kilobytes per Second)",
+					"notes": "Total Read IO Throughput"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT sum(total_write_io_throughput) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Write IO Throughput (Kilobytes per Second)",
+					"notes": "Total Write IO Throughput"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 3,
+					"column": 3
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(total_read_io_rate) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total Read IO Rate (Operations per Second)",
+					"notes": "Total Read IO Rate"
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
 					"row": 4,
 					"column": 1
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(storage_usage) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(total_write_io_rate) FROM nutanix_storage_pool COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Storage Usage (Kibibytes)",
-					"notes": "Usage"
+					"title": "Total Write IO Rate (Operations per Second)",
+					"notes": "Total Write IO Rate"
 				}
 			},
 			{

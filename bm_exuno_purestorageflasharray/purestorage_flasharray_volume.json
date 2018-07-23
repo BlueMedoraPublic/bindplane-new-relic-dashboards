@@ -217,7 +217,7 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 2,
+					"width": 1,
 					"height": 1,
 					"row": 3,
 					"column": 2
@@ -225,30 +225,30 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_iops) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(read_io_rate) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read IOPS (Reads per Second)",
+					"title": "Read IO Rate (Reads per Second)",
 					"notes": "The number of read requests processed per second."
 				}
 			},
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 2,
+					"width": 1,
 					"height": 1,
-					"row": 4,
-					"column": 2
+					"row": 3,
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_iops) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(write_io_rate) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Write IOPS (Writes per Second)",
+					"title": "Write IO Rate (Writes per Second)",
 					"notes": "The number of write requests processed per second."
 				}
 			},
@@ -257,7 +257,7 @@
 				"layout": {
 					"width": 2,
 					"height": 1,
-					"row": 5,
+					"row": 4,
 					"column": 2
 				},
 				"account_id": 1825180,
@@ -276,7 +276,7 @@
 				"layout": {
 					"width": 2,
 					"height": 1,
-					"row": 6,
+					"row": 5,
 					"column": 2
 				},
 				"account_id": 1825180,
@@ -288,6 +288,25 @@
 				"presentation": {
 					"title": "Write Latency (Microseconds)",
 					"notes": "The average time it takes to process an I/O write request."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 2,
+					"height": 1,
+					"row": 6,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(total_io_rate) FROM purestorage_flasharray_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Total IO Rate (Operations per Second)",
+					"notes": "The sum of read and write requests processed per second."
 				}
 			}
 		]

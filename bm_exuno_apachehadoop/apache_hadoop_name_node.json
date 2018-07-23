@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (capacity_used_ratio IS NULL OR capacity_used_ratio < 85) AND (current_heap_memory_used IS NULL OR current_heap_memory_used < maximum_heap_memory_size) AND (current_non_heap_memory_used IS NULL OR current_non_heap_memory_used < maximum_non_heap_memory_size) AND (physical_memory_utilization IS NULL OR physical_memory_utilization < 85) AND (process_cpu_load IS NULL OR process_cpu_load < 85) AND (space_used_percent IS NULL OR space_used_percent < 85) AND (system_cpu_load IS NULL OR system_cpu_load < 85) AND (total_error_log_messages_rate IS NULL OR total_error_log_messages_rate < 1) AND (total_fatal_log_messages_rate IS NULL OR total_fatal_log_messages_rate < 1) AND (volume_failures_total IS NULL OR volume_failures_total < 1)) AS 'Health Score' FROM apache_hadoop_name_node FACET apache_hadoop_name_node_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (capacity_used_ratio IS NULL OR capacity_used_ratio < 85) AND (current_heap_memory_used IS NULL OR current_heap_memory_used < maximum_heap_memory_size) AND (current_non_heap_memory_used IS NULL OR current_non_heap_memory_used < maximum_non_heap_memory_size) AND (physical_memory_utilization IS NULL OR physical_memory_utilization < 85) AND (process_cpu_load IS NULL OR process_cpu_load < 85) AND (space_utilization IS NULL OR space_utilization < 85) AND (system_cpu_load IS NULL OR system_cpu_load < 85) AND (total_error_log_messages_rate IS NULL OR total_error_log_messages_rate < 1) AND (total_fatal_log_messages_rate IS NULL OR total_fatal_log_messages_rate < 1) AND (volume_failures_total IS NULL OR volume_failures_total < 1)) AS 'Health Score' FROM apache_hadoop_name_node FACET apache_hadoop_name_node_name"
 						
 					}
 				],
@@ -187,11 +187,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(space_used_percent) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(space_utilization) FROM apache_hadoop_name_node COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Space Used Percent (Percent)",
+					"title": "Space Utilization (Percent)",
 					"notes": "Attribute PercentUsed from Bean Hadoop:service=NameNode,name=NameNodeInfo"
 				}
 			},

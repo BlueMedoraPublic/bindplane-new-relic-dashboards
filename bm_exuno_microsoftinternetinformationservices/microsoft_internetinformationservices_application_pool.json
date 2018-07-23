@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "Microsoft Internet Information Services Application Pool",
+		"title": "Microsoft IIS Application Pool",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",

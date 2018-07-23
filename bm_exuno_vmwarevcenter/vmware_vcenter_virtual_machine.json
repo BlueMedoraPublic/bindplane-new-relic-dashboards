@@ -126,6 +126,25 @@
 				"account_id": 1825180,
 				"data": [
 					{
+						"nrql": "SELECT average(memory_used) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Memory Used (Percent)",
+					"notes": "The Memory Used of the Virtual Machine."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 2,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
 						"nrql": "SELECT average(disk_space_used) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -140,7 +159,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 2,
-					"column": 2
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -158,8 +177,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 2,
-					"column": 3
+					"row": 3,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -178,7 +197,7 @@
 					"width": 1,
 					"height": 1,
 					"row": 3,
-					"column": 2
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -194,10 +213,10 @@
 			{
 				"visualization": "comparison_line_chart",
 				"layout": {
-					"width": 1,
+					"width": 2,
 					"height": 1,
-					"row": 3,
-					"column": 3
+					"row": 4,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -208,25 +227,6 @@
 				"presentation": {
 					"title": "Network Throughput (Kilobytes per Second)",
 					"notes": "The Network Throughput Counter of the Virtual Machine."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 2,
-					"height": 1,
-					"row": 4,
-					"column": 2
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(memory_used) FROM vmware_vcenter_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Memory Used (Percent)",
-					"notes": "The Memory Used of the Virtual Machine."
 				}
 			}
 		]

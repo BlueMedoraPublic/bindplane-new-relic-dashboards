@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cloud_and_local_total_physical_usage IS NULL OR cloud_and_local_total_physical_usage < cloud_and_local_physical_capacity) AND (cloud_and_local_system_usage IS NULL OR cloud_and_local_system_usage < cloud_and_local_system_capacity)) AS 'Health Score' FROM cohesity_storage_view_box FACET cohesity_storage_view_box_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cloud_and_local_total_physical_usage IS NULL OR cloud_and_local_total_physical_usage < cloud_and_local_physical_capacity) AND (cloud_and_local_system_usage IS NULL OR cloud_and_local_system_usage < cloud_and_local_system_capacity) AND (cloud_and_local_read_latency IS NULL OR cloud_and_local_read_latency < 100) AND (cloud_and_local_write_latency IS NULL OR cloud_and_local_write_latency < 100)) AS 'Health Score' FROM cohesity_storage_view_box FACET cohesity_storage_view_box_name"
 						
 					}
 				],
@@ -103,44 +103,6 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(cloud_and_local_data_read) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Cloud and Local Data Read (Bytes)",
-					"notes": "Provides the total amount of data read."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 2,
-					"column": 3
-				},
-				"account_id": 1825180,
-				"data": [
-					{
-						"nrql": "SELECT average(cloud_and_local_data_written) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
-					}
-				],
-				"presentation": {
-					"title": "Cloud and Local Data Written (Bytes)",
-					"notes": "Provides the total amount of data written."
-				}
-			},
-			{
-				"visualization": "comparison_line_chart",
-				"layout": {
-					"width": 1,
-					"height": 1,
-					"row": 3,
-					"column": 2
-				},
-				"account_id": 1825180,
-				"data": [
-					{
 						"nrql": "SELECT average(cloud_and_local_read_latency) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
@@ -154,7 +116,7 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 3,
+					"row": 2,
 					"column": 3
 				},
 				"account_id": 1825180,
@@ -173,8 +135,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 4,
-					"column": 1
+					"row": 3,
+					"column": 2
 				},
 				"account_id": 1825180,
 				"data": [
@@ -192,8 +154,8 @@
 				"layout": {
 					"width": 1,
 					"height": 1,
-					"row": 4,
-					"column": 2
+					"row": 3,
+					"column": 3
 				},
 				"account_id": 1825180,
 				"data": [
@@ -204,6 +166,44 @@
 				"presentation": {
 					"title": "Cloud and Local Writes (Operations)",
 					"notes": "Provides the Write latency for Write IOs."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 1
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cloud_and_local_data_read) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local Data Read (Bytes)",
+					"notes": "Provides the total amount of data read."
+				}
+			},
+			{
+				"visualization": "comparison_line_chart",
+				"layout": {
+					"width": 1,
+					"height": 1,
+					"row": 4,
+					"column": 2
+				},
+				"account_id": 1825180,
+				"data": [
+					{
+						"nrql": "SELECT average(cloud_and_local_data_written) FROM cohesity_storage_view_box COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+					}
+				],
+				"presentation": {
+					"title": "Cloud and Local Data Written (Bytes)",
+					"notes": "Provides the total amount of data written."
 				}
 			},
 			{

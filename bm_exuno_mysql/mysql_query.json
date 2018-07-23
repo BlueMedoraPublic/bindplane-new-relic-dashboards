@@ -22,7 +22,7 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (average_errors IS NULL OR average_errors < 1)) AS 'Health Score' FROM mysql_query FACET mysql_query_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (average_errors IS NULL OR average_errors < 1)) AS 'Health Score' FROM mysql_query FACET sql_text"
 						
 					}
 				],

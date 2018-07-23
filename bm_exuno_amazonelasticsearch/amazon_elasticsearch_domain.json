@@ -183,11 +183,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_iops) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(read_io_rate) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read IOPS (Operations per Second)",
+					"title": "Read IO Rate (Operations per Second)",
 					"notes": "The input and output (I/O) operations rate for read operations on EBS volumes."
 				}
 			},
@@ -240,11 +240,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_iops) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(write_io_rate) FROM amazon_elasticsearch_domain COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Write IOPS (Operations per Second)",
+					"title": "Write IO Rate (Operations per Second)",
 					"notes": "The input and output (I/O) operations rate for write operations on EBS volumes."
 				}
 			},

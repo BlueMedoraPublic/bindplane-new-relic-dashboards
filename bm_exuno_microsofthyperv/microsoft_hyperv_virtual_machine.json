@@ -143,11 +143,11 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(average_normalized_iops) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(average_normalized_io_rate) FROM microsoft_hyperv_virtual_machine COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Average Normalized IOPS (per Second)",
+					"title": "Average Normalized IO Rate (per Second)",
 					"notes": "Average Normalized IOPS for all disks on the Virtual Machine"
 				}
 			},

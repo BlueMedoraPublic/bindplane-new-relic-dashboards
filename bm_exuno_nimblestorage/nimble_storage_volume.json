@@ -107,12 +107,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(combined_iops) FROM nimble_storage_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(combined_io_rate) FROM nimble_storage_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Combined IOPS (Operations per Second)",
-					"notes": "Combined IOPS"
+					"title": "Combined IO Rate (Operations per Second)",
+					"notes": "Combined IO Rate"
 				}
 			},
 			{
@@ -164,12 +164,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(read_iops) FROM nimble_storage_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(read_io_rate) FROM nimble_storage_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Read IOPS (Operations per Second)",
-					"notes": "Read IOPS"
+					"title": "Read IO Rate (Operations per Second)",
+					"notes": "Read IO Rate"
 				}
 			},
 			{
@@ -221,12 +221,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(write_iops) FROM nimble_storage_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(write_io_rate) FROM nimble_storage_volume COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Write IOPS (Operations per Second)",
-					"notes": "Write IOPS"
+					"title": "Write IO Rate (Operations per Second)",
+					"notes": "Write IO Rate"
 				}
 			},
 			{

@@ -2,7 +2,7 @@
 
 {
 	"dashboard": {
-		"title": "Google Compute Engine Instance",
+		"title": "EMC VNX File File System",
 		"icon": "bar-chart",
 		"visibility": "all",
 		"editable": "editable_by_all",
@@ -22,12 +22,12 @@
 				"data": [
 					{
 						
-							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (cpu_utilization IS NULL OR cpu_utilization < 1.0) AND (status IS NULL OR status = 'RUNNING')) AS 'Health Score' FROM google_computeengine_instance FACET google_computeengine_instance_name"
+							"nrql": "SELECT PERCENTAGE(COUNT(*), WHERE (capacity_utilization IS NULL OR capacity_utilization < 85)) AS 'Health Score' FROM emc_vnxfile_file_system FACET emc_vnxfile_file_system_name"
 						
 					}
 				],
 				"presentation": {
-					"title": "Instance Selector",
+					"title": "File System Selector",
 					"notes": null,
 					"drilldown_dashboard_id": null
 				}
@@ -44,12 +44,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(google_computeengine_instance_name) AS 'Instances' FROM google_computeengine_instance FACET machine_type"
+						"nrql": "SELECT uniqueCount(emc_vnxfile_file_system_name) AS 'File Systems' FROM emc_vnxfile_file_system FACET emc_vnxfile_nfs_export_name"
 					}
 				],
 				"presentation": {
-					"title": "Machine Type Distribution",
-          "notes": "Full or partial URL of the machine type resource used for this instance.",
+					"title": "NFS Export Distribution",
+          "notes": "The parent NFS Export of this File System",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -65,12 +65,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT uniqueCount(google_computeengine_instance_name) AS 'Instances' FROM google_computeengine_instance FACET zone"
+						"nrql": "SELECT uniqueCount(emc_vnxfile_file_system_name) AS 'File Systems' FROM emc_vnxfile_file_system FACET thin_provisioned"
 					}
 				],
 				"presentation": {
-					"title": "Zone Distribution",
-          "notes": "URL of the zone where the instance resides.",
+					"title": "Thin Provisioned Distribution",
+          "notes": "The Thin Provisioned of the File System.",
 					"drilldown_dashboard_id": null
 				}
 			}
@@ -86,12 +86,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(cpu_utilization) FROM google_computeengine_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT average(capacity_utilization) FROM emc_vnxfile_file_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "CPU Utilization",
-					"notes": "The fraction of the allocated CPU that is currently in use on the instance."
+					"title": "Capacity Utilization (Percent)",
+					"notes": "The Utilization of the File System."
 				}
 			},
 			{
@@ -105,12 +105,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(received_throughput) FROM google_computeengine_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(total_io_rate) FROM emc_vnxfile_file_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Received Throughput (Bytes)",
-					"notes": "Delta count of bytes received from the network."
+					"title": "Total IO Rate (Operations per Second)",
+					"notes": "The Total Operations per Second of the File System."
 				}
 			},
 			{
@@ -124,12 +124,12 @@
 				"account_id": 1825180,
 				"data": [
 					{
-						"nrql": "SELECT average(sent_throughput) FROM google_computeengine_instance COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
+						"nrql": "SELECT sum(total_throughput) FROM emc_vnxfile_file_system COMPARE WITH 1 WEEK AGO TIMESERIES AUTO"
 					}
 				],
 				"presentation": {
-					"title": "Sent Throughput (Bytes)",
-					"notes": "Delta count of bytes sent over the network."
+					"title": "Total Throughput (Kibibytes per Second)",
+					"notes": "The Total Throughput of the File System."
 				}
 			}
 		]
